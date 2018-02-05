@@ -1,0 +1,17 @@
+const path = require('path')
+
+module.exports = {
+  server: {
+    port: 4321,
+    staticPath: path.join(__dirname, '../static')
+  },
+  database: {
+    uri: 'mongodb://localhost:27017/reactblog'
+  },
+  session: {
+    key: 'kkeeyy',
+    httpOnly: true
+  }
+}
+
+console.log(path.join(__dirname, '../static'))

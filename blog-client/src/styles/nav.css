@@ -1,0 +1,46 @@
+.nav-wrapper {
+  position: relative;
+  z-index: 9999;
+}
+nav {
+  height: 70px;
+  display: flex;
+  justify-content: center;
+  background: #222b39;
+  color: #fff;
+  user-select:none;
+}
+
+nav .title {
+  line-height: 70px;
+  font-size: 30px;
+  font-weight: 50;
+}
+
+nav ul {
+  margin-left: 100px;;
+  width: 600px;
+  display: flex;
+  justify-content: space-around;
+  letter-spacing: 3px;
+  font-weight: 100;
+  font-size: 20px;
+}
+
+nav li {
+  box-sizing: border-box;
+  padding-left: 10px;
+  width: 130px;
+  height: 70px;
+  text-align: center;
+  line-height: 70px;
+}
+
+nav li:hover {
+  background: #304960;
+}
+
+nav span {
+  letter-spacing: 0px;
+  font-size: 15px;
+}
