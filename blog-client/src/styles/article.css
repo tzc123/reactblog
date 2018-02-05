@@ -3,14 +3,14 @@
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 20px 0 0 100px;
-  width: 885px;
+  width: 995px;
 }
 
 .article-list li {
   position: relative;
-  width: 400px;
+  width: 450px;
   height: 150px;
-  margin-top: 20px;
+  margin-top: 30px;
   padding-left: 30px;
   border: 1px solid #999999;
   /* opacity: 0; */
