@@ -27,7 +27,7 @@ export default class ArticleItem extends React.Component {
   render() {
     const { props: { title, views, pic, time, index, handleClick }, state: { active } } = this;
     return (
-      <li className={active ? 'active' : ''} style={{zIndex:1000-(index+1)*100}}>
+      <li className={active ? 'active' : ''}>
         <div className="title">
           <span>
             <Link className="article-list__link" to="/article">

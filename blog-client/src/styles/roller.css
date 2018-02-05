@@ -1,6 +1,6 @@
 .roller_mask {
   position: fixed;
-  top: 100px;
+  top: 300px;
   right: 100px;
   width: 30px;
   height: 360px;
@@ -10,14 +10,25 @@
 }
 .roller {
   position: fixed;
-  top: 100px;
+  top: 300px;
   right: 100px;
   width: 30px;
   height: 360px;
   overflow: scroll;
 }
+.roller_mark {
+  position: fixed;
+  top: 480px;
+  right: 80px;
+  width: 70px;
+  height: 1px;
+  overflow: scroll;
+  background: #222b39;
+  opacity: .5;
+}
 .pages {
   margin-top: 160px;
+  margin-bottom: 140px;
 }
 .roller::-webkit-scrollbar {/*隐藏滚轮*/
   display: none;

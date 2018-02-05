@@ -6,7 +6,6 @@ export default class Nav extends React.Component {
   constructor() {
     super()
     this.state = {
-      nav: ['js','css','vue','react','node'],
       nav: [
         {
           text: 'js',
