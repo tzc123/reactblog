@@ -5,13 +5,13 @@
 nav {
   height: 70px;
   display: flex;
-  justify-content: center;
   background: #222b39;
   color: #fff;
   user-select:none;
 }
 
 nav .title {
+  margin-left: 150px;
   line-height: 70px;
   font-size: 30px;
   font-weight: 50;
@@ -19,7 +19,7 @@ nav .title {
 
 nav ul {
   margin-left: 100px;;
-  width: 600px;
+  width: 1000px;
   display: flex;
   justify-content: space-around;
   letter-spacing: 3px;

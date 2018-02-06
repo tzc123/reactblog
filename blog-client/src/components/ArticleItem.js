@@ -37,12 +37,12 @@ export default class ArticleItem extends React.Component {
               </div>
             </Link>
           </span>
-          <span className="time">{time}</span>
         </div>
         <div className="desc">这是一段描述</div>
         <div className="footer">
           <img className="views" src={require("../images/views.png")} alt="" />
           <span>{views}</span>
+          <span className="time">{time}</span>
         </div>
         <img onClick={handleClick} className="pic" src={pic} alt="" />
       </li>

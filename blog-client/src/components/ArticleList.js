@@ -28,6 +28,27 @@ export default class ArticleList extends React.Component {
           pic: '../images/bg.jpeg',
           views: 33,
           isInserted: false          
+        },
+        {
+          title: 'js的基础类型',
+          time: '2017-10-25',
+          pic: '../images/bg.jpeg',
+          views: 33,
+          isInserted: false          
+        },
+        {
+          title: 'js的基础类型',
+          time: '2017-10-25',
+          pic: '../images/bg.jpeg',
+          views: 33,
+          isInserted: false          
+        },
+        {
+          title: 'js的基础类型',
+          time: '2017-10-25',
+          pic: '../images/bg.jpeg',
+          views: 33,
+          isInserted: false          
         }
       ]
     }

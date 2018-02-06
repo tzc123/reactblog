@@ -61,6 +61,7 @@ const config = {
 				name: 'vendor',
 				minChunks: Infinity
 			}),
+			new webpack.optimize.UglifyJsPlugin()
 		]
 };
 

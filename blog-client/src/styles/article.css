@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin: 20px 0 0 100px;
+  margin: 0px 0 0 150px;
   width: 995px;
 }
 
@@ -69,6 +69,12 @@
   height: 90px;
   right: 20px;
   top: 30px;
+  transition: transform .5s;
+}
+
+.article-list .pic:hover {
+  box-shadow: #6c727c 0px 0px 15px;
+  transform: scale(1.2, 1.2);
 }
 
 .article-list .footer {
@@ -100,11 +106,11 @@
   right: 0;
   left: 0;
   bottom: -2px;
-  height: 2px;
+  height: 1px;
   background:skyblue;
 }
 .underline .mask {
-  transition: transform .5s;
+  transition: transform .2s;
   height: 100%;
   width: 100%;
   background: #fff;

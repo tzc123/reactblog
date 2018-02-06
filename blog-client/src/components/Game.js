@@ -1,33 +1,139 @@
 import React from 'react'
 import '../styles/game.css'
 
-const boxColor = {
-  2: '#eee4da',
-  4: '#ede0c8',
-  8: '#f2b179',
-  16: '#f59563',
-  32: '#f67c5f',
-  64: '#f65e3b',
-  128: '#edcf72',
-  265: '#edcc61',
-  512: '#edc850',
-  1024: '#edc53f',
-  2048: '#edc22e',
-  4096: '#3c3a32'
+const boxType = {
+  2: {
+    color: '#eee4da',
+    textColor: '#776e65',
+    offset: {
+      x: 18,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  4: {
+    color: '#ede0c8',
+    textColor: '#776e65',
+    offset: {
+      x: 18,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  8: {
+    color: '#f2b179',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 18,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  16: {
+    color: '#f59563',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 10,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  32: {
+    color: '#f67c5f',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 10,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  64: {
+    color: '#f65e3b',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 10,
+      y: 33
+    },
+    font: '25px Helvetica Neue'
+  },
+  128: {
+    color: '#edcf72',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 4,
+      y: 33
+    },
+    font: '23px Helvetica Neue'
+  },
+  256: {
+    color: '#edcc61',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 5,
+      y: 33
+    },
+    font: '23px Helvetica Neue'
+  },
+  512: {
+    color: '#edc850',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 5,
+      y: 33
+    },
+    font: '23px Helvetica Neue'
+  },
+  1024: {
+    color: '#edc53f',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 1,
+      y: 32
+    },
+    font: '20px Helvetica Neue'
+  },
+  2048: {
+    color: '#edc22e',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 2,
+      y: 32
+    },
+    font: '20px Helvetica Neue'
+  },
+  4096: {
+    color: '#3c3a32',
+    textColor: '#f9f6f2',
+    offset: {
+      x: 2,
+      y: 32
+    },
+    font: '20px Helvetica Neue'
+  },
 }
 
 export default class Game extends React.Component {
-  componentDidMount() {
-    const { refs: { game } } = this
-    this.ctx = game.getContext('2d')
-    this.ctx.font=`25px Helvetica Neue`;
+  constructor() {
+    super()
     this.boxs = []
+  }
+  componentDidMount() {
+    const { createInitialBoxs, refs: { game } } = this
+    this.ctx = game.getContext('2d')
+    this.boxs = createInitialBoxs()
+    this.createBox()
+    this.createBox()    
+    this.draw()
+    window.addEventListener('keydown', this.handleKeyDown.bind(this))
+  }
+  createInitialBoxs() {
+    const initialBoxs = []
     for (let i = 0; i < 16; i++) {
       const row = Math.ceil((i + 1) / 4) - 1
       const column = i % 4
-      const beginX = (row) * 50 + 0.5
-      const beginY = (column) * 50 + 0.5
-      this.boxs.push({
+      const beginX = (column) * 50 + 0.5
+      const beginY = (row) * 50 + 0.5
+      initialBoxs.push({
         row,
         column,
         position: [
@@ -50,13 +156,11 @@ export default class Game extends React.Component {
         ]
       })
     }
-    this.createBox()
-    this.createBox()    
-    this.draw()
-    window.addEventListener('keydown', this.handleKeyDown.bind(this))
+    return initialBoxs
   }
   createBox() {
-    let emptyBoxs = this.boxs.map((boxs, index) => {
+    const { boxs } = this
+    let emptyBoxs = boxs.map((boxs, index) => {
       if (boxs.value) {
         return null
       } else {
@@ -65,10 +169,11 @@ export default class Game extends React.Component {
     })
     emptyBoxs = emptyBoxs.filter(box => box != null)
     const len = emptyBoxs.length
-    const index = emptyBoxs[Math.floor(Math.random() * len)]
-    this.boxs[index].value = 2
-    this.boxs[index].color = boxColor[2]
-    this.boxs[index].textColor = '#776e65'
+    if (len > 0) {
+      const index = emptyBoxs[Math.floor(Math.random() * len)]
+      boxs[index].index = index
+      boxs[index].value = Math.random() < 0.9 ? 2 : 4
+    }
   }
   drawLine() {
     const { ctx } = this
@@ -90,8 +195,9 @@ export default class Game extends React.Component {
     ctx.lineJoin = "round"
     boxs.forEach(box => {
       if (box.value) {
+        const type = boxType[box.value]
         const { position } = box
-        ctx.fillStyle = box.color
+        ctx.fillStyle = type.color
         ctx.beginPath()
         ctx.moveTo(position[0].x, position[0].y)
         for (let i = 1; i < 4; i++) {
@@ -99,8 +205,9 @@ export default class Game extends React.Component {
         }
         ctx.closePath()
         ctx.fill()
-        ctx.fillStyle = box.textColor
-        ctx.fillText(box.value, position[0].x + 18, position[0].y + 33)
+        ctx.font = type.font
+        ctx.fillStyle = type.textColor
+        ctx.fillText(box.value, position[0].x + type.offset.x, position[0].y + type.offset.y)
       }
     })
   }
@@ -117,20 +224,193 @@ export default class Game extends React.Component {
     this.trigger(key)
   }
   trigger(key) {
-    if (key = 'w') {
-      this.boxs.forEach((box, index) => {
-        if (box.row != 0) {
+    const { boxs } = this
+    const moveTasks = []
+    if (key == 'w') {
+      boxs.forEach((box, index) => {
+        if (box.value && (box.row != 0)) {
           let end = index
-          for(let i = index; i >= 0 && i < 16; i -= 4) {
-            if (boxs[i].value) {
-
+          let datum = box.value
+          let hasSame = false
+          for(let i = index - 4; i >= 0 && i < 16; i -= 4) {
+            let value = boxs[i].value
+            if (value) {
+              if (hasSame) {
+                datum = value
+                hasSame = false
+              } else {
+                if (datum == value) {
+                  end -= 4
+                  hasSame = true
+                } else {
+                  datum = value
+                }
+              }
             } else {
-              end = i
+              end -= 4
             }
           } 
+          if (end != index) {
+            boxs[index].index = end
+            moveTasks.push({
+              index,
+              distance: boxs[index].row - boxs[end].row
+            })
+          }
+        }
+      })
+    } else if (key == 's') {
+      boxs.forEach((box, index) => {
+        if (box.value && (box.row != 3)) {
+          let end = index
+          let datum = box.value
+          let hasSame = false
+          for(let i = index + 4; i >= 0 && i < 16; i += 4) {
+            let value = boxs[i].value
+            if (value) {
+              if (hasSame) {
+                datum = value
+                hasSame = false
+              } else {
+                if (datum == value) {
+                  end += 4
+                  hasSame = true
+                } else {
+                  datum = value
+                }
+              }
+            } else {
+              end += 4
+            }
+          } 
+          if (end != index) {
+            boxs[index].index = end
+            moveTasks.push({
+              index,
+              distance:  boxs[end].row - boxs[index].row
+            })
+          }
+        }
+      })
+    } else if (key == 'd') {
+      boxs.forEach((box, index) => {
+        if (box.value && (box.column != 3)) {
+          let end = index
+          let datum = box.value
+          let hasSame = false
+          for(let i = index + 1; i < box.row * 4 + 4; i ++) {
+            let value = boxs[i].value
+            if (value) {
+              if (hasSame) {
+                datum = value
+                hasSame = false
+              } else {
+                if (datum == value) {
+                  end++
+                  hasSame = true
+                } else {
+                  datum = value
+                }
+              }
+            } else {
+              end++
+            }
+          } 
+          if (end != index) {
+            boxs[index].index = end
+            moveTasks.push({
+              index,
+              distance: boxs[end].column - boxs[index].column
+            })
+          }
+        }
+      })
+    } else if (key == 'a') {
+      boxs.forEach((box, index) => {
+        if (box.value && (box.column != 0)) {
+          let end = index
+          let datum = box.value
+          let hasSame = false
+          for(let i = index - 1; i > box.row * 4 - 1; i --) {
+            let value = boxs[i].value
+            if (value) {
+              if (hasSame) {
+                datum = value
+                hasSame = false
+              } else {
+                if (datum == value) {
+                  end--
+                  hasSame = true
+                } else {
+                  datum = value
+                }
+              }
+            } else {
+              end--
+            }
+          } 
+          if (end != index) {
+            boxs[index].index = end
+            moveTasks.push({
+              index,
+              distance: boxs[index].column - boxs[end].column
+            })
+          }
         }
       })
     }
+    this.moveBoxs(moveTasks, key)
+  }
+
+  moveBoxs(moveTasks, key) {
+    const { boxs } = this
+    let i = 0
+    function handle() {
+      if (i < 10) {
+        moveTasks.forEach(task => {
+          const { index, distance } = task
+          for (let i = 0; i < 4; i++) {
+            if (key == 'w') {
+              boxs[index].position[i].y -= distance * 5
+            } else if (key == 's') {
+              boxs[index].position[i].y += distance * 5
+            } else if (key == 'd') {
+              boxs[index].position[i].x += distance * 5
+            } else if (key == 'a') {
+              boxs[index].position[i].x -= distance * 5
+            }
+          }
+        })
+        this.clear()
+        this.draw()
+        requestAnimationFrame(handle.bind(this))
+      } else {
+        this.mergeBoxs()
+        if (moveTasks.length > 0) {
+          this.createBox()
+          this.clear()
+          this.draw()
+        }
+      }
+      i ++
+    }
+    if (moveTasks.length > 0) {
+      handle.call(this)
+    }
+  }
+  mergeBoxs() {
+    const { ctx, boxs, createInitialBoxs } = this
+    const newBoxs = createInitialBoxs()
+    for (let i = 0; i < 16; i++) {
+      const newbox = boxs.filter(box => box.index == i)
+      const len = newbox.length
+      if (len == 1 || len == 2) {
+        const box = newBoxs[newbox[0].index]
+        box.index = newbox[0].index
+        box.value = newbox[0].value * len
+      }
+    }
+    this.boxs = newBoxs
   }
   render() {
     return (

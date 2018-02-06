@@ -1,7 +1,7 @@
 .roller_mask {
   position: fixed;
-  top: 300px;
-  right: 100px;
+  top: 160px;
+  left: 50px;
   width: 30px;
   height: 360px;
   background: linear-gradient(to bottom, rgba(244,244,244,1) 0%, rgba(244,244,244,0) 50%, rgba(244,244,244,1) 100%);
@@ -10,16 +10,16 @@
 }
 .roller {
   position: fixed;
-  top: 300px;
-  right: 100px;
+  top: 160px;
+  left: 50px;
   width: 30px;
   height: 360px;
   overflow: scroll;
 }
 .roller_mark {
   position: fixed;
-  top: 480px;
-  right: 80px;
+  top: 339px;
+  left: 30px;
   width: 70px;
   height: 1px;
   overflow: scroll;
@@ -28,7 +28,7 @@
 }
 .pages {
   margin-top: 160px;
-  margin-bottom: 140px;
+  margin-bottom: 160px;
 }
 .roller::-webkit-scrollbar {/*隐藏滚轮*/
   display: none;
