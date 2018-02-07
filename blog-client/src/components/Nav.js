@@ -42,7 +42,7 @@ export default class Nav extends React.Component {
       <div className="nav-wrapper">
         <nav>
           <Link to="/">
-            <span className="title">DAZ's</span>
+            <span className="title">DAZs</span>
           </Link>
           <ul >
             {nav.map((item, index) => (
