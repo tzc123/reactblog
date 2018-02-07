@@ -1,4 +1,4 @@
-BLOG_PATH = '/home/tzc123/workspace/reactblog'
+BLOG_PATH='/home/tzc123/workspace/reactblog'
 
 echo 'receive post'
 echo 'building'
