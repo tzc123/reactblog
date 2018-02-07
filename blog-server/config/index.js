@@ -5,7 +5,7 @@ module.exports = {
     port: 4321,
     staticPath: path.join(__dirname, '../static'),
     staticOptions: {
-      maxage: '10000000'
+      maxage: 99999999
     }
   },
   database: {
