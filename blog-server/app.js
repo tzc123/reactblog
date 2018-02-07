@@ -18,6 +18,10 @@ app.use(static(staticPath));
 
 app.use(koaSession(session, app))
 
+app.use(ctx => {
+  ctx.set('Cache-Control', 'max-age=100000')
+})
+
 app.use(router.routes());
 
 app.listen(port, () => {
