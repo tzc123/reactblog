@@ -5,7 +5,7 @@ module.exports = {
     port: 4321,
     staticPath: path.join(__dirname, '../static'),
     staticOptions: {
-      maxage: 99999999
+      maxage: 99999
     }
   },
   database: {
@@ -16,5 +16,3 @@ module.exports = {
     httpOnly: true
   }
 }
-
-console.log(path.join(__dirname, '../static'))
