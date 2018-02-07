@@ -1,5 +1,6 @@
 const http = require('http')
 const createHandler = require('github-webhook-handler')
+const path = require('path')
 const { exec } = require('child_process')
 
 const handler = createHandler({ path: '/', secret: '129315' })
@@ -14,7 +15,7 @@ handler.on('push', function (event) {
   console.log('Received a push event for %s to %s',
     event.payload.repository.name,
     event.payload.ref)
-  exec('./deploy.sh', function(error, stdout, stderr) {
+  exec(path.join(__dirname, 'deploy.sh'), function(error, stdout, stderr) {
     if (error) {
       console.error('exec error: '+error)
       return
