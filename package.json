@@ -9,7 +9,7 @@
     "cdev": "webpack-dev-server --inline --hot --config webpack.development.config.js",
     "server": "webpack --config webpack.production.config.js && pm2 start blog-server/app.js --watch",
     "sdev": "nodemon blog-server/app.js",
-    "hook": "pm2 start webhook/deploy.js --watch",
+    "hook": "pm2 start webhook/deploy.js",
     "watch": "pm2 start blog-server/app.js --watch",
     "prod": "npm run watch && npm run hook"
   },
