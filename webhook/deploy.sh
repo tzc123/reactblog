@@ -4,4 +4,5 @@ echo 'receive post'
 echo 'building'
 cd $BLOG_PATH
 git pull
+npm run build
 echo 'finish'
