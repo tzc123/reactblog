@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.production.config.js",
     "cdev": "webpack-dev-server --inline --hot --config webpack.development.config.js",
-    "server": "webpack --config webpack.production.config.js && node blog-server/app.js",
+    "server": "webpack --config webpack.production.config.js && pm2 start blog-server/app.js --watch",
     "sdev": "nodemon ./blog-server/app.js",
-    "hook": "node ./webhook/deploy.js"
+    "hook": "node ./webhook/deploy.js",
+    "watch": "pm2 start blog-server/app.js --watch"
   },
   "keywords": [],
   "author": "",

@@ -61,17 +61,19 @@ const config = {
 			]
 		},
 		plugins: [
-			new HtmlPlugin({
-				title: "DAZ'blog",
-				template: path.join(__dirname, 'blog-client/index.html')
-			}),
-			new CleanPlugin([outputPath]),
 			new ExtractTextPlugin("css/style.css"),
 			new webpack.optimize.CommonsChunkPlugin({
 				name: 'vendor',
 				minChunks: Infinity
 			}),
-			new webpack.optimize.UglifyJsPlugin()
+			new webpack.optimize.UglifyJsPlugin(),
+			new HtmlPlugin({
+				title: "DAZ'blog",
+				template: path.join(__dirname, 'blog-client/index.html')
+			}),
+			new CleanPlugin(outputPath, {
+				beforeEmit: true
+			}),
 		]
 };
 
