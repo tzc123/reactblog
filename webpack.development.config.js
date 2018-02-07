@@ -31,10 +31,19 @@ const config = {
 							fallback: "style-loader",
 							use:[
 										{
-												loader: 'css-loader',
-												options:{
-														minimize: true
-												}
+											loader: 'css-loader',
+											options:{
+													minimize: true
+											}
+										},
+										{
+											loader: 'postcss-loader',
+											options: {
+												ident: 'postcss',
+												plugins: () => [
+													require('postcss-px2rem')({remUnit: 16})
+												]
+											}
 										}
 									]
 							})
