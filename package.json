@@ -5,8 +5,9 @@
   "main": "webpack.config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --inline --hot --config webpack.development.config.js",
-    "server": "webpack --config webpack.production.config.js && node blog-server/app.js"
+    "cdev": "webpack-dev-server --inline --hot --config webpack.development.config.js",
+    "server": "webpack --config webpack.production.config.js && node blog-server/app.js",
+    "sdev": "nodemon ./blog-server/app.js"
   },
   "keywords": [],
   "author": "",
