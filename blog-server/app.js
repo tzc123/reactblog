@@ -1,8 +1,8 @@
 const path = require("path");
 const fs = require("fs");
 const Koa = require("koa");
-const static = require("koa-static");
-const cors = require("koa-cors");
+const koaStatic = require("koa-static");
+// const koaCors = require("koa-cors");
 const koaBody = require('koa-body');
 const koaSession = require('koa-session');
 const router = require("./router");
@@ -11,13 +11,13 @@ const { server: { staticPath, staticOptions, port }, session } = require('./conf
 require('./db_connection')
 const app = new Koa();
 
-app.use(cors());
+// app.use(koaCors());
 
-app.use(koaBody())
-
-app.use(static(staticPath, staticOptions));
+app.use(koaStatic(staticPath, staticOptions));
 
 app.use(koaSession(session, app))
+
+app.use(koaBody())
 
 app.use(router.routes());
 
