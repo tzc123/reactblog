@@ -12,7 +12,6 @@ require('./db_connection')
 const app = new Koa();
 
 // app.use(koaCors());
-
 app.use(koaStatic(staticPath, staticOptions));
 
 app.use(koaSession(session, app))
