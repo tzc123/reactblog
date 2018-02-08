@@ -13,7 +13,7 @@ module.exports = {
       "env": {
         "NODE_ENV": "development"
       },
-      "ignore_watch": ["node_modules", "blog-server/logs", ".git", "blog-client"]
+      "ignore_watch": ["node_modules", "blog-server/logs", ".git", "blog-client", "package-lock.json", "package.json"]
     },
 
     // Second application
