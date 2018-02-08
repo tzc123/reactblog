@@ -21,6 +21,13 @@ const ArticleSchema = new Schema({
   content: {
     type: String,
     required: true
+  },
+  create_at: {
+    type: Date,
+    required: true
+  },
+  update_at: {
+    type: Date
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)

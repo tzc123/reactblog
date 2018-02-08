@@ -13,17 +13,17 @@ module.exports = {
       const article = await ArticleModel.findArticle(filter)
       ctx.body = article
     } catch(e) {
-      console.log(e)
-      ctx.body = e.stack
+      ctx.body = e
+      logger.error(e.stack)
     }
   },
   async insert(ctx) {
     try {
-      const newArticle = await ArticleModel.insert(ctx.request.body)
+      const newArticle = await ArticleModel.insert({...ctx.request.body, created_at: new Date()})
       ctx.body = newArticle
     } catch (e) {
-      console.log(e)
-      ctx.body = e.stack
+      ctx.body = e
+      logger.error(e.stack)
     }
   }
 }
