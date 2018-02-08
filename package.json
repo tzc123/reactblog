@@ -10,7 +10,7 @@
     "server": "npm run build && pm2 start blog-server/app.js --watch",
     "sdev": "NODE_ENV='development' nodemon blog-server/app.js",
     "hook": "pm2 start webhook/deploy.js",
-    "watch": "pm2 start blog-server/app.js --watch",
+    "watch": "pm2 start blog-server/app.js --ignore-watch blog-server/logs/",
     "prod": "npm run watch && npm run hook"
   },
   "keywords": [],
