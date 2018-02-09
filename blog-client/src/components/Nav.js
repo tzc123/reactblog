@@ -63,10 +63,10 @@ export default class Nav extends React.Component {
     let nav = this.state.nav
 
     return (
-      <div className="nav-wrapper">
+      <header>
         <nav>
-          <Link to="/">
-            <span className="title">DAZs</span>
+          <Link className="title" to="/">
+            DAZs
           </Link>
           <ul >
             {nav.map((item, index) => (
@@ -77,7 +77,7 @@ export default class Nav extends React.Component {
               ))}
           </ul>
         </nav>
-      </div>
+      </header>
     )
   }
 }

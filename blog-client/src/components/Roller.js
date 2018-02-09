@@ -12,26 +12,24 @@ export default class Roller extends React.Component {
   }
 
   handleScroll(e) {
-    const { timeout, refs: { pages, roller } } = this
-    timeout && clearTimeout(timeout)
-    this.timeout = setTimeout(() => {
-      let { top } = pages.getBoundingClientRect()
-      let distance = this.top - top
-      roller.scrollTo(0, Math.round(distance / 40) * 40)
-    }, 500)
+    // const { timeout, refs: { pages, roller } } = this
+    // timeout && clearTimeout(timeout)
+    // this.timeout = setTimeout(() => {
+    //   let { top } = pages.getBoundingClientRect()
+    //   let distance = this.top - top
+    //   roller.scrollTo(0, Math.round(distance / 40) * 40)
+    // }, 500)
   }
   
   handleClick(index) {
-    const { refs: { roller } } = this
-    roller.scrollTo(0, this.top + ((index - 8) * 40) + 9)
+    // const { refs: { roller } } = this
+    // roller.scrollTo(0, this.top + ((index - 8) * 40) + 9)
   }
 
   render() {
     const { props: { total }, handleClick } = this
     return (
-      <div>
-        <div className="roller_mark"></div>
-        <div className="roller_mask"></div>
+      <div className="roller__wrapper">
         <div className="roller" ref="roller" onScroll={this.handleScroll.bind(this)}>
           <div className="pages" ref="pages">
             {(() => {
@@ -43,6 +41,8 @@ export default class Roller extends React.Component {
             })()}
           </div>
         </div>
+        <div className="roller__mask"></div>
+        <div className="roller__mark"></div>
       </div>
     )
   }

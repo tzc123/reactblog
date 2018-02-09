@@ -1,35 +1,39 @@
-.roller_mask {
+.roller__wrapper {
   position: fixed;
-  top: 20%;
-  left: 50px;
+  top: 90px;
+  bottom: 0;
   width: 30px;
-  height: 360px;
-  background: linear-gradient(to bottom, rgba(244,244,244,1) 0%, rgba(244,244,244,0) 50%, rgba(244,244,244,1) 100%);
-  z-index: 9999;
+  margin-left: 10px;
+}
+
+.roller__mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   pointer-events: none;
+  /* background: linear-gradient(to bottom, rgba(244,244,244,1) 0%, rgba(244,244,244,0) 50%, rgba(244,244,244,1) 100%); */
 }
 .roller {
-  position: fixed;
-  top: 20%;
-  left: 50px;
-  width: 30px;
-  height: 360px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   overflow: scroll;
 }
-.roller_mark {
-  position: fixed;
-  top: 20%;
-  left: 30px;
-  margin-top: 179px;
-  width: 70px;
+.roller__mark {
+  position: absolute;
+  right: -10px;
+  left: -10px;
+  top: 19px;
   height: 1px;
-  overflow: scroll;
   background: #222b39;
   opacity: .5;
 }
 .pages {
-  margin-top: 160px;
-  margin-bottom: 160px;
+  margin-top: 0px;
 }
 .roller::-webkit-scrollbar {/*隐藏滚轮*/
   display: none;

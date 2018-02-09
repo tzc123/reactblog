@@ -16,9 +16,9 @@ export default class Home extends React.Component {
     const { state } = this
     return (
       <div className="home">
+        <Roller total="100" />
         <ArticleList { ...state } />
         <Game />
-        <Roller total="100" />
       </div>
     )
   }

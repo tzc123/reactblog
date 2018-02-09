@@ -72,7 +72,6 @@ export default class ArticleList extends React.Component {
     const { state: { articles } } = this
     return (
       <ul className="article-list">
-      <div className="line"></div>
         {
           articles.map(
             (article, index) => (

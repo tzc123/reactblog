@@ -1,19 +1,24 @@
-.nav-wrapper {
-  position: relative;
-  z-index: 9999;
+header {
+ position: fixed;
+ top: 0;
+ right: 0;
+ left: 0;
+ height: 70px;
+ background: #222b39;
+ z-index: 9999;
 }
 nav {
+  margin: auto;
+  max-width: 960px;
   height: 70px;
   display: flex;
-  width: 100%;
-  background: #222b39;
   color: #fff;
   user-select:none;
 }
 
 nav .title {
   letter-spacing: 3px;
-  margin: 0 100px 0 150px;
+  margin-right: 150px;
   line-height: 70px;
   font-size: 30px;
   font-weight: 50;
@@ -25,10 +30,9 @@ span.count {
 }
 
 nav>ul {
-  margin-right: 150px;
   flex: 1;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   letter-spacing: 3px;
   font-weight: 100;
   font-size: 20px;

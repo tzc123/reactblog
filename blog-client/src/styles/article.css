@@ -1,10 +1,7 @@
 .article-list {
-  position: relative;
-  display: flex;
   flex: 1;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 20px 240px 0 130px;
+  position: relative;
+  margin: 0 15px 0 55px;
   animation: show_list .5s;
 }
 
@@ -14,17 +11,15 @@
   top: 0;
   bottom: 20px;
   width: 1px;
-  background: #222b39;
+  background: #999999;
+  opacity: .1;
 }
 
 .article-list li {
   position: relative;
-  margin-bottom: 20px;
-  width: 450px;
+  margin-bottom: 15px;
   height: 150px;
   padding-left: 30px;
-  border: 1px solid #999999;
-  /* opacity: 0; */
   background: #fff;
   overflow: hidden;
   transition: transform .5s;
@@ -33,6 +28,7 @@
 
 .article-list li:hover {
   box-shadow: #6c727c 0px 7px 15px;
+  /* border: 1px solid #999999;   */
   transform: scale(1.02, 1.02);
 }
 

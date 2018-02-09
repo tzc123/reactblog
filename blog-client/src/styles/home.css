@@ -1,4 +1,6 @@
 .home {
+  position: relative;
+  margin: 90px auto 0 auto;
+  max-width: 960px;
   display: flex;
-  width: 100%;
 }
