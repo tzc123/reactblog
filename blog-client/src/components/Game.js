@@ -226,7 +226,7 @@ export default class Game extends React.Component {
   trigger(key) {
     const { boxs } = this
     const moveTasks = []
-    if (key == 'w') {
+    if (key == 'w' || key == 'ArrowUp') {
       boxs.forEach((box, index) => {
         if (box.value && (box.row != 0)) {
           let end = index
@@ -259,7 +259,7 @@ export default class Game extends React.Component {
           }
         }
       })
-    } else if (key == 's') {
+    } else if (key == 's' || key == 'ArrowDown') {
       boxs.forEach((box, index) => {
         if (box.value && (box.row != 3)) {
           let end = index
@@ -292,7 +292,7 @@ export default class Game extends React.Component {
           }
         }
       })
-    } else if (key == 'd') {
+    } else if (key == 'd' || key == 'ArrowRight') {
       boxs.forEach((box, index) => {
         if (box.value && (box.column != 3)) {
           let end = index
@@ -325,7 +325,7 @@ export default class Game extends React.Component {
           }
         }
       })
-    } else if (key == 'a') {
+    } else if (key == 'a' || key == 'ArrowLeft') {
       boxs.forEach((box, index) => {
         if (box.value && (box.column != 0)) {
           let end = index
@@ -370,13 +370,13 @@ export default class Game extends React.Component {
         moveTasks.forEach(task => {
           const { index, distance } = task
           for (let i = 0; i < 4; i++) {
-            if (key == 'w') {
+            if (key == 'w' || key == 'ArrowUp') {
               boxs[index].position[i].y -= distance * 5
-            } else if (key == 's') {
+            } else if (key == 's' || key == 'ArrowDown') {
               boxs[index].position[i].y += distance * 5
-            } else if (key == 'd') {
+            } else if (key == 'd' || key == 'ArrowRight') {
               boxs[index].position[i].x += distance * 5
-            } else if (key == 'a') {
+            } else if (key == 'a' || key == 'ArrowLeft') {
               boxs[index].position[i].x -= distance * 5
             }
           }

@@ -1,9 +1,8 @@
 .roller__wrapper {
   position: fixed;
-  top: 90px;
+  top: 80px;
   bottom: 0;
   width: 30px;
-  margin-left: 10px;
 }
 
 .roller__mask {
@@ -23,17 +22,17 @@
   left: 0;
   overflow: scroll;
 }
-.roller__mark {
+/* .roller__mark {
   position: absolute;
   right: -10px;
   left: -10px;
-  top: 19px;
+  top: 50%;
   height: 1px;
   background: #222b39;
   opacity: .5;
-}
+} */
 .pages {
-  margin-top: 0px;
+  position: absolute;
 }
 .roller::-webkit-scrollbar {/*隐藏滚轮*/
   display: none;

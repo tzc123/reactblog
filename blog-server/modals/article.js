@@ -28,6 +28,11 @@ const ArticleSchema = new Schema({
   },
   update_at: {
     type: Date
+  },
+  views: {
+    type: Number,
+    required: true,
+    min: 0
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)

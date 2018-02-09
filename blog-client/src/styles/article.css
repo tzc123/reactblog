@@ -1,7 +1,7 @@
 .article-list {
   flex: 1;
   position: relative;
-  margin: 0 15px 0 55px;
+  margin: 0 15px 0 35px;
   animation: show_list .5s;
 }
 
@@ -19,6 +19,7 @@
   position: relative;
   margin-bottom: 15px;
   height: 150px;
+  border-radius: 5px;
   padding-left: 30px;
   background: #fff;
   overflow: hidden;
