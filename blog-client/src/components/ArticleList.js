@@ -49,6 +49,20 @@ export default class ArticleList extends React.Component {
           pic: '../images/bg.jpeg',
           views: 33,
           isInserted: false          
+        },
+        {
+          title: 'js的基础类型',
+          time: '2017-10-25',
+          pic: '../images/bg.jpeg',
+          views: 33,
+          isInserted: false          
+        },
+        {
+          title: 'js的基础类型',
+          time: '2017-10-25',
+          pic: '../images/bg.jpeg',
+          views: 33,
+          isInserted: false          
         }
       ]
     }
@@ -70,6 +84,7 @@ export default class ArticleList extends React.Component {
     const { state: { articles } } = this
     return (
       <ul className="article-list">
+      <div className="line"></div>
         {
           articles.map(
             (article, index) => (

@@ -1,6 +1,6 @@
 .roller_mask {
   position: fixed;
-  top: 160px;
+  top: 20%;
   left: 50px;
   width: 30px;
   height: 360px;
@@ -10,7 +10,7 @@
 }
 .roller {
   position: fixed;
-  top: 160px;
+  top: 20%;
   left: 50px;
   width: 30px;
   height: 360px;
@@ -18,8 +18,9 @@
 }
 .roller_mark {
   position: fixed;
-  top: 339px;
+  top: 20%;
   left: 30px;
+  margin-top: 179px;
   width: 70px;
   height: 1px;
   overflow: scroll;

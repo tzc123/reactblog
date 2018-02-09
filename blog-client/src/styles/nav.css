@@ -5,12 +5,14 @@
 nav {
   height: 70px;
   display: flex;
+  width: 100%;
   background: #222b39;
   color: #fff;
   user-select:none;
 }
 
 nav .title {
+  letter-spacing: 3px;
   margin-left: 150px;
   line-height: 70px;
   font-size: 30px;
@@ -18,8 +20,8 @@ nav .title {
 }
 
 nav ul {
+  flex: 1;
   margin-left: 100px;;
-  width: 1000px;
   display: flex;
   justify-content: space-around;
   letter-spacing: 3px;
