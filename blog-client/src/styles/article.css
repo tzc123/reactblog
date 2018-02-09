@@ -5,6 +5,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 20px 240px 0 130px;
+  animation: show_list 1s;
 }
 
 .line {
@@ -62,7 +63,7 @@
   height: 90px;
   right: 20px;
   top: 30px;
-  /* transition: transform .5s; */
+  animation: show_pic .5s;
 }
 
 .article-list .loading {
@@ -118,4 +119,17 @@
 .article-list__link:hover .mask{
   transform: scaleX(0);
   display: block;
+}
+
+@keyframes show_pic {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes show_list {
+  from {
+    opacity: 0;
+    transform: translateY(100px)
+  }
 }
