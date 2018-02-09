@@ -45,3 +45,7 @@
 		.color-blue {
 			color: #47d8b8e7;
 		}
+
+		.hidden {
+			display: none;
+		}

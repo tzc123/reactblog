@@ -19,7 +19,12 @@ nav .title {
   font-weight: 50;
 }
 
-nav ul {
+span.count {
+  letter-spacing: 0px;
+  font-size: 10px;
+}
+
+nav>ul {
   flex: 1;
   margin-left: 100px;;
   display: flex;
@@ -29,9 +34,9 @@ nav ul {
   font-size: 20px;
 }
 
-nav li {
+nav>ul>li {
+  position: relative;
   box-sizing: border-box;
-  padding-left: 10px;
   width: 130px;
   height: 70px;
   text-align: center;
@@ -42,7 +47,31 @@ nav li:hover {
   background: #304960;
 }
 
-nav span {
-  letter-spacing: 0px;
-  font-size: 15px;
+nav>ul>li:hover .sub-nav {
+  display: block;
+}
+
+.sub-nav {
+  display: none;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 70px;
+  animation: show .5s;
+}
+.sub-nav>li {
+  margin-top: 1px;
+  padding-left: 10px;
+  background: #222b39;  
+}
+
+@keyframes show {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);    
+    opacity: 1;
+  }
 }

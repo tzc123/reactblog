@@ -5,29 +5,20 @@ export default class ArticleItem extends React.Component {
   constructor() {
     super();
     this.state = {
-      active: false
+      loading: true
     }
   }
   componentDidMount() {
-    const { props: { isInserted, index } } = this
-    if (isInserted) {
-      setImmediate(() => {
-        this.setState({
-          active: true
-        })
+    this.refs.pic.onload = () => {
+      this.setState({
+        loading: false
       })
-    } else {
-      setTimeout(() => {
-        this.setState({
-          active: true
-        })
-      }, index * 500);
     }
   }
   render() {
-    const { props: { title, views, pic, time, index, handleClick }, state: { active } } = this;
+    const { props: { title, views, pic, time, index, handleClick } } = this;
     return (
-      <li className={active ? 'active' : ''}>
+      <li>
         <div className="title">
           <span>
             <Link className="article-list__link" to="/article">
@@ -44,7 +35,8 @@ export default class ArticleItem extends React.Component {
           <span>{views}</span>
           <span className="time">{time}</span>
         </div>
-        <img onClick={handleClick} className="pic" src={pic} alt="" />
+        <img ref="pic" onClick={handleClick} className={`pic ${this.state.loading ? 'hidden' : ''}`} src={pic} alt="" />
+        <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={require("../images/loading.gif")} />
       </li>
     );
   }

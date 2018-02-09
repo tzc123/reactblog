@@ -65,6 +65,13 @@
   /* transition: transform .5s; */
 }
 
+.article-list .loading {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  margin-top: -10px;
+}
+
 /* .article-list .pic:hover {
   box-shadow: #6c727c 0px 5px 10px;
   transform: scale(1.2, 1.2);

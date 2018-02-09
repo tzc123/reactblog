@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/nav.css'
 import { Link } from "react-router-dom";
+import SubNav from './SubNav'
 
 export default class Nav extends React.Component {
   constructor() {
@@ -8,29 +9,39 @@ export default class Nav extends React.Component {
     this.state = {
       nav: [
         {
-          text: 'js',
-          count: 10,
-          color: 'yellow'
+          text: 'home'
         },
         {
-          text: 'css',
-          count: 5,
-          color: 'yellowgreen'
+          text: 'category',
+          type: 'category',
+          subNav: [
+            {
+              text: 'js',
+              count: '10',
+            },
+            {
+              text: 'css',
+              count: '20'
+            },
+            {
+              text: 'vue',
+              count: '12',
+            },
+            {
+              text: 'react',
+              count: '13',
+            },
+            {
+              text: 'node',
+              count: '15',
+            }
+          ]
         },
         {
-          text: 'vue',
-          count: 12,
-          color: 'purple'
+          text: 'links'
         },
         {
-          text: 'react',
-          count: 2,
-          color: 'skyblue'
-        },
-        {
-          text: 'nodejs',
-          count: 10,
-          color: 'pink'
+          text: 'about',
         }
       ]
     }
@@ -48,12 +59,9 @@ export default class Nav extends React.Component {
             {nav.map((item, index) => (
                 <li key={index}>
                   {item.text}
-                  <span>
-                    「<span className="color-blue">{item.count}</span>」
-                  </span>
+                  {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
                 </li>
               ))}
-              <li>about</li>
           </ul>
         </nav>
       </div>
