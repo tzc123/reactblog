@@ -26,7 +26,7 @@ span.count {
 
 nav>ul {
   flex: 1;
-  margin-left: 100px;;
+  margin: 0 150px 0 100px;
   display: flex;
   justify-content: space-around;
   letter-spacing: 3px;
