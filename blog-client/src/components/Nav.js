@@ -38,7 +38,20 @@ export default class Nav extends React.Component {
           ]
         },
         {
-          text: 'links'
+          text: 'links',
+          type: 'common',
+          subNav: [
+            {
+              text: 'github',
+              url: require('../images/github.png'),
+              link: 'https://github.com/tzc123'
+            },
+            {
+              text: 'juejin',
+              url: require('../images/github.png'),
+              link: 'https://juejin.im/user/5936123afe88c20061db655d'
+            }
+          ]
         },
         {
           text: 'about',

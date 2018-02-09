@@ -13,7 +13,7 @@ nav {
 
 nav .title {
   letter-spacing: 3px;
-  margin-left: 150px;
+  margin: 0 100px 0 150px;
   line-height: 70px;
   font-size: 30px;
   font-weight: 50;
@@ -25,8 +25,8 @@ span.count {
 }
 
 nav>ul {
+  margin-right: 150px;
   flex: 1;
-  margin: 0 150px 0 100px;
   display: flex;
   justify-content: space-around;
   letter-spacing: 3px;
@@ -60,9 +60,17 @@ nav>ul>li:hover .sub-nav {
   animation: show .5s;
 }
 .sub-nav>li {
+  line-height: 70px;
+  height: 70px;
   margin-top: 1px;
   padding-left: 10px;
-  background: #222b39;  
+  background: #222b39;
+}
+.sub-nav img {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
 @keyframes show {

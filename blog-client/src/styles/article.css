@@ -5,7 +5,7 @@
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 20px 240px 0 130px;
-  animation: show_list 1s;
+  animation: show_list .5s;
 }
 
 .line {

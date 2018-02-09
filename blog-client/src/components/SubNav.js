@@ -18,7 +18,7 @@ export default function (props) {
         } else if (type == 'common') {
           return (
             <li key={index}>
-              {item.text}
+              <a href={item.link}>{item.text}</a>
             </li>
           )
         }

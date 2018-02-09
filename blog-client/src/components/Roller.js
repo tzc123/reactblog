@@ -20,9 +20,14 @@ export default class Roller extends React.Component {
       roller.scrollTo(0, Math.round(distance / 40) * 40)
     }, 500)
   }
+  
+  handleClick(index) {
+    const { refs: { roller } } = this
+    roller.scrollTo(0, this.top + ((index - 8) * 40) + 9)
+  }
 
   render() {
-    const { props: { total } } = this
+    const { props: { total }, handleClick } = this
     return (
       <div>
         <div className="roller_mark"></div>
@@ -32,7 +37,7 @@ export default class Roller extends React.Component {
             {(() => {
               const pages = []
               for (let i = 0; i < +total; i++) {
-                pages.push(<div className="page" key={i}>{i + 1 < 10 ? '0' + (i + 1) : i + 1}</div>)
+                pages.push(<div className="page" onClick={handleClick.bind(this, i)} key={i}>{i + 1 < 10 ? '0' + (i + 1) : i + 1}</div>)
               }
               return pages
             })()}
