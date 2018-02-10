@@ -27,15 +27,15 @@ export default class Roller extends React.Component {
   }
 
   render() {
-    const { props: { total }, handleClick } = this
+    const { props: { total, currentPage }, handleClick } = this
     return (
       <div className="roller__wrapper">
         <div className="roller" ref="roller" onScroll={this.handleScroll.bind(this)}>
           <div className="pages" ref="pages">
             {(() => {
               const pages = []
-              for (let i = 0; i < +total; i++) {
-                pages.push(<div className="page" onClick={handleClick.bind(this, i)} key={i}>{i + 1 < 10 ? '0' + (i + 1) : i + 1}</div>)
+              for (let i = 1; i < +total + 1; i++) {
+                pages.push(<div className={`page ${ currentPage == i ? 'active' : '' }`} onClick={handleClick.bind(this, i)} key={i}>{i < 10 ? '0' + i : i}</div>)
               }
               return pages
             })()}

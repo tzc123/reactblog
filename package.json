@@ -6,9 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.production.config.js",
-    "cdev": "NODE_ENV='development' webpack-dev-server --inline --hot --config webpack.development.config.js",
-    "server": "npm run build && pm2 start blog-server/app.js --watch",
-    "sdev": "NODE_ENV='development' nodemon blog-server/app.js",
+    "client": "NODE_ENV='development' webpack-dev-server --inline --hot --config webpack.development.config.js",
+    "server": "npm run build && nodemon blog-server/app.js",
     "prod": "pm2 start ecosystem.config.js"
   },
   "keywords": [],
@@ -25,15 +24,12 @@
     "mongoose": "^5.0.3",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-markdown": "^3.1.4",
-    "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "winston": "^2.4.0",
     "winston-daily-rotate-file": "^1.7.2"
   },
   "devDependencies": {
-    "babel": "^6.23.0",
-    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
@@ -48,6 +44,7 @@
     "style-loader": "^0.20.1",
     "url-loader": "^0.6.2",
     "webpack": "^3.10.0",
+    "webpack-bundle-analyzer": "^2.10.0",
     "webpack-dev-server": "^2.11.1"
   }
 }

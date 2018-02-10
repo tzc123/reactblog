@@ -9,15 +9,16 @@ export default class Home extends React.Component {
   constructor() {
     super()
     this.state = {
-      currentPage: 1
+      currentPage: 1,
+      total: 100
     }
   }
   render() {
-    const { state } = this
+    const { state: {currentPage, total} } = this
     return (
       <div className="home">
-        <Roller total="100" />
-        <ArticleList { ...state } />
+        <Roller currentPage={currentPage} total={total}/>
+        <ArticleList currentPage={currentPage}/>
         <Game />
       </div>
     )
