@@ -10,7 +10,7 @@ export default class Home extends React.Component {
     super()
     this.state = {
       currentPage: 1,
-      total: 100
+      total: 5
     }
   }
   render() {

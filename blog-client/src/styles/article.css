@@ -23,7 +23,7 @@
   padding-left: 30px;
   background: #fff;
   overflow: hidden;
-  transition: transform .5s;
+  transition: all .5s;
 }
 
 

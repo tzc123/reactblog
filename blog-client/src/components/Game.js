@@ -414,7 +414,11 @@ export default class Game extends React.Component {
   }
   render() {
     return (
-      <canvas className="game" onKeyDown={this.handleKeyDown.bind(this)} ref="game" width="200" height="200"></canvas>
+      <canvas className="game" 
+        onKeyDown={this.handleKeyDown.bind(this)} 
+        ref="game" 
+        width="200" 
+        height="200"></canvas>
     )
   }
 }

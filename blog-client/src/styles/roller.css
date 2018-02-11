@@ -43,6 +43,7 @@
 }
 
 .page {
+  width: 30px;
   height: 30px;
   margin-bottom: 20px;
   line-height: 30px;

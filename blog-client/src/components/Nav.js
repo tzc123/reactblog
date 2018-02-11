@@ -68,7 +68,11 @@ export default class Nav extends React.Component {
           <Link className="title" to="/">
             DAZs
           </Link>
-          <ul >
+          <div className="search">
+            <input placeholder="你倒是搜啊..."/>
+            <img src={require('../images/search.png')}></img>
+          </div>
+          <ul>
             {nav.map((item, index) => (
                 <li key={index}>
                   {item.text}

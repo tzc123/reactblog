@@ -7,3 +7,7 @@
   width: 200px;
   height: 200px;
 }
+
+.game:focus {
+  /* background: #000; */
+}

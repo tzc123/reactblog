@@ -18,7 +18,7 @@ nav {
 
 nav .title {
   letter-spacing: 3px;
-  margin-right: 150px;
+  margin-right: 120px;
   line-height: 70px;
   font-size: 30px;
   font-weight: 50;
@@ -27,6 +27,35 @@ nav .title {
 span.count {
   letter-spacing: 0px;
   font-size: 10px;
+}
+
+.search {
+  position: relative;
+  height: 25px;
+  margin-top: 22px;
+}
+
+.search>input {
+  display: inline-block;
+  box-sizing: border-box;
+  padding-left: 12px;
+  padding-right: 30px;
+  font-size: 15px;
+  font-weight: 200;
+  height: 100%;
+  border-radius: 20px;
+  border: none;
+  background: #f4f4f4;
+  outline: none;
+}
+
+.search>img {
+  position: absolute;
+  right: 5px;
+  top: -1px;
+  width: 25px;
+  height: 25px;
+  transition: transform .5s;
 }
 
 nav>ul {
