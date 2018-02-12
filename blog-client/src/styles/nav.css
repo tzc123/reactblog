@@ -64,7 +64,6 @@ nav>ul {
   justify-content: space-between;
   letter-spacing: 3px;
   font-weight: 100;
-  font-size: 20px;
 }
 
 nav>ul>li {
@@ -74,10 +73,13 @@ nav>ul>li {
   height: 70px;
   text-align: center;
   line-height: 70px;
+  font-size: 20px;
+  transition: font-size .5s;
 }
 
 nav li:hover {
-  background: #304960;
+  /* background: #304960; */
+  font-size: 23px;
 }
 
 nav>ul>li:hover .sub-nav {
@@ -96,8 +98,11 @@ nav>ul>li:hover .sub-nav {
   line-height: 70px;
   height: 70px;
   margin-top: 1px;
+  border-radius: 3px;  
   padding-left: 10px;
   background: #222b39;
+  font-size: 20px;
+  transition: font-size .5s;  
 }
 .sub-nav img {
   width: 30px;
