@@ -22,7 +22,7 @@ app.use(koaBody())
 app.use(router.routes());
 
 app.on('error', (err, ctx) => {
-  logger.error('server error', err, ctx)
+  logger.error('server error', { err, ctx })
 })
 
 app.listen(port, () => {

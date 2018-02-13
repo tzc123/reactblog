@@ -22,9 +22,9 @@ module.exports = {
     } catch (e) {
       ctx.body = {
         success: false,
-        message: '啊偶出错了'
+        message: '失败:查找文章列表时错误'
       }
-      logger.error('查找文章列表时错误', { category, error: e.stack })
+      logger.error('查找文章列表时错误', { category, err: e.stack })
     }
   },
   async index(ctx) {
@@ -42,9 +42,9 @@ module.exports = {
     } catch(e) {
       ctx.body = {
         success: false,
-        message: '啊偶出错了'
+        message: '失败:查找文章时错误'
       }
-      logger.error('查找文章时错误', { id, error: e.stack })
+      logger.error('查找文章时错误', { id, err: e.stack })
     }
   },
   async insert(ctx) {
@@ -58,7 +58,7 @@ module.exports = {
         })
         ctx.body = {
           success: true,
-          message: '添加成功'
+          message: '成功:添加成功'
         }
         logger.info('成功添加文章', { _id: _id.toString() } )
       } catch (e) {
@@ -66,13 +66,13 @@ module.exports = {
           success: false,
           message: '失败:' + e
         }
-        logger.error('数据库写入时错误', { title, secret, content, description, error: e.stack })
+        logger.error('数据库写入时错误', { title, secret, content, description, err: e.stack })
       }
     } else {
       logger.info('添加文章时参数错误', { title, secret, content, description })
       ctx.body = {
         success: false,
-        message: '参数错误'
+        message: '失败:参数错误'
       }
     }
   }
