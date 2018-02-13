@@ -1,4 +1,4 @@
-.roller__wrapper {
+.roller-wrapper {
   position: fixed;
   top: 80px;
   bottom: 0;
@@ -6,7 +6,7 @@
   padding-right: 100px;
 }
 
-.roller__mask {
+.roller-mask {
   position: absolute;
   top: 0;
   right: 0;
@@ -24,7 +24,7 @@
   overflow: scroll;
 }
 
-.roller__mark {
+.roller-mark {
   position: absolute;
   top: 0;
   bottom: 0;

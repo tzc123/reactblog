@@ -1,0 +1,132 @@
+.article-list {
+  flex: 1;
+  position: relative;
+  margin: 0 20px 0 50px;
+  animation: show_list .5s;
+}
+
+.line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 20px;
+  width: 1px;
+  background: #999999;
+  opacity: .1;
+}
+
+.article-list li {
+  position: relative;
+  margin-bottom: 15px;
+  height: 150px;
+  border-radius: 5px;
+  padding-left: 30px;
+  background: #fff;
+  overflow: hidden;
+  transition: all .5s;
+}
+
+
+.article-list li:hover {
+  box-shadow: #6c727c 0px 7px 15px;
+  /* border: 1px solid #999999;   */
+  transform: scale(1.02, 1.02);
+}
+
+.article-list .title {
+  margin-top: 30px;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 200;
+  line-height: 30px;
+}
+
+.article-list .time {
+  margin-left: 10px;
+  font-size: 14px;
+  color: #d4d4d4;
+}
+
+.article-list .desc {
+  margin-top: 5px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 100;
+}
+
+.article-list .pic {
+  position: absolute;
+  height: 90px;
+  right: 20px;
+  top: 30px;
+  animation: show_pic .5s;
+}
+
+.article-list .loading {
+  position: absolute;
+  right: 80px;
+  top: 50%;
+  margin-top: -10px;
+}
+
+/* .article-list .pic:hover {
+  box-shadow: #6c727c 0px 5px 10px;
+  transform: scale(1.2, 1.2);
+} */
+
+.article-list .footer {
+  margin-top: 10px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.article-list .views{
+  height: 15px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.article-list .footer span {
+  font-size: 10px;
+  font-weight: 300;
+  color: #6c727c;
+}
+
+.article-list__link {
+  position: relative;
+}
+.article-list__link:hover {
+  color: skyblue;
+}
+.underline {
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  background:skyblue;
+}
+.underline .mask {
+  transition: transform .2s;
+  height: 100%;
+  width: 100%;
+  background: #fff;
+}
+.article-list__link:hover .mask{
+  transform: scaleX(0);
+  display: block;
+}
+
+@keyframes show_pic {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes show_list {
+  from {
+    opacity: 0;
+    transform: translateY(100px)
+  }
+}

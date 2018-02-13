@@ -1,6 +1,6 @@
 import React from 'react'
 import ArticleItem from './ArticleItem.js'
-import '../styles/article.css'
+import '../styles/articlelist.css'
 import '../images/bg.jpeg'
 
 export default class ArticleList extends React.Component {

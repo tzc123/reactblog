@@ -1,9 +1,9 @@
 import React from 'react'
-import '../styles/nav.css'
+import '../styles/header.css'
 import { Link } from "react-router-dom";
 import SubNav from './SubNav'
 
-export default class Nav extends React.Component {
+export default class Header extends React.Component {
   constructor() {
     super()
     this.state = {
@@ -63,7 +63,7 @@ export default class Nav extends React.Component {
     let nav = this.state.nav
 
     return (
-      <header>
+      <header className="main-header">
         <nav>
           <Link className="title" to="/">
             DAZs

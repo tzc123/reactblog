@@ -29,8 +29,8 @@ export default class Roller extends React.Component {
   render() {
     const { props: { total, currentPage }, handleClick } = this
     return (
-      <div className="roller__wrapper">
-        <div className="roller__mark"></div>
+      <nav className="roller-wrapper">
+        <div className="roller-mark"></div>
         <div className="roller" ref="roller" onScroll={this.handleScroll.bind(this)}>
           <div className="pages" ref="pages">
             {(() => {
@@ -42,8 +42,8 @@ export default class Roller extends React.Component {
             })()}
           </div>
         </div>
-        <div className="roller__mask"></div>
-      </div>
+        <div className="roller-mask"></div>
+      </nav>
     )
   }
 }

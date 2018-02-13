@@ -4,3 +4,10 @@
   max-width: 960px;
   display: flex;
 }
+
+.home>aside {
+  position: sticky;
+  top: 90px;
+  width: 200px;
+  height: 200px;  
+}

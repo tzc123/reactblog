@@ -1,7 +1,7 @@
 import React from "react";
 import Home from "./pages/Home.js";
 import Article from "./pages/Article.js";
-import Nav from "./components/Nav";
+import Header from "./components/Header";
 import Mask from "./components/Mask"
 import { BrowserRouter, Route } from "react-router-dom";
 
@@ -10,7 +10,7 @@ export default () => {
     <BrowserRouter>
       <div>
         <Mask />
-        <Nav />
+        <Header />
         <Route path="/" exact component={Home} />
         <Route path="/article" component={Article} />
       </div>
