@@ -2,13 +2,9 @@ const ArticleModel = require('../models/article')
 
 module.exports = {
   async list(ctx) {
-    const { query: { category } } = ctx
-    const filter = {}
-    if (category) {
-      filter.category = category
-    }
+    const { query: { category, size, index } } = ctx
     try{
-      const articles = await ArticleModel.find(filter)
+      const articles = await ArticleModel.paginator(category, size || 10, index || 1)
       if (articles.length == 0) {
         ctx.body = {
           success: false,
@@ -30,7 +26,7 @@ module.exports = {
   async index(ctx) {
     const { params: { id } } = ctx
     try {
-      const article = await ArticleModel.findOne(id)
+      const article = await ArticleModel.findById(id)
       if (article) {
         ctx.body = {
           success: true,

@@ -5,7 +5,24 @@
   display: flex;
 }
 
+.article>article {
+  overflow: hidden;
+  flex: 1;
+  background: #fff;
+  padding: 30px;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
 .article-header {
   height: 70px;
   font-size: 30px;
+}
+
+.article>aside {
+  position: sticky;
+  top: 90px;
+  width: 200px;
+  height: 200px;  
+  background: #fff;
 }

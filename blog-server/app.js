@@ -7,7 +7,7 @@ const koaBody = require('koa-body');
 const koaSession = require('koa-session');
 const router = require("./router");
 global.logger = require('./logger')
-const { server: { staticPath, staticOptions, port }, session } = require('./config/index');
+const { server: { staticPath, staticOptions, port }, session } = require('./config');
 require('./db_connection')
 const app = new Koa();
 

@@ -8,7 +8,7 @@ const appPath = path.join(__dirname, "blog-client/src/app.js")
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
-			vendor: ['react', 'react-dom', 'react-router-dom'],
+			vendor: ['react', 'react-dom', 'react-router-dom', 'regenerator-runtime'],
 			app: appPath
 		},
     output: {
@@ -24,7 +24,12 @@ const config = {
 					exclude: /node_modules/,
 					loader: 'babel-loader',
 					options: {
-						presets: ['env', 'stage-3', 'react']
+						presets: ['env', 'stage-3', 'react'],
+						plugins: [['transform-runtime', {
+							"polyfill": false,
+							"regenerator": true,
+							"moduleName": "babel-runtime"
+						}]]
 					}
 				}, 
 				{

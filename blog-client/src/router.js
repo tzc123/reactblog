@@ -12,7 +12,7 @@ export default () => {
         <Mask />
         <Header />
         <Route path="/" exact component={Home} />
-        <Route path="/article" component={Article} />
+        <Route path="/article/:id" component={Article} />
       </div>
     </BrowserRouter>
   );

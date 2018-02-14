@@ -29,18 +29,24 @@ const ArticleSchema = new Schema({
   updated_at: {
     type: Date
   },
-  views: {
+  browse: {
     type: Number,
     default: 0,
     min: 0
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
-
+async function paginator(category, size, index) {
+  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0})
+                        .limit(size)
+                        .skip(index - 1)
+                        .exec()
+  return articles
+} 
 async function findById(id) {
   const hex = /[0-9A-Fa-f]{6}/g
   if (hex.test(id)) {
-    const article = await findOne({ _id: id })
+    const article = await findOne({ _id: id }, { __v: 0 })
     return article
   } else {
     return null
@@ -75,5 +81,7 @@ module.exports = {
   findOne,
   create,
   find,
-  remove
+  findById,
+  remove,
+  paginator
 }
