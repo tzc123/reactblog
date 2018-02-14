@@ -11,14 +11,14 @@ module.exports = new Logger({
         filename: path.join(__dirname, `logs/.info.log`),
         datePattern: 'yyyy_MM_dd',
         prepend: true,
-        level: process.env.NODE_ENV === 'development' ? 'debug' : 'info'
+        level: 'info'
       }),
       new DailyRotateFile({
         name: 'error',
         filename: path.join(__dirname, `logs/.error.log`),
         datePattern: 'yyyy_MM_dd',
         prepend: true,
-        level: process.env.NODE_ENV === 'development' ? 'debug' : 'error'
+        level: 'error'
       })
     ]
   })
