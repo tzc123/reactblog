@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   server: {
     port: 4321,
-    staticPath: path.join(__dirname, '../static'),
+    staticPath: path.join(__dirname, 'static'),
     staticOptions: {
       maxage: 7776000000,
       immutable: true
