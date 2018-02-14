@@ -5,13 +5,13 @@ const ArticleSchema = new Schema({
     type: String,
     required: true,
     unique: true,
-    maxlength: 20,
+    maxlength: 128,
     minlength: 3,
     trim: true
   },
   description: {
     type: String,
-    maxlength: 50,
+    maxlength: 512,
     trim: true
   },
   category: {
@@ -22,11 +22,11 @@ const ArticleSchema = new Schema({
     type: String,
     required: true
   },
-  create_at: {
+  created_at: {
     type: Date,
     default: Date.now
   },
-  update_at: {
+  updated_at: {
     type: Date
   },
   views: {
@@ -37,27 +37,43 @@ const ArticleSchema = new Schema({
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
 
-async function findArticle(id) {
+async function findById(id) {
   const hex = /[0-9A-Fa-f]{6}/g
   if (hex.test(id)) {
-    const article = await ArticleModel.findOne({ _id: id })
+    const article = await findOne({ _id: id })
     return article
   } else {
     return null
   }
 }
-
-async function findArticles(filter) {
-  const articles = await ArticleModel.find(filter)
+async function findOne(filter) {
+  const article = ArticleModel.findOne(filter, {
+    __v: 0
+  })
+  return article
+}
+async function find(filter) {
+  const articles = await ArticleModel.find(filter, {
+    __v: 0,
+    content: 0
+  })
   return articles
 }
-async function insert(article) {
-  const articles = findArticle(article._id)
+async function create(article) {
+  const oldArticle = await findOne({ title: article.title })
+  if (oldArticle) {
+    return null
+  }
   const newArticle = await ArticleModel.create(article)
   return newArticle
 }
+async function remove(_id) {
+  const res = await ArticleModel.remove({ _id })
+  return res
+}
 module.exports = {
-  findArticle,
-  insert,
-  findArticles
+  findOne,
+  create,
+  find,
+  remove
 }

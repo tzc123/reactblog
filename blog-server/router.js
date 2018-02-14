@@ -7,6 +7,7 @@ router
   .get("/", home.index)
   .get('/article', article.list)
   .get('/article/:id', article.index)
-  .post('/article', article.insert)
+  .post('/article', article.create)
+  .post('/article/:id/remove', article.remove)
 
 module.exports = router;

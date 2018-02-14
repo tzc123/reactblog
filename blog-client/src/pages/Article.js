@@ -7,14 +7,14 @@ import '../styles/article.css'
 export default class Article extends React.Component {
   render() {
     return (
-      <main>
+      <main className="article">
         <article>
           <ArticleHeader />
           <ArticleContent />
           <ArticleFooter />
         </article>
         <aside>
-          
+
         </aside>
       </main>
     )

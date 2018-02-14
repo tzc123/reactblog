@@ -18,10 +18,10 @@ export default class ArticleItem extends React.Component {
   render() {
     const { props: { title, views, pic, time, index, handleClick } } = this;
     return (
-      <li>
+      <li className="article-item">
         <div className="title">
           <span>
-            <Link className="article-list__link" to="/article">
+            <Link className="article-list-link" to="/article">
               {title}
               <div className="underline">
                 <div className="mask" />

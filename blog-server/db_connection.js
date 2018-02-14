@@ -5,8 +5,8 @@ mongoose.connect(uri)
 const db = mongoose.connection
 
 db.on('open', () => {
-  logger.info('db connected')
+  logger.info('数据库已连接')
 })
 db.on('error', () => {
-  logger.error('db failed to connect')
+  logger.error('数据库连接失败')
 })

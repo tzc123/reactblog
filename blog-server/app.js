@@ -22,9 +22,9 @@ app.use(koaBody())
 app.use(router.routes());
 
 app.on('error', (err, ctx) => {
-  logger.error('server error', { err, ctx })
+  logger.error('服务器错误', { err, ctx })
 })
 
 app.listen(port, () => {
-  logger.info('server start', { port })
+  logger.info('服务器已启动', { port })
 });
