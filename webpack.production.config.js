@@ -70,7 +70,8 @@ const config = {
 			// new BundleAnalyzerPlugin(),
 			new HtmlPlugin({
 				title: "DAZ'blog",
-				template: path.join(__dirname, 'blog-client/index.html')
+				template: path.join(__dirname, 'blog-client/index.html'),
+				favicon: path.join(__dirname, 'blog-client/favicon.ico')				
 			}),
 			new webpack.DefinePlugin({
 				"process.env.NODE_ENV": '"production"'

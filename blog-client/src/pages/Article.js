@@ -16,7 +16,6 @@ export default class Article extends React.Component {
   componentDidMount() {
     getArticle(this.props.match.params.id)
       .then(article => {
-        console.log(article)
         if (article) {
           this.setState({
             article
@@ -25,11 +24,12 @@ export default class Article extends React.Component {
       })
   }
   render() {
-    const { state: { article: { content } } } = this
+    const { state: { article: { title, content, browse, category, created_at } } } = this
+    console.log(this.state)
     return (
       <main className="article">
         <article>
-          <ArticleHeader />
+          <ArticleHeader {...{title, browse, category, created_at}}/>
           <ArticleContent content={content}/>
           <ArticleFooter />
         </article>

@@ -60,10 +60,14 @@ const config = {
 		},
 		plugins: [
 			new webpack.HotModuleReplacementPlugin(),
+			new webpack.DefinePlugin({
+				"process.env.NODE_ENV": '"development"'
+			}),
 			new ExtractTextPlugin("css/style.css"),
 			new HtmlPlugin({
 				title: "DAZ'blog",
-				template: path.join(__dirname, 'blog-client/index.html')
+				template: path.join(__dirname, 'blog-client/index.html'),
+				favicon: path.join(__dirname, 'blog-client/favicon.ico')
 			})
 		],
 	devServer: {

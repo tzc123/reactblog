@@ -15,8 +15,36 @@
 }
 
 .article-header {
-  height: 70px;
-  font-size: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #999999;
+}
+.article-header>h1 {
+  font-size: 28px;
+  font-weight: 500;
+}
+.meta {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.meta>.browse,
+.meta>.time,
+.meta>.category {
+  height: 19px;
+  margin-right: 5px;
+  vertical-align: middle;
+  margin-top: -2px;
+}
+
+.meta>.browse {
+  height: 20px;
+}
+
+.meta>span {
+  font-size: 13px;
+  font-weight: 300;
+  color: #6c727c;
+  margin-right: 30px;
 }
 
 .article>aside {
