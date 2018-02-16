@@ -11,6 +11,8 @@ const { server: { staticPath, staticOptions, port }, session } = require('./conf
 require('./db_connection')
 const app = new Koa();
 
+app.keys = ['kkeeyyss']
+
 app.use(koaCors());
 
 app.use(koaStatic(staticPath, staticOptions));
@@ -22,7 +24,8 @@ app.use(koaBody())
 app.use(router.routes());
 
 app.on('error', (err, ctx) => {
-  logger.error('服务器错误', { err, ctx })
+  console.log(err)
+  logger.error('服务器错误', { err: err.stack, ctx })
 })
 
 app.listen(port, () => {

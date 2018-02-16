@@ -33,6 +33,7 @@
 }
 
 .article-item>.title {
+  margin-right: 200px;
   height: 30px;
   font-size: 18px;
   font-weight: 400;
@@ -60,6 +61,7 @@
   right: 25px;
   top: 25px;
   animation: show_pic .5s;
+  border-radius: 2px;
 }
 
 .article-item>.loading {
