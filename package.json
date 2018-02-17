@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config webpack.production.config.js",
-    "client": "NODE_ENV='development' webpack-dev-server --inline --hot --config webpack.development.config.js",
+    "client": "webpack-dev-server --inline --hot --config webpack.development.config.js",
     "server": "npm run build && nodemon blog-server/app.js",
     "prod": "pm2 start ecosystem.config.js"
   },

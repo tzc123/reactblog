@@ -2,6 +2,7 @@ import React from 'react'
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
+import Catelog from '../components/Catelog'
 import '../styles/article.css'
 import 'github-markdown-css'
 import { getArticle } from '../api'
@@ -34,7 +35,9 @@ export default class Article extends React.Component {
           <ArticleFooter />
         </article>
         <aside>
-          <div style={{width: '200px', height: '200px'}}></div>
+          <div style={{width: '200px', height: '200px'}}>
+            <Catelog />
+          </div>
         </aside>
       </main>
     )
