@@ -15,7 +15,7 @@ app.keys = ['kkeeyyss']
 
 app.use(koaCors());
 
-app.use(koaStatic(staticPath, staticOptions));
+// app.use(koaStatic(staticPath, staticOptions));
 
 app.use(koaSession(session, app))
 
