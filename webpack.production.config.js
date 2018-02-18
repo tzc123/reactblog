@@ -61,7 +61,7 @@ const config = {
 					loader: 'url-loader',
 					query: {
 						limit: 8192,
-						name: 'images/[name].[ext]?[hash]'
+						name: 'http://122.152.205.25:1234/images/[name].[ext]?[hash]'
 					}
 				}
 			]
