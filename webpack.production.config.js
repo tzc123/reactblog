@@ -3,8 +3,9 @@ const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const outputPath = path.join(__dirname, 'blog-server/static')
+const outputPath = path.join(__dirname, 'static')
 const appPath = path.join(__dirname, "blog-client/src/app.js")
+const serverDomain = 'http://122.152.205.25:1234/'
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
@@ -14,7 +15,7 @@ const config = {
     output: {
         path: outputPath,
 				filename: 'js/[name].[chunkhash:8].js',
-				publicPath: 'http://122.152.205.25:1234/'
+				publicPath: serverDomain
     },
     module: {
 			strictExportPresence: true,
