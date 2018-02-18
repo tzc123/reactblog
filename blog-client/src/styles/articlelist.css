@@ -116,7 +116,7 @@
   background:skyblue;
 }
 .underline>.mask {
-  transition: transform .2s;
+  transition: transform .5s;
   height: 100%;
   width: 100%;
   background: #fff;
