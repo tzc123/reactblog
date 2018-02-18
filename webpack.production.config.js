@@ -14,7 +14,7 @@ const config = {
     output: {
         path: outputPath,
 				filename: 'js/[name].[chunkhash:8].js',
-				publicPath: '/'
+				publicPath: 'http://122.152.205.25:1234/'
     },
     module: {
 			strictExportPresence: true,
