@@ -53,7 +53,7 @@ const config = {
 						loader: 'url-loader',
 						query: {
 							limit: 8192,
-							name: path.join(outputPath, 'images/[name].[ext]?[hash]')
+							name: 'image/[name].[ext]?[hash]'
 						}
 					}
 			]

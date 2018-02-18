@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import pic from "../images/bg.jpeg"
+import loading from "../images/loading.gif"
 
 export default class ArticleItem extends React.Component {
   constructor() {
@@ -16,7 +18,7 @@ export default class ArticleItem extends React.Component {
     }
   }
   render() {
-    const { props: { title, browse, pic, created_at, _id, index, handleClick, description, category } } = this;
+    const { props: { title, browse, created_at, _id, index, handleClick, description, category } } = this;
     return (
       <li className="article-item">
         <div className="title">
@@ -39,7 +41,7 @@ export default class ArticleItem extends React.Component {
           <span>{(new Date(created_at).toLocaleDateString().replace(/\//g,'-'))}</span>
         </div>
         <img ref="pic" onClick={handleClick} className={`pic ${this.state.loading ? 'hidden' : ''}`} src={pic} alt="" />
-        <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={require("../images/loading.gif")} />
+        <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={loading} />
       </li>
     );
   }
