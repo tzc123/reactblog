@@ -13,7 +13,7 @@ const app = new Koa();
 
 app.keys = ['kkeeyyss']
 
-app.use(koaCors());
+// app.use(koaCors());
 
 // app.use(koaStatic(staticPath, staticOptions));
 
