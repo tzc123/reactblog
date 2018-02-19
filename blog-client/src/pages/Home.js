@@ -6,7 +6,6 @@ import Game from '../components/Game'
 import '../styles/home.css'
 import '../styles/hopscotch.min.css'
 
-console.log(getArticleList)
 
 export default class Home extends React.Component {
   constructor() {
