@@ -47,7 +47,7 @@ async function paginator(category, size, index) {
                         .exec()
   return articles
 } 
-async function findById(id,returnMarkDown = false) {
+async function findById(id, returnMarkDown) {
   const hex = /[0-9A-Fa-f]{6}/g
   if (hex.test(id)) {
     const article = await findOne({ _id: id }, returnMarkDown ? { __v: 0 } : { __v: 0, markdown: 0 })
