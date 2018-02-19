@@ -1,5 +1,9 @@
 ### 个人博客
 
+### 网址
+
+http://122.152.105.25
+
 ### todo
 * blog backend 1
 * markdown editor 1
