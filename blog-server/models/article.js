@@ -83,7 +83,7 @@ async function remove(_id) {
   return res
 }
 async function update(_id, article) {
-  const res = await ArticleModel.updateOne({ _id }, article)
+  const res = await ArticleModel.updateOne({ _id }, { ...article, updated_at: Date.now() })
   return res
 }
 module.exports = {
