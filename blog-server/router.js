@@ -9,5 +9,6 @@ router
   .get('/article/:id', article.index)
   .post('/article', article.create)
   .post('/article/:id/remove', article.remove)
+  .post('/article/:id', article.update)
 
 module.exports = router;

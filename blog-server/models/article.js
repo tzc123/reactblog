@@ -65,7 +65,8 @@ async function findOne(filter, returnMarkDown) {
 async function find(filter) {
   const articles = await ArticleModel.find(filter, {
     __v: 0,
-    content: 0
+    content: 0,
+    markdown: 0
   })
   return articles
 }
@@ -81,11 +82,16 @@ async function remove(_id) {
   const res = await ArticleModel.remove({ _id })
   return res
 }
+async function update(_id, article) {
+  const res = await ArticleModel.updateOne({ _id }, article)
+  return res
+}
 module.exports = {
   findOne,
   create,
   find,
   findById,
   remove,
-  paginator
+  paginator,
+  update
 }

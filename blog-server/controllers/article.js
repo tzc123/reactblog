@@ -6,21 +6,24 @@ module.exports = {
     try{
       const articles = await ArticleModel.paginator(category, size || 10, index || 1)
       if (articles.length == 0) {
+        logger.info('无相关文章', { url: ctx.request.url, method: ctx.request.method })
         ctx.body = {
           success: false,
           message: '没有发现任何相关文章'
         }
-      }
-      ctx.body = {
-        success: true,
-        data: articles
+      } else {
+        logger.info('查找列表成功', { url: ctx.request.url, method: ctx.request.method })      
+        ctx.body = {
+          success: true,
+          data: articles
+        }
       }
     } catch (e) {
+      logger.error('未知错误', { url: ctx.request.url, method: ctx.request.method, err: e.stack })
       ctx.body = {
         success: false,
-        message: '查找文章列表时错误'
+        message: '未知错误'
       }
-      logger.error('查找文章列表时错误', { category, err: e.stack })
     }
   },
   async index(ctx) {
@@ -28,19 +31,24 @@ module.exports = {
     try {
       const article = await ArticleModel.findById(id, rmd == 1)
       if (article) {
+        logger.info('查找文章成功', { url: ctx.request.url, method: ctx.request.method })              
         ctx.body = {
           success: true,
           data: article
         }
       } else {
-        ctx.status = 404
+        logger.info('无此文章', { url: ctx.request.url, method: ctx.request.method })    
+        ctx.body = {
+          success: false,
+          message: '文章不存在'
+        }
       }
     } catch (e) {
+      logger.error('查找文章时错误', { url: ctx.request.url, method: ctx.request.method, err: e.stack })      
       ctx.body = {
         success: false,
-        message: '查找文章时错误'
+        message: '未知错误'
       }
-      logger.error('查找文章时错误', { id, err: e.stack })
     }
   },
   async create(ctx) {
@@ -55,30 +63,30 @@ module.exports = {
           description: !!description ? description : ''
         })
         if (!newArticle) {
+          logger.info('同名', { title, url: ctx.request.url, method: ctx.request.method })
           ctx.body = {
             success: false,
             message: '已有同名文章'
           }
-          logger.info('已有同名文章', { title } )
         } else {
+          logger.info('已添加', { id: newArticle._id.toString(), url: ctx.request.url, method: ctx.request.method })          
           ctx.body = {
             success: true,
             message: '添加成功'
           }
-          logger.info('成功添加文章', { id: newArticle._id.toString() } )
         }
       } catch (e) {
         ctx.body = {
           success: false,
-          message: '数据库写入时错误'
+          message: '未知错误'
         }
-        logger.error('数据库写入时错误', { title, err: e.stack })
+        logger.error('未知错误', {  url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown, err: e.stack })
       }
     } else {
-      logger.info('添加文章时参数错误', { title })
+      logger.info('参数错误', {  url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown })
       ctx.body = {
         success: false,
-        message: '添加文章时参数错误'
+        message: '参数错误'
       }
     }
   },
@@ -89,35 +97,92 @@ module.exports = {
         const res = await ArticleModel.remove(id)
         if (res.ok == 1) {
           if (res.n >= 1) {
+            logger.info('已删除', {  url: ctx.request.url, method: ctx.request.method, id })
             ctx.body = {
               success: true,
               message: '删除成功'
             }
           } else {
+            logger.info('删除时不存在', {  url: ctx.request.url, method: ctx.request.method, id })
             ctx.body = {
               success: false,
               message: '该文章不存在'
             }
           }
         } else {
+          logger.error('数据库错误', {  url: ctx.request.url, method: ctx.request.method, id })
           ctx.body = {
             success: false,
-            message: '删除文章时数据库错误'
+            message: '数据库错误'
           }
-          logger.error('删除文章时数据库错误', { id })
         }
       } catch (e) {
+        logger.error('未知错误', { url: ctx.request.url, method: ctx.request.method, id })
         ctx.body = {
           success: false,
-          message: '删除文章时错误'
+          message: '未知错误'
         }
-        logger.error('删除文章时错误', { id })
       }
     } else {
-      logger.info('删除文章时参数错误', { id })
+      logger.info('参数错误', { url: ctx.request.url, method: ctx.request.method, id })
       ctx.body = {
         success: false,
-        message: '删除文章时参数错误'
+        message: '参数错误'
+      }
+    }
+  },
+  async update(ctx) {
+    const { params: { id }, request: { body: { content, description, title, category, markdown } } } = ctx
+    if (content && title && category && markdown) {
+      try {
+        const { ok, nModified, n } = await ArticleModel.update(id, {
+          category,
+          content,
+          markdown,
+          title,
+          description: !!description ? description : ''
+        })
+        if (ok == 1) {
+          if (n >= 1) {
+            if (nModified == 0) {
+              logger.info('未改动', { url: ctx.request.url, method: ctx.request.method, id })
+              ctx.body = {
+                success: false,
+                message: '没有需要更新的地方'
+              }
+            } else {
+              logger.info('已更新', { url: ctx.request.url, method: ctx.request.method, id })
+              ctx.body = {
+                success: true,
+                message: '更新成功'
+              }
+            }
+          } else {
+            logger.info('文章不存在', { url: ctx.request.url, method: ctx.request.method, id })
+            ctx.body = {
+              success: false,
+              message: '未找到该文章'
+            }
+          }
+        } else {
+          logger.error('数据库错误', { url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown, id })
+          ctx.body = {
+            success: false,
+            message: '数据库错误'
+          }
+        }
+      } catch (e) {
+        logger.error('未知错误', { url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown, id })
+        ctx.body = {
+          success: false,
+          message: '未知错误'
+        }
+      }  
+    } else {
+      logger.info('参数错误', { url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown, id  })
+      ctx.body = {
+        success: false,
+        message: '参数错误'
       }
     }
   }
