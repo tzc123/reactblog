@@ -24,9 +24,9 @@ module.exports = {
     }
   },
   async index(ctx) {
-    const { params: { id } } = ctx
+    const { params: { id }, query: { rmd } } = ctx
     try {
-      const article = await ArticleModel.findById(id)
+      const article = await ArticleModel.findById(id, !!rmd)
       if (article) {
         ctx.body = {
           success: true,
