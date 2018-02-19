@@ -44,12 +44,13 @@ module.exports = {
     }
   },
   async create(ctx) {
-    const { request: { body: { content, description, title, category } } } = ctx 
-    if (content && title && category) {
+    const { request: { body: { content, description, title, category, markdown } } } = ctx 
+    if (content && title && category && markdown) {
       try {
         const newArticle = await ArticleModel.create({
           category,
           content,
+          markdown,
           title,
           description: !!description ? description : ''
         })

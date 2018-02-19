@@ -33,6 +33,10 @@ const ArticleSchema = new Schema({
     type: Number,
     default: 0,
     min: 0
+  },
+  markdown: {
+    type: String,
+    required: true
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
@@ -43,10 +47,10 @@ async function paginator(category, size, index) {
                         .exec()
   return articles
 } 
-async function findById(id) {
+async function findById(id,returnMarkDown = false) {
   const hex = /[0-9A-Fa-f]{6}/g
   if (hex.test(id)) {
-    const article = await findOne({ _id: id }, { __v: 0 })
+    const article = await findOne({ _id: id }, returnMarkDown ? { __v: 0 } : { __v: 0, markdown: 0 })
     return article
   } else {
     return null
