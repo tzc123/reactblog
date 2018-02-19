@@ -41,25 +41,25 @@ const ArticleSchema = new Schema({
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
 async function paginator(category, size, index) {
-  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0})
+  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0 })
                         .limit(size)
                         .skip(index - 1)
                         .exec()
   return articles
 } 
-async function findById(id, returnMarkDown) {
+async function findById(id, returnMarkDown = false) {
   const hex = /[0-9A-Fa-f]{6}/g
   if (hex.test(id)) {
-    const article = await findOne({ _id: id }, returnMarkDown ? { __v: 0 } : { __v: 0, markdown: 0 })
+    const article = await findOne({ _id: id }, returnMarkDown)
     return article
   } else {
     return null
   }
 }
-async function findOne(filter) {
-  const article = ArticleModel.findOne(filter, {
+async function findOne(filter, returnMarkDown) {
+  const article = ArticleModel.findOne(filter, returnMarkDown ? {
     __v: 0
-  })
+  } : { __v: 0, markdown: 0 })
   return article
 }
 async function find(filter) {
