@@ -10,7 +10,7 @@ module.exports = {
     }
   },
   database: {
-    uri: 'mongodb://localhost:27017/reactblog'
+    url: 'mongodb://localhost:27017/reactblog'
   },
   session: {
     key: 'kkeeyy',
