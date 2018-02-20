@@ -37,11 +37,15 @@ const ArticleSchema = new Schema({
   markdown: {
     type: String,
     required: true
+  },
+  catelog: {
+    type: Array,
+    required: true
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
 async function paginator(category, size, index) {
-  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0 })
+  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0, catelog: 0 })
                         .limit(size)
                         .skip(index - 1)
                         .exec()

@@ -53,13 +53,14 @@ module.exports = {
   },
   async create(ctx) {
     const { request: { body: { content, description, title, category, markdown }, url, method } } = ctx 
-    if (content && title && category && markdown) {
+    if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
           category,
           content,
           markdown,
           title,
+          catelog,
           description: !!description ? description : ''
         })
         if (!newArticle) {
@@ -132,13 +133,14 @@ module.exports = {
     }
   },
   async update(ctx) {
-    const { params: { id }, request: { body: { content, description, title, category, markdown }, url, method } } = ctx
-    if (content && title && category && markdown) {
+    const { params: { id }, request: { body: { content, description, title, category, markdown, catelog }, url, method } } = ctx
+    if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const { ok, nModified, n } = await ArticleModel.update(id, {
           category,
           content,
           markdown,
+          catelog,
           title,
           description: !!description ? description : ''
         })

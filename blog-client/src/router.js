@@ -9,7 +9,7 @@ export default () => {
   return (
     <BrowserRouter>
       <div>
-        <Mask />
+        {/* <Mask /> */}
         <Header />
         <Route path="/" exact component={Home} />
         <Route path="/article/:id" component={Article} />

@@ -1,6 +1,6 @@
 import axios from 'axios'
-const domain = process.env.NODE_ENV == 'development' ? 'http://localhost:4321' : 'http://122.152.205.25:4321'
-
+//const domain = process.env.NODE_ENV == 'development' ? 'http://localhost:4321' : 'http://122.152.205.25:4321'
+const domain = 'http://localhost:4321'
 export async function getArticleList(category, index) {
   try {
     const res = await axios.get(domain + '/article', category ? { category, size: 10, index } : { size: 10, index })
