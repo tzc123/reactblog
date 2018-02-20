@@ -1,8 +1,6 @@
 const path = require("path");
 const fs = require("fs");
 const Koa = require("koa");
-const Boom = require('boom')
-// const koaStatic = require("koa-static");
 const koaCors = require("koa-cors");
 const koaBody = require('koa-body');
 const koaSession = require('koa-session');
@@ -24,11 +22,7 @@ app.use(koaBody())
 
 app.use(router.routes())
 
-app.use(router.allowedMethods({
-  throw: true,
-  notImplemented: () => new Boom.notImplemented(),
-  methodNotAllowed: () => new Boom.methodNotAllowed()
-}))
+app.use(router.allowedMethods())
 
 app.on('error', (err, ctx) => {
   console.log(err)
