@@ -61,7 +61,7 @@ module.exports = {
           markdown,
           title,
           catelog,
-          description: !!description ? description : ''
+          description: description || ''
         })
         if (!newArticle) {
           logger.info('同名', { title, url, method })
@@ -142,7 +142,7 @@ module.exports = {
           markdown,
           catelog,
           title,
-          description: !!description ? description : ''
+          description: description || ''
         })
         if (ok == 1) {
           if (n >= 1) {

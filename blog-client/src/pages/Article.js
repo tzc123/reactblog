@@ -16,7 +16,7 @@ export default class Article extends React.Component {
       browse: 0,
       category: '',
       created_at: '0000-00-00',
-      catelog: {}
+      catelog: []
     }
   }
   componentDidMount() {
@@ -28,8 +28,11 @@ export default class Article extends React.Component {
       })
     
   }
+  shouldComponentUpdate(props, state) {
+    return this.state.title != state.title
+  }
   render() {
-    const { state: { title, content, browse, category, created_at } } = this
+    const { state: { title, content, browse, category, created_at, catelog } } = this
     return (
       <main className="article">
         <article>
@@ -39,7 +42,7 @@ export default class Article extends React.Component {
         </article>
         <aside>
           <div>
-            <Catelog />
+            <Catelog catelog={catelog} />
           </div>
         </aside>
       </main>

@@ -1,0 +1,16 @@
+.catelog {
+  background: #fff;
+  padding: 20px;
+}
+
+.catelog>ul {
+  /* list-style: circle inside; */
+}
+
+.catelog>ul>li {
+  list-style: square inside;  
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+}

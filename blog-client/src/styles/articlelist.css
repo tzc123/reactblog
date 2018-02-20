@@ -50,7 +50,7 @@
 .article-item>.desc {
   text-align: justify;
   margin-top: 5px;
-  margin-right: 200px;
+  margin-right: 190px;
   line-height: 30px;
   font-size: 16px;
   font-weight: 300;
@@ -60,7 +60,7 @@
   position: absolute;
   width: 180px;
   right: 25px;
-  top: 25px;
+  top: 65px;
   animation: show_pic .5s;
   border-radius: 2px;
 }
