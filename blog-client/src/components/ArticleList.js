@@ -26,5 +26,5 @@ export default class ArticleList extends React.Component {
 }
 
 ArticleList.defaultProps = {
-    articles: []
+  articles: []
 }

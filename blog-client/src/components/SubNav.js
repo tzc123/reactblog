@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function (props) {
+export default (props) => {
   if (!props) return ''
   const { type, subNav } = props
   return (

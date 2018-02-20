@@ -16,6 +16,16 @@ export default class Home extends React.Component {
       articles: []
     }
   }
+  componentDidMount() {
+    const { state: { currentPage } } = this
+    getArticleList(null, currentPage)
+      .then(articles => {
+        this.setState({
+          articles: articles.map(article => ({ ...article, pic: '../images/bg.jpeg' })),
+          total: articles.length
+        })
+      })
+  }
   render() {
     const { state: {currentPage, total, articles} } = this
     return (
@@ -27,15 +37,5 @@ export default class Home extends React.Component {
         </aside>
       </main>
     )
-  }
-  componentDidMount() {
-    const { state: { currentPage } } = this
-    getArticleList(null, currentPage)
-      .then(articles => {
-        this.setState({
-          articles: articles.map(article => ({ ...article, pic: '../images/bg.jpeg' })),
-          total: articles.length
-        })
-      })
   }
 }

@@ -9,7 +9,8 @@ export default class Header extends React.Component {
     this.state = {
       nav: [
         {
-          text: 'home'
+          text: 'home',
+          link: '/'
         },
         {
           text: 'category',
@@ -74,11 +75,13 @@ export default class Header extends React.Component {
           </div>
           <ul>
             {nav.map((item, index) => (
-                <li key={index}>
+              <li key={index}>
+                <Link to={!!item.link ? item.link : '/'}>
                   {item.text}
-                  {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
-                </li>
-              ))}
+                </Link>
+                {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
+              </li>
+            ))}
           </ul>
         </nav>
       </header>

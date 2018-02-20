@@ -11,21 +11,25 @@ export default class Article extends React.Component {
   constructor() {
     super()
     this.state = {
-      article: ''
+      title: '',
+      content: '',
+      browse: 0,
+      category: '',
+      created_at: '0000-00-00',
+      catelog: {}
     }
   }
   componentDidMount() {
     getArticle(this.props.match.params.id)
       .then(article => {
-        if (article) {
-          this.setState({
-            article
-          })
-        }
+        article && this.setState({
+          ...article
+        })
       })
+    
   }
   render() {
-    const { state: { article: { title, content, browse, category, created_at } } } = this
+    const { state: { title, content, browse, category, created_at } } = this
     return (
       <main className="article">
         <article>
@@ -34,7 +38,7 @@ export default class Article extends React.Component {
           <ArticleFooter />
         </article>
         <aside>
-          <div style={{width: '200px', height: '200px'}}>
+          <div>
             <Catelog />
           </div>
         </aside>

@@ -24,7 +24,7 @@ export default class ArticleHeader extends React.Component {
 
 ArticleHeader.defaultProps = {
   title: '',
-  browse: '0',
+  browse: 0,
   category: 'null',
   created_at: '0000-00-00'
 }
