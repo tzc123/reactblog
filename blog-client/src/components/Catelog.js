@@ -27,21 +27,27 @@ export default class Catelog extends React.Component {
       catelog: initCatelog(props.catelog)
     }
   }
-  componentDidMount() {
-    // 修复锚点位置
-    window.addEventListener('hashchange', this.handleHashChange)
-  }
-  componentWillUnmount() {
-    window.removeEventListener('hashchange', this.handleHashChange)    
-  }
-  handleHashChange() {
-    const id = location.hash
-    if (id.indexOf('heading') != -1) {
-      const heading = document.querySelector(id)
-      if (heading) {
-        scrollBy(0, -95)
-      }
-    }
+  // componentDidMount() {
+  //   // 修复锚点位置
+  //   window.addEventListener('hashchange', this.handleHashChange)
+  // }
+  // componentWillUnmount() {
+  //   window.removeEventListener('hashchange', this.handleHashChange)    
+  // }
+  // handleHashChange() {
+  //   console.log(1)
+  //   const id = location.hash
+  //   if (id.indexOf('heading') != -1) {
+  //     const heading = document.querySelector(id)
+  //     if (heading) {
+  //       scrollBy(0, -95)
+  //     }
+  //   }
+  // }
+  handleClick() {
+    setImmediate(() => {
+      scrollBy(0, -95)
+    })
   }
   render() {
     const { state: { catelog } } = this
@@ -52,7 +58,10 @@ export default class Catelog extends React.Component {
           {
             catelog.map((cate, index) => (
               <li className={`t${cate.t}`} key={index}>
-                <a href={`#heading-${index}`}>{cate.text}</a>
+                <a href={`#heading-${index}`}
+                  onClick={this.handleClick.bind(this)}>
+                  {cate.text}
+                </a>
               </li>
             ))
           }

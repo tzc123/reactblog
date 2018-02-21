@@ -126,16 +126,3 @@
   transform: scaleX(0);
   display: block;
 }
-
-@keyframes show_pic {
-  from {
-    opacity: 0;
-  }
-}
-
-@keyframes show_to_top {
-  from {
-    opacity: 0;
-    transform: translateY(100px)
-  }
-}

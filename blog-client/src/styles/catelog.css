@@ -2,6 +2,7 @@
   background: #fff;
   padding: 20px;
   padding-top: 10px;
+  animation: show_to_left .5s;
 }
 
 .catelog>header {
@@ -14,7 +15,9 @@
   font-weight: 500;
 }
 
-.catelog>ul>li>a {}
+.catelog>ul>li>a {
+
+}
 
 .catelog>ul>li {
   list-style: square inside;  

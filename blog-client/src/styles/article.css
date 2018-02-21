@@ -3,7 +3,6 @@
   margin: 90px auto 0 auto;
   max-width: 960px;
   display: flex;
-  animation: show_to_top .5s;
 }
 
 .article>article {
@@ -13,6 +12,7 @@
   padding: 30px;
   margin-right: 20px;
   border-radius: 5px;
+  animation: show_to_top .5s;
 }
 
 .article-header {
