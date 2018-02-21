@@ -1,16 +1,51 @@
 .catelog {
   background: #fff;
   padding: 20px;
+  padding-top: 10px;
 }
 
-.catelog>ul {
-  /* list-style: circle inside; */
+.catelog>header {
+  height: 30px;
+  line-height: 30px;
+  color: #444444;
+  border-bottom: 1px solid #eaecef;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
 }
+
+.catelog>ul>li>a {}
 
 .catelog>ul>li {
   list-style: square inside;  
-  margin-top: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap; 
+}
+
+.catelog>ul>li.t1 {
+  font-weight: 500;
+}
+
+.catelog>ul>li.t2 {
+  font-weight: 400;
+  padding-left: 22px;
+  color: #333333;
+}
+
+.catelog>ul>li.t3 {
+  font-weight: 400;
+  padding-left: 44px;
+  font-size: 13px;  
+  color: #444444;  
+}
+
+.catelog>ul>li.t4 {
+  font-weight: 400;
+  padding-left: 66px;
+  font-size: 13px;  
+  color: #444444;  
 }

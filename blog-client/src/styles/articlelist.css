@@ -2,7 +2,7 @@
   flex: 1;
   position: relative;
   margin: 0 20px 0 50px;
-  animation: show_list .5s;
+  animation: show_to_top .5s;
 }
 
 .line {
@@ -133,7 +133,7 @@
   }
 }
 
-@keyframes show_list {
+@keyframes show_to_top {
   from {
     opacity: 0;
     transform: translateY(100px)

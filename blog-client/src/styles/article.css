@@ -3,6 +3,7 @@
   margin: 90px auto 0 auto;
   max-width: 960px;
   display: flex;
+  animation: show_to_top .5s;
 }
 
 .article>article {
@@ -54,6 +55,14 @@
   height: 100%;
 }
 
-.heading:target { 
-  padding-top: 100px;
+.markdown-body .image-wrapper {
+  text-align: center;
+}
+
+.markdown-body .image-wrapper>.title {
+  letter-spacing: 1px;
+  padding-top: 10px;
+  color: #888888;
+  font-weight: 400;
+  font-size: 14px;
 }

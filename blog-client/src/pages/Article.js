@@ -19,21 +19,23 @@ export default class Article extends React.Component {
       catelog: []
     }
   }
-  componentDidMount() {
+  componentWillMount() {
+    this.loadData()
+  }
+  loadData() {
     getArticle(this.props.match.params.id)
       .then(article => {
         article && this.setState({
           ...article
         })
       })
-    
   }
   shouldComponentUpdate(props, state) {
     return this.state.title != state.title
   }
   render() {
     const { state: { title, content, browse, category, created_at, catelog } } = this
-    return (
+    return title ? (
       <main className="article">
         <article>
           <ArticleHeader {...{title, browse, category, created_at}}/>
@@ -42,10 +44,12 @@ export default class Article extends React.Component {
         </article>
         <aside>
           <div>
-            <Catelog catelog={catelog} />
+            {
+              catelog.length > 0 ? <Catelog catelog={catelog} /> : ''
+            }
           </div>
         </aside>
       </main>
-    )
+    ) : ''
   }
 }

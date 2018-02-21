@@ -17,6 +17,10 @@ export default class Home extends React.Component {
     }
   }
   componentDidMount() {
+    scrollTo(0, 0)
+    this.loadData()
+  }
+  loadData() {
     const { state: { currentPage } } = this
     getArticleList(null, currentPage)
       .then(articles => {

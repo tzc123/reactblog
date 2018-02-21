@@ -194,21 +194,20 @@ export default class Game extends React.Component {
     const { ctx, boxs } = this
     ctx.lineJoin = "round"
     boxs.forEach(box => {
-      if (box.value) {
-        const type = boxType[box.value]
-        const { position } = box
-        ctx.fillStyle = type.color
-        ctx.beginPath()
-        ctx.moveTo(position[0].x, position[0].y)
-        for (let i = 1; i < 4; i++) {
-          ctx.lineTo(position[i].x, position[i].y)
-        }
-        ctx.closePath()
-        ctx.fill()
-        ctx.font = type.font
-        ctx.fillStyle = type.textColor
-        ctx.fillText(box.value, position[0].x + type.offset.x, position[0].y + type.offset.y)
+      if (!box.value) return;
+      const type = boxType[box.value]
+      const { position } = box
+      ctx.fillStyle = type.color
+      ctx.beginPath()
+      ctx.moveTo(position[0].x, position[0].y)
+      for (let i = 1; i < 4; i++) {
+        ctx.lineTo(position[i].x, position[i].y)
       }
+      ctx.closePath()
+      ctx.fill()
+      ctx.font = type.font
+      ctx.fillStyle = type.textColor
+      ctx.fillText(box.value, position[0].x + type.offset.x, position[0].y + type.offset.y)
     })
   }
   draw() {
