@@ -52,7 +52,7 @@ module.exports = {
     }
   },
   async create(ctx) {
-    const { request: { body: { content, description, title, category, markdown }, url, method } } = ctx 
+    const { request: { body: { content, description, title, catelog, category, markdown }, url, method } } = ctx 
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
