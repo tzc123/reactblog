@@ -48,7 +48,7 @@
 		}
 
 		.color-blue {
-			color: #47d8b8e7;
+			color: #47d8b8;
 		}
 
 		.hidden {
@@ -79,5 +79,12 @@
 			from {
 				opacity: 0;
 				transform: translateX(-100px)
+			}
+		}
+
+		@keyframes show {
+			from {
+				opacity: 0;
+				transform: translateY(20px);
 			}
 		}

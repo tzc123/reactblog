@@ -73,7 +73,6 @@
 }
 
 .main-header>nav li:hover {
-  /* background: #304960; */
   font-size: 23px;
 }
 
@@ -105,9 +104,3 @@
   font-size: 10px;
 }
 
-@keyframes show {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-}
