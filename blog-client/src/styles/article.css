@@ -66,3 +66,11 @@
   font-weight: 400;
   font-size: 14px;
 }
+
+.heading:target::before {
+  content: "";
+  display: block;
+  margin-top: -90px;
+  height: 90px;
+  width: 1px;
+}

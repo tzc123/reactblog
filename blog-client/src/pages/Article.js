@@ -64,12 +64,9 @@ export default class Article extends React.Component {
   }
   handleCatelogClick(index, isLast, e) {
     setTimeout(() => {
-      !isLast && scrollBy(0, -95)
-      setTimeout(() => {
-        this.setState({
-          active: index
-        })
-      }, 0)
+      this.setState({
+        active: index
+      })
     }, 0)
   }
   render() {
