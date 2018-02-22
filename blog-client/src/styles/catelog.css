@@ -3,6 +3,7 @@
   padding: 20px;
   padding-top: 10px;
   animation: show_to_left .5s;
+  border-radius: 5px;
 }
 
 .catelog>header {
@@ -18,9 +19,19 @@
 .catelog>ul>li>a {
 
 }
+.catelog>.active {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 25px;
+  background: rgba(34,43,57,.2);
+  transition: top .2s;
+  border-left: 3px solid #222b39;
+}
 
 .catelog>ul>li {
   list-style: square inside;  
+  height: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
   font-size: 14px;

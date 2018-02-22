@@ -14,9 +14,7 @@ export default class ArticleList extends React.Component {
         {
           articles.map(
             (article, index) => (
-              <ArticleItem 
-                {...{...article, index}} 
-                key={index} />
+              <ArticleItem {...{...article, index}} key={index} />
             ) 
           )
         }

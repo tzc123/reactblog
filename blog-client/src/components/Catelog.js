@@ -1,65 +1,28 @@
 import React from 'react'
 import '../styles/catelog.css'
 
-function initCatelog(catelog) {
-  if (!catelog || catelog.length == 0) return
-  let levels = []
-  catelog.forEach(cate => {
-    const { level } = cate
-    if (levels.indexOf(level) == -1) {
-      levels.push(level)
-    }
-  })
-  levels = levels.sort((a, b) => a - b)
-  return catelog.map(cate => (
-      {
-        ...cate,
-        t: levels.indexOf(cate.level) + 1
-      }
-    )
-  )
-}
-
 export default class Catelog extends React.Component {
-  constructor(props) {
-    super()
-    this.state = {
-      catelog: initCatelog(props.catelog)
-    }
-  }
-  // componentDidMount() {
-  //   // 修复锚点位置
-  //   window.addEventListener('hashchange', this.handleHashChange)
-  // }
-  // componentWillUnmount() {
-  //   window.removeEventListener('hashchange', this.handleHashChange)    
-  // }
-  // handleHashChange() {
-  //   console.log(1)
-  //   const id = location.hash
-  //   if (id.indexOf('heading') != -1) {
-  //     const heading = document.querySelector(id)
-  //     if (heading) {
-  //       scrollBy(0, -95)
-  //     }
-  //   }
-  // }
   handleClick() {
     setImmediate(() => {
       scrollBy(0, -95)
     })
   }
   render() {
-    const { state: { catelog } } = this
+    const { props: { catelog, active } } = this
     return (
       <section className="catelog">
         <header>目录</header>
+        <div className="active" style={{top: 41 + active * 26}}></div>
         <ul>
           {
             catelog.map((cate, index) => (
               <li className={`t${cate.t}`} key={index}>
                 <a href={`#heading-${index}`}
-                  onClick={this.handleClick.bind(this)}>
+                  onClick={
+                    index != catelog.length - 1 
+                    ? this.handleClick.bind(this)
+                    : () => {}
+                  }>
                   {cate.text}
                 </a>
               </li>

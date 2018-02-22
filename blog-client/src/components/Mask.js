@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/mask.css'
+import debounce from '../utils/debounce'
 
 export default class Mask extends React.Component {
   constructor() {
@@ -11,21 +12,17 @@ export default class Mask extends React.Component {
     }
   }
   componentDidMount() {
-    window.addEventListener('resize', this.handleResize.bind(this))
+    window.addEventListener('resize', debounce(this.handleResize.bind(this), 500))
     document.body.addEventListener('click', this.handleClick.bind(this))
     this.ctx = this.refs.canvas.getContext('2d')
     this.ctx.lineWidth = 20
   }
   handleResize() {
-    // 防抖
-    this.timeout && clearTimeout(this.timeout)
-    this.timeout = setTimeout(() => {
-      const { innerWidth, innerHeight } = window
-      this.setState({
-        width: innerWidth,
-        height: innerHeight
-      })
-    }, 500);
+    const { innerWidth, innerHeight } = window
+    this.setState({
+      width: innerWidth,
+      height: innerHeight
+    })
   }
   handleClick(e) {
     const { ctx } = this
