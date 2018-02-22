@@ -1,3 +1,5 @@
+require('es6-promise').polyfill()
+
 import axios from 'axios'
 const domain = 'http://122.152.205.25:4321'
 
