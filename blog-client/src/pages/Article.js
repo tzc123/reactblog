@@ -9,6 +9,24 @@ import 'github-markdown-css'
 import throttle from '../utils/throttle'
 import { getArticle } from '../api'
 
+function handleScroll() {
+  const { headings, state: { active } } = this
+  if (!headings) return
+  const activeLine = window.scrollY
+  let newActive = active
+  let minDistance = Infinity
+  headings.forEach((heading, index) => {
+    if (heading.offsetTop < activeLine) {
+      const distance = activeLine - heading.offsetTop
+      if (distance < minDistance) {
+        minDistance = distance
+        newActive = index
+      }
+    }
+  })
+  this.setState({ active: newActive })
+}
+
 export default class Article extends React.Component {
   constructor() {
     super()
@@ -21,9 +39,7 @@ export default class Article extends React.Component {
       catelog: [],
       active: 0
     }
-  }
-  componentWillMount() {
-    this.loadData()
+    this.handleScroll = throttle(handleScroll.bind(this), 200)
   }
   loadData() {
     getArticle(this.props.match.params.id)
@@ -33,38 +49,28 @@ export default class Article extends React.Component {
           catelog: initCatelog(article.catelog)
         }, state => {
           this.headings = Array.from(document.querySelectorAll('.heading'))
-          window.addEventListener('scroll', throttle(this.handleScroll.bind(this), 200))
+          window.addEventListener('scroll', this.handleScroll)
         })
       })
   }
-
+  componentWillMount() {
+    this.loadData()
+  }
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll)
+  }
   shouldComponentUpdate(props, state) {
     return this.state.title != state.title || this.state.active != state.active
   }
-  handleScroll() {
-    const { headings, state: { active } } = this
-    if (!headings) return
-    const activeLine = window.scrollY
-    let newActive = active
-    let minDistance = Infinity
-    headings.forEach((heading, index) => {
-      if (heading.offsetTop < activeLine) {
-        const distance = activeLine - heading.offsetTop
-        if (distance < minDistance) {
-          minDistance = distance
-          newActive = index
-        }
-      }
-    })
-    this.setState({ active: newActive })
-  }
   handleCatelogClick(index, isLast, e) {
-    setImmediate(() => {
+    setTimeout(() => {
       !isLast && scrollBy(0, -95)
-      this.setState({
-        active: index
-      })
-    })
+      setTimeout(() => {
+        this.setState({
+          active: index
+        })
+      }, 0)
+    }, 0)
   }
   render() {
     const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this

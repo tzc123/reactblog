@@ -7,7 +7,7 @@ export default class Catelog extends React.Component {
     return (
       <section className="catelog">
         <header>目录</header>
-        <div className="active" style={{top: 41 + active * 26}}></div>
+        <div className="active" style={{top: 36 + active * 26}}></div>
         <ul>
           {
             catelog.map((cate, index) => (

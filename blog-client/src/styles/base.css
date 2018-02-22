@@ -74,3 +74,10 @@
 				transform: translateX(100px)
 			}
 		}
+
+		@keyframes show_to_right {
+			from {
+				opacity: 0;
+				transform: translateX(-100px)
+			}
+		}

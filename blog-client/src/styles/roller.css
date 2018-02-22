@@ -4,6 +4,7 @@
   bottom: 0;
   width: 30px;
   padding-right: 100px;
+  animation: show_to_top .5s;
 }
 
 .roller-mask {
