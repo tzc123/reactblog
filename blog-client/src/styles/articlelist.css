@@ -3,6 +3,7 @@
   position: relative;
   margin: 0 20px 0 50px;
   animation: show_to_top .5s;
+  background: #f4f4f4;
 }
 
 .line {
