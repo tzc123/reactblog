@@ -9,7 +9,7 @@ const serverDomain = 'http://122.152.205.25:1234/'
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
-			vendor: ['react', 'react-dom', 'react-router-dom', 'regenerator-runtime'],
+			vendor: ['react', 'react-dom', 'react-router-dom', 'regenerator-runtime', 'axios'],
 			app: appPath
 		},
     output: {
@@ -27,7 +27,7 @@ const config = {
 					options: {
 						presets: ['env', 'stage-3', 'react'],
 						plugins: [['transform-runtime', {
-							"polyfill": false,
+							"polyfill": true,
 							"regenerator": true,
 							"moduleName": "babel-runtime"
 						}]]
