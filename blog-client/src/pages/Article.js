@@ -12,7 +12,7 @@ import { getArticle } from '../api'
 function handleScroll() {
   const { headings, state: { active } } = this
   if (!headings) return
-  const activeLine = window.scrollY
+  const activeLine = window.scrollY || window.pageYOffset
   let newActive = active
   let minDistance = Infinity
   headings.forEach((heading, index) => {

@@ -78,6 +78,7 @@
 
 .main-header>nav>ul>li:hover .sub-nav {
   display: block;
+  animation: show .5s;
 }
 
 .sub-nav {
@@ -86,7 +87,6 @@
   left: 0;
   right: 0;
   top: 70px;
-  animation: show .5s;
 }
 .sub-nav>li {
   line-height: 70px;
