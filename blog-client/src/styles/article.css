@@ -52,6 +52,7 @@
   top: 90px;
   width: 240px;
   height: 100%;
+  position: sticky;
 }
 
 .markdown-body .image-wrapper {
