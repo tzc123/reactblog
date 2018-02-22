@@ -1,4 +1,6 @@
 .game {
+  position: sticky;
+  position: -ms-device-fixed;
   border: 2px solid rgb(187, 173, 160);
   background: rgba(238, 228, 218, 0.35);
   border-radius: 5px;

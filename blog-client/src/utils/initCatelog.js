@@ -1,5 +1,5 @@
 export default function (catelog) {
-  if (!catelog || catelog.length == 0) return
+  if (!catelog || catelog.length == 0) return []
   let levels = []
   catelog.forEach(cate => {
     const { level } = cate

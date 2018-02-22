@@ -49,8 +49,6 @@
 }
 
 .article>aside {
-  position: sticky;
-  position: -ms-device-fixed;
   top: 90px;
   width: 240px;
   height: 100%;

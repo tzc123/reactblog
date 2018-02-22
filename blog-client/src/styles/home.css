@@ -6,8 +6,6 @@
 }
 
 .home>aside {
-  position: sticky;
-  position: -ms-device-fixed;
   top: 90px;
   width: 200px;
   height: 100%;  

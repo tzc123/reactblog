@@ -71,6 +71,7 @@ export default class Article extends React.Component {
   }
   render() {
     const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this
+    console.log(catelog)
     return title ? (
       <main className="article">
         <article>
