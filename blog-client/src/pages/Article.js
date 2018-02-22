@@ -58,6 +58,14 @@ export default class Article extends React.Component {
     })
     this.setState({ active: newActive })
   }
+  handleCatelogClick(index, isLast, e) {
+    setImmediate(() => {
+      !isLast && scrollBy(0, -95)
+      this.setState({
+        active: index
+      })
+    })
+  }
   render() {
     const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this
     return title ? (
@@ -70,7 +78,7 @@ export default class Article extends React.Component {
         <aside>
           <div>
             {
-              catelog.length > 0 ? <Catelog {...{...{catelog, active}}} /> : ''
+              catelog.length > 0 ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> : ''
             }
           </div>
         </aside>

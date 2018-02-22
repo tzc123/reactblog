@@ -1,6 +1,6 @@
 .catelog {
   background: #fff;
-  padding: 20px;
+  padding-bottom: 20px;
   padding-top: 10px;
   animation: show_to_left .5s;
   border-radius: 5px;
@@ -16,14 +16,11 @@
   font-weight: 500;
 }
 
-.catelog>ul>li>a {
-
-}
 .catelog>.active {
   position: absolute;
   right: 0;
   left: 0;
-  height: 25px;
+  height: 26px;
   background: rgba(34,43,57,.2);
   transition: top .2s;
   border-left: 3px solid #222b39;
@@ -32,6 +29,8 @@
 .catelog>ul>li {
   list-style: square inside;  
   height: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   padding-top: 3px;
   padding-bottom: 3px;
   font-size: 14px;
@@ -40,26 +39,35 @@
   white-space: nowrap; 
 }
 
+.catelog>ul>li>a {
+  display: inline-block;
+  width: 100%;
+}
+
+.catelog>ul>li:hover {
+  background: rgba(34,43,57,.2);
+}
+
 .catelog>ul>li.t1 {
   font-weight: 500;
 }
 
 .catelog>ul>li.t2 {
   font-weight: 400;
-  padding-left: 22px;
+  padding-left: 42px;
   color: #333333;
 }
 
 .catelog>ul>li.t3 {
   font-weight: 400;
-  padding-left: 44px;
+  padding-left: 64px;
   font-size: 13px;  
   color: #444444;  
 }
 
 .catelog>ul>li.t4 {
   font-weight: 400;
-  padding-left: 66px;
+  padding-left: 86px;
   font-size: 13px;  
   color: #444444;  
 }

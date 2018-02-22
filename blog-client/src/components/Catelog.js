@@ -2,13 +2,8 @@ import React from 'react'
 import '../styles/catelog.css'
 
 export default class Catelog extends React.Component {
-  handleClick() {
-    setImmediate(() => {
-      scrollBy(0, -95)
-    })
-  }
   render() {
-    const { props: { catelog, active } } = this
+    const { props: { catelog, active, handleClick } } = this
     return (
       <section className="catelog">
         <header>目录</header>
@@ -18,11 +13,7 @@ export default class Catelog extends React.Component {
             catelog.map((cate, index) => (
               <li className={`t${cate.t}`} key={index}>
                 <a href={`#heading-${index}`}
-                  onClick={
-                    index != catelog.length - 1 
-                    ? this.handleClick.bind(this)
-                    : () => {}
-                  }>
+                  onClick={handleClick.bind(null, index, index == catelog.length - 1)}>
                   {cate.text}
                 </a>
               </li>
