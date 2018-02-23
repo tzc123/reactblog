@@ -12,4 +12,4 @@ http://122.152.205.25
 * https 
 * lifting SEO
 * 3D model
-* adapt PC and Mobile
+* adapt PC and Mobile 1/2

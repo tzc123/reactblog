@@ -1,7 +1,7 @@
 .home {
   position: relative;
   margin: 90px auto 0 auto;
-  max-width: 960px;
+  max-width: 1024px;
   display: flex;
 }
 
@@ -10,4 +10,13 @@
   width: 200px;
   height: 100%;  
   position: sticky;  
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    margin-top: 70px;
+  }
+  .home>aside {
+    display: none; 
+  }
 }

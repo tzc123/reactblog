@@ -60,3 +60,20 @@
   background: #222b39;
   color: #fff;
 }
+@media screen and (max-width: 768px) {
+  .roller-wrapper {
+    top: 70px;
+    background: #fff;
+  }
+  .page {
+    background: #fff;
+  } 
+  .roller {
+    top: 20px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .roller-wrapper {
+    display: none;
+  }
+}

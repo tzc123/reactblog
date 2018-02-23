@@ -25,7 +25,7 @@ export default class Home extends React.Component {
     getArticleList(null, currentPage)
       .then(articles => {
         this.setState({
-          articles: articles.map(article => ({ ...article, pic: '../images/bg.jpeg' })),
+          articles: articles.map(article => ({ ...article, pic: 'http://122.152.205.25:1235/images/bg.jpeg' })),
           total: articles.length
         })
       })

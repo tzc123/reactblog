@@ -1,7 +1,7 @@
 .article {
   position: relative;
   margin: 90px auto 0 auto;
-  max-width: 960px;
+  max-width: 1024px;
   display: flex;
 }
 
@@ -73,4 +73,16 @@
   margin-top: -90px;
   height: 90px;
   width: 1px;
+}
+
+@media screen and (max-width: 768px) {
+  .article>aside {
+    display: none;
+  }
+  .article {
+    margin-top: 70px;
+  }
+  .article>article {
+    margin-right: 0;
+  }
 }

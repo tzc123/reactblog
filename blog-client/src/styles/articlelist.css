@@ -61,7 +61,7 @@
   position: absolute;
   width: 180px;
   right: 25px;
-  top: 65px;
+  top: 35px;
   animation: show_pic .5s;
   border-radius: 2px;
 }
@@ -126,4 +126,37 @@
 .article-list-link:hover .mask{
   transform: scaleX(0);
   display: block;
+}
+@media screen and (max-width: 768px) {
+  .article-list {
+    margin-right: 0;
+    background: #fff;
+  }
+  .article-item {
+    border-radius: 0;
+    margin: 0;
+    border-top: 1px solid #999999;
+  }
+  .article-item:hover {
+    box-shadow: 0 0 0;
+    transform: none;
+  }
+}
+@media screen and (max-width: 480px) {
+  .article-list {
+    margin-left: 0;
+  }
+  .article-item>.pic {
+    display: none;
+  }
+  .article-item>.desc {
+    margin-right: 15px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+  .article-item>.title {
+    margin-right: 15px;
+  }
 }

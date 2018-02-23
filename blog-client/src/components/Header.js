@@ -65,25 +65,27 @@ export default class Header extends React.Component {
 
     return (
       <header className="main-header">
-        <nav>
+        <div className="container">
           <Link className="title" to="/">
-            DAZs
+            DAZ
           </Link>
-          <div className="search">
-            <input placeholder="你倒是搜啊..."/>
-            <img src={require('../images/search.png')}></img>
-          </div>
-          <ul>
-            {nav.map((item, index) => (
-              <li key={index}>
-                <Link to={!!item.link ? item.link : '/'}>
-                  {item.text}
-                </Link>
-                {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
-              </li>
-            ))}
-          </ul>
-        </nav>
+          <nav>
+            <div className="search">
+              <input placeholder="你倒是搜啊..."/>
+              <img src={require('../images/search.png')}></img>
+            </div>
+            <ul>
+              {nav.map((item, index) => (
+                <li key={index}>
+                  <Link to={!!item.link ? item.link : '/'}>
+                    {item.text}
+                  </Link>
+                  {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </header>
     )
   }
