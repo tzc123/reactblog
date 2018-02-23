@@ -117,5 +117,11 @@
   .main-header>.container>nav>ul {
     display: none; 
   }
+  .main-header {
+    height: 50px;
+  }
+  .main-header>.container {
+    height: 50px;
+  }
 }
 

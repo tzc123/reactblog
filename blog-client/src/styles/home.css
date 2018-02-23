@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 768px) {
   .home {
-    margin-top: 70px;
+    margin-top: 50px;
   }
   .home>aside {
     display: none; 
