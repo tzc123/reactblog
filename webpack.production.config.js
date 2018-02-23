@@ -32,7 +32,7 @@ const config = {
 							"useBuiltIns": true,
 						}], 'stage-3', 'react'],
 						plugins: [['transform-runtime', {
-							"polyfill": false,
+							"polyfill": true,
 							"regenerator": true,
 							"moduleName": "babel-runtime"
 						}]]
