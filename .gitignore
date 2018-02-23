@@ -3,3 +3,4 @@ blog-server/logs/
 blog-server/static/
 blog-backend/
 static/
+asset/
