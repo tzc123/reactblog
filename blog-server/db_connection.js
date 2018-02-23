@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
-const { database: { url } } = require('./config')
+const { database: { uri } } = require('./config')
 
-mongoose.connect(url)
+mongoose.connect(uri)
 const db = mongoose.connection
 
 db.on('open', () => {

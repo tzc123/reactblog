@@ -11,7 +11,7 @@ module.exports = {
       script: 'blog-server/app.js',
       watch: true,
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "production"
       },
       "ignore_watch": ["node_modules", "blog-server/logs", ".git", "blog-client", "package-lock.json", "package.json"]
     },
