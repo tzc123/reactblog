@@ -71,7 +71,6 @@ export default class Article extends React.Component {
   }
   render() {
     const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this
-    console.log(catelog)
     return title ? (
       <main className="article">
         <article>
@@ -82,7 +81,11 @@ export default class Article extends React.Component {
         <aside>
           <div>
             {
-              catelog.length > 0 ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> : ''
+              window.innerWidth > 768 ?
+              catelog.length > 0 ? 
+              <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
+              : ''
+              : ''
             }
           </div>
         </aside>

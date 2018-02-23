@@ -1,6 +1,5 @@
 import React from 'react'
 import '../styles/catelog.css'
-
 export default class Catelog extends React.Component {
   render() {
     const { props: { catelog, active, handleClick } } = this

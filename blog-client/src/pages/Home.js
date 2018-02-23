@@ -37,7 +37,11 @@ export default class Home extends React.Component {
         <Roller currentPage={currentPage} total={total}/>
         <ArticleList {...{currentPage, articles}}/>
         <aside>
-          <Game/>
+          {
+            window.innerWidth > 768
+            ? <Game/>
+            : ''
+          }
         </aside>
       </main>
     )
