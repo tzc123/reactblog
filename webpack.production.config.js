@@ -54,7 +54,7 @@ const config = {
 								options: {
 									ident: 'postcss',
 									plugins: () => [
-										require('autoprefixer')({browsers: ['last 2 version']}),
+										require('autoprefixer')({browsers: ['last 5 version']}),
 										require('postcss-px2rem')({remUnit: 16})
 									]
 								}
