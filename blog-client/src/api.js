@@ -19,7 +19,7 @@ export function getArticleList(category, index) {
   })
 }
 
-export async function getArticle(id) {
+export function getArticle(id) {
   return get(domain + '/article/' + id)
   .then(res => {
     return res.success 

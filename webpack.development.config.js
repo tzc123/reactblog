@@ -25,7 +25,7 @@ const config = {
 							presets: ['env', 'stage-3', 'react'],
 							plugins: [['transform-runtime', {
 								"polyfill": false,
-								"regenerator": true,
+								"regenerator": false,
 								"moduleName": "babel-runtime"
 							}]]
 						}
