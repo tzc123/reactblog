@@ -6,11 +6,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const outputPath = path.join(__dirname, 'asset')
 const appPath = path.join(__dirname, "blog-client/src/app.js")
 const serverDomain = 'http://122.152.205.25:1234/'
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
-			vendor: ['react', 'react-dom', 'react-router-dom', 'regenerator-runtime', 'axios'],
-			app: appPath
+			vendor: ['react', 'react-dom', 'react-router-dom', 'axios', 'es6-promise'],
+			app: appPath,
 		},
     output: {
         path: outputPath,
@@ -33,7 +33,7 @@ const config = {
 						}], 'stage-3', 'react'],
 						plugins: [['transform-runtime', {
 							"polyfill": true,
-							"regenerator": true,
+							"regenerator": false,
 							"moduleName": "babel-runtime"
 						}]]
 					}
@@ -54,7 +54,7 @@ const config = {
 								options: {
 									ident: 'postcss',
 									plugins: () => [
-										require('autoprefixer')({browsers: ['last 5 version']}),
+										require('autoprefixer')({browsers: ['last 2 version']}),
 										require('postcss-px2rem')({remUnit: 16})
 									]
 								}
@@ -73,7 +73,7 @@ const config = {
 			]
 		},
 		plugins: [
-			// new BundleAnalyzerPlugin(),
+			new BundleAnalyzerPlugin(),
 			new HtmlPlugin({
 				title: "DAZ'blog",
 				template: path.join(__dirname, 'blog-client/index.html'),
