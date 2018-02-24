@@ -5,6 +5,7 @@
   animation: show_to_left .5s;
   border-radius: 5px;
   position: -ms-device-fixed;
+  width: 240px;
 }
 
 .catelog>header {
@@ -32,10 +33,7 @@
   list-style: square inside;  
   height: 20px;
   line-height: 20px;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  padding: 3px 20px 3px 15px;
   font-size: 14px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -52,20 +50,20 @@
 
 .catelog>ul>li.t2 {
   font-weight: 400;
-  padding-left: 42px;
+  padding-left: 35px;
   color: #333333;
 }
 
 .catelog>ul>li.t3 {
   font-weight: 400;
-  padding-left: 64px;
+  padding-left: 54px;
   font-size: 13px;  
   color: #444444;  
 }
 
 .catelog>ul>li.t4 {
   font-weight: 400;
-  padding-left: 86px;
+  padding-left: 75px;
   font-size: 13px;  
   color: #444444;  
 }
