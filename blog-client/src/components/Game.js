@@ -9,7 +9,7 @@ const boxType = {
       x: 18,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   4: {
     color: '#ede0c8',
@@ -18,7 +18,7 @@ const boxType = {
       x: 18,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   8: {
     color: '#f2b179',
@@ -27,7 +27,7 @@ const boxType = {
       x: 18,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   16: {
     color: '#f59563',
@@ -36,7 +36,7 @@ const boxType = {
       x: 10,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   32: {
     color: '#f67c5f',
@@ -45,7 +45,7 @@ const boxType = {
       x: 10,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   64: {
     color: '#f65e3b',
@@ -54,7 +54,7 @@ const boxType = {
       x: 10,
       y: 33
     },
-    font: '25px Helvetica Neue'
+    font: '25px Helvetica Neue sans-serif'
   },
   128: {
     color: '#edcf72',
@@ -63,7 +63,7 @@ const boxType = {
       x: 4,
       y: 33
     },
-    font: '23px Helvetica Neue'
+    font: '23px Helvetica Neue sans-serif'
   },
   256: {
     color: '#edcc61',
@@ -72,7 +72,7 @@ const boxType = {
       x: 5,
       y: 33
     },
-    font: '23px Helvetica Neue'
+    font: '23px Helvetica Neue sans-serif'
   },
   512: {
     color: '#edc850',
@@ -81,7 +81,7 @@ const boxType = {
       x: 5,
       y: 33
     },
-    font: '23px Helvetica Neue'
+    font: '23px Helvetica Neue sans-serif'
   },
   1024: {
     color: '#edc53f',
@@ -90,7 +90,7 @@ const boxType = {
       x: 1,
       y: 32
     },
-    font: '20px Helvetica Neue'
+    font: '20px Helvetica Neue sans-serif'
   },
   2048: {
     color: '#edc22e',
@@ -99,7 +99,7 @@ const boxType = {
       x: 2,
       y: 32
     },
-    font: '20px Helvetica Neue'
+    font: '20px Helvetica Neue sans-serif'
   },
   4096: {
     color: '#3c3a32',
@@ -108,7 +108,7 @@ const boxType = {
       x: 2,
       y: 32
     },
-    font: '20px Helvetica Neue'
+    font: '20px Helvetica Neue sans-serif'
   },
 }
 
