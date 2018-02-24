@@ -15,8 +15,8 @@ function handleScroll() {
   let newActive = active
   let minDistance = Infinity
   tops.forEach((top, index) => {
-    if (top < activeLine) {
-      const distance = activeLine - top
+    const distance = activeLine - top
+    if (distance > 0) {
       if (distance < minDistance) {
         minDistance = distance
         newActive = index
@@ -24,6 +24,14 @@ function handleScroll() {
     }
   })
   this.setState({ active: newActive })
+}
+
+function handleLoad () {
+  this.tops = [].map.call(
+    this.headings, 
+    heading => heading.offsetTop + 15
+  )
+  this.handleScroll()
 }
 
 export default class Article extends React.Component {
@@ -39,6 +47,7 @@ export default class Article extends React.Component {
       active: 0
     }
     this.handleScroll = throttle(handleScroll.bind(this), 100)
+    this.handleLoad = handleLoad.bind(this)
   }
   loadData() {
     getArticle(this.props.match.params.id)
@@ -46,27 +55,18 @@ export default class Article extends React.Component {
         article && this.setState({
           ...article,
         }, state => {
-          this.headings = document.querySelectorAll('.heading')
-          this.tops = [].map.call(
-            this.headings, 
-            heading => heading.offsetTop
-          )
-          window.addEventListener('scroll', this.handleScroll,  {
-            capture: false,
-            passive: false,
-            once: false
-          });
-          [].map.call(
-            document.querySelectorAll('.markdown-body img'),
-            img => {
-              img.addEventListener('load', () => {
-                this.tops = [].map.call(
-                  this.headings, 
-                  heading => heading.offsetTop
-                )
-              })
-            }
-          )
+          if (window.innerWidth > 768) {
+            this.headings = document.querySelectorAll('.heading')
+            this.tops = [].map.call(
+              this.headings, 
+              heading => heading.offsetTop + 15
+            )
+            window.addEventListener('scroll', this.handleScroll, false);
+            [].map.call(
+              document.querySelectorAll('.markdown-body img'),
+              img => img.addEventListener('load', this.handleLoad)
+            )
+          }
         })
       })
   }
@@ -74,7 +74,11 @@ export default class Article extends React.Component {
     this.loadData()
   }
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll)
+    window.removeEventListener('scroll', this.handleScroll);
+    [].map.call(
+      document.querySelectorAll('.markdown-body img'),
+      img => img.removeEventListener('load', this.handleLoad)
+    )
   }
   shouldComponentUpdate(props, state) {
     return this.state.title != state.title || this.state.active != state.active
@@ -84,13 +88,13 @@ export default class Article extends React.Component {
     this.animate(index, 60)
   }
   animate(index, speed) {
-    const top = this.tops[index] + 20
+    const top = this.tops[index]
     const activeLine = window.scrollY || window.pageYOffset
     const distance = top - activeLine
     const times = Math.floor(Math.abs(distance / speed))
     const end = distance % speed
     let i = 1
-    function handle() {
+    const handle = () => {
       if (i > times) {
         location.hash = `#heading-${index}`
         return
