@@ -3,21 +3,20 @@ import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
 import Catelog from '../components/Catelog'
-import initCatelog from '../utils/initCatelog'
 import '../styles/article.css'
 import 'github-markdown-css'
 import throttle from '../utils/throttle'
 import { getArticle } from '../api'
-
+let i = 0
 function handleScroll() {
-  const { headings, state: { active } } = this
-  if (!headings) return
+  const { tops, state: { active } } = this
+  if (!tops) return
   const activeLine = window.scrollY || window.pageYOffset
   let newActive = active
   let minDistance = Infinity
-  headings.forEach((heading, index) => {
-    if (heading.offsetTop < activeLine) {
-      const distance = activeLine - heading.offsetTop
+  tops.forEach((top, index) => {
+    if (top < activeLine) {
+      const distance = activeLine - top
       if (distance < minDistance) {
         minDistance = distance
         newActive = index
@@ -39,17 +38,35 @@ export default class Article extends React.Component {
       catelog: [],
       active: 0
     }
-    this.handleScroll = throttle(handleScroll.bind(this), 200)
+    this.handleScroll = throttle(handleScroll.bind(this), 100)
   }
   loadData() {
     getArticle(this.props.match.params.id)
       .then(article => {
         article && this.setState({
           ...article,
-          catelog: initCatelog(article.catelog)
         }, state => {
-          this.headings = Array.from(document.querySelectorAll('.heading'))
-          window.addEventListener('scroll', this.handleScroll)
+          this.headings = document.querySelectorAll('.heading')
+          this.tops = [].map.call(
+            this.headings, 
+            heading => heading.offsetTop
+          )
+          window.addEventListener('scroll', this.handleScroll,  {
+            capture: false,
+            passive: false,
+            once: false
+          });
+          [].map.call(
+            document.querySelectorAll('.markdown-body img'),
+            img => {
+              img.addEventListener('load', () => {
+                this.tops = [].map.call(
+                  this.headings, 
+                  heading => heading.offsetTop
+                )
+              })
+            }
+          )
         })
       })
   }
@@ -62,12 +79,30 @@ export default class Article extends React.Component {
   shouldComponentUpdate(props, state) {
     return this.state.title != state.title || this.state.active != state.active
   }
-  handleCatelogClick(index, isLast, e) {
-    setTimeout(() => {
-      this.setState({
-        active: index
-      })
-    }, 0)
+  handleCatelogClick(index, e) {
+    e.preventDefault()
+    this.animate(index, 60)
+  }
+  animate(index, speed) {
+    const top = this.tops[index] + 20
+    const activeLine = window.scrollY || window.pageYOffset
+    const distance = top - activeLine
+    const times = Math.floor(Math.abs(distance / speed))
+    const end = distance % speed
+    let i = 1
+    function handle() {
+      if (i > times) {
+        location.hash = `#heading-${index}`
+        return
+      }
+      requestAnimationFrame(handle)
+      scrollBy(0, 
+        distance < 0
+        ? -speed
+        : speed)
+      i++
+    }
+    handle()
   }
   render() {
     const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this

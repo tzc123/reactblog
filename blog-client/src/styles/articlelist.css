@@ -6,16 +6,6 @@
   background: #f4f4f4;
 }
 
-.line {
-  position: absolute;
-  left: 50%;
-  top: 0;
-  bottom: 20px;
-  width: 1px;
-  background: #999999;
-  opacity: .1;
-}
-
 .article-item {
   position: relative;
   margin-bottom: 15px;
@@ -24,13 +14,14 @@
   background: #fff;
   overflow: hidden;
   transition: all .5s;
+  transform: translateZ(0);
 }
 
 
 .article-item:hover {
   box-shadow: #6c727c 0px 7px 15px;
   /* border: 1px solid #999999;   */
-  transform: scale(1.02, 1.02);
+  transform: scale(1.02, 1.02) translateZ(0);
 }
 
 .article-item>.title {

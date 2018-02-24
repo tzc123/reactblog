@@ -70,8 +70,8 @@
 .heading:target::before {
   content: "";
   display: block;
-  margin-top: -90px;
-  height: 90px;
+  margin-top: -70px;
+  height: 70px;
   width: 1px;
 }
 

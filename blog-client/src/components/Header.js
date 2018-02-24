@@ -84,6 +84,11 @@ export default class Header extends React.Component {
                 </li>
               ))}
             </ul>
+            <div className="icon-list">
+              <div className="line line-1"></div>
+              <div className="line line-2"></div>
+              <div className="line line-3"></div>
+            </div>
           </nav>
         </div>
       </header>

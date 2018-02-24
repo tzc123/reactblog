@@ -1,5 +1,7 @@
 import React from 'react'
 import '../styles/catelog.css'
+import initCatelog from '../utils/initCatelog'
+
 export default class Catelog extends React.Component {
   render() {
     const { props: { catelog, active, handleClick } } = this
@@ -9,10 +11,10 @@ export default class Catelog extends React.Component {
         <div className="active" style={{top: `${(36 + active * 26) / 16}rem`}}></div>
         <ul>
           {
-            catelog.map((cate, index) => (
+            initCatelog(catelog).map((cate, index) => (
               <li className={`t${cate.t}`} key={index}>
                 <a href={`#heading-${index}`}
-                  onClick={handleClick.bind(null, index, index == catelog.length - 1)}>
+                  onClick={handleClick.bind(null, index)}>
                   {cate.text}
                 </a>
               </li>

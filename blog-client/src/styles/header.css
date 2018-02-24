@@ -15,7 +15,6 @@
   height: 70px;
   display: flex;
   color: #fff;
-  user-select:none;
 }
 
 .main-header .title {
@@ -62,6 +61,7 @@
   justify-content: space-between;
   letter-spacing: 3px;
   font-weight: 100;
+  user-select:none;
 }
 
 .main-header>.container>nav>ul>li {
@@ -106,6 +106,10 @@
   letter-spacing: 0px;
   font-size: 10px;
 }
+
+.icon-list {
+  display: none;
+}
 @media screen and (max-width: 1024px) {
   .main-header .title {
     margin-left: 20px;
@@ -115,14 +119,49 @@
   .search {
     margin-right: 20px;
   }
+
   .main-header>.container>nav>ul {
     display: none; 
   }
+
   .main-header {
     height: 50px;
   }
+
   .main-header>.container {
     height: 50px;
+  }
+
+  .icon-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .icon-list .line {
+    height: 2px;
+    background: #fff;
+  }
+
+  .icon-list .line-1,
+  .icon-list .line-3 { 
+    transition: transform .5s;
+  }
+
+  .icon-list .line-2 {
+    transition: all .5s;
+  }
+  .icon-list:hover .line-1 {
+    transform: translateY(9px) rotateZ(-315deg);
+  }
+  .icon-list:hover .line-2 {
+    transform: rotateZ(-315deg);
+  }
+  .icon-list:hover .line-3 {
+    transform: translateY(-9px) rotateZ(315deg);
   }
 }
 

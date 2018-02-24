@@ -32,7 +32,8 @@ export default class Home extends React.Component {
   }
   render() {
     const { state: {currentPage, total, articles} } = this
-    return (
+    return articles.length != 0
+    ? (
       <main className="home">
         <Roller currentPage={currentPage} total={total}/>
         <ArticleList {...{currentPage, articles}}/>
@@ -45,5 +46,6 @@ export default class Home extends React.Component {
         </aside>
       </main>
     )
+    : ''
   }
 }
