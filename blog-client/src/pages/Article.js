@@ -29,7 +29,7 @@ function handleScroll() {
 function handleLoad () {
   this.tops = [].map.call(
     this.headings, 
-    heading => heading.offsetTop + 15
+    heading => heading.offsetTop + 80
   )
   this.handleScroll()
 }
@@ -59,7 +59,7 @@ export default class Article extends React.Component {
             this.headings = document.querySelectorAll('.heading')
             this.tops = [].map.call(
               this.headings, 
-              heading => heading.offsetTop + 15
+              heading => heading.offsetTop + 80
             )
             window.addEventListener('scroll', this.handleScroll, false);
             [].map.call(

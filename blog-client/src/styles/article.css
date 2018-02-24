@@ -67,7 +67,7 @@
   font-size: 14px;
 }
 
-.heading:target::before {
+.heading::before {
   content: "";
   display: block;
   margin-top: -70px;
