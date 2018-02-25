@@ -137,17 +137,17 @@
   .article-list {
     margin-left: 0;
   }
-  .article-item>.pic {
-    display: none;
-  }
-  .article-item>.desc {
-    margin-right: 15px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-  }
-  .article-item>.title {
-    margin-right: 15px;
-  }
+}
+.article-item>.pic {
+  display: none;
+}
+.article-item>.desc {
+  margin-right: 0px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.article-item>.title {
+  margin-right: 15px;
 }

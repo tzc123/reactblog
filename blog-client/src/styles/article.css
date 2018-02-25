@@ -55,6 +55,12 @@
   position: sticky;
 }
 
+.article>article>footer {
+  height: 300px;
+  line-height: 300px;
+  text-align: center;
+}
+
 .markdown-body .image-wrapper {
   text-align: center;
 }

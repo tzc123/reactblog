@@ -133,6 +133,7 @@ module.exports = {
     }
   },
   async update(ctx) {
+    console.log(ctx)
     const { params: { id }, request: { body: { content, description, title, category, markdown, catelog }, url, method } } = ctx
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {

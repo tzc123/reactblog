@@ -9,9 +9,9 @@ router
   .get('/login', login.index)
   .get('/article', article.list)
   .get('/article/:id', article.index)
-  .post('/article', koaBody(), article.create)
-  .post('/article/:id/remove', koaBody(), article.remove)
-  .post('/article/:id', koaBody(), article.update)
+  .post('/article', article.create)
+  .post('/article/:id/remove', article.remove)
+  .post('/article/:id', article.update)
   .post('/image', koaBody({
     multipart: true,
     onError(err, ctx) {

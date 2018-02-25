@@ -132,6 +132,10 @@
     height: 50px;
   }
 
+  .main-header .title {
+    line-height: 50px;
+  }
+
   .icon-list {
     display: flex;
     flex-direction: column;
