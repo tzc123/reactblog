@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const outputPath = path.join(__dirname, 'asset')
 const appPath = path.join(__dirname, "blog-client/src/app.js")
 const serverDomain = 'http://122.152.205.25:1234/'
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
 			vendor: ['react', 'react-dom', 'react-router-dom', 'axios', 'es6-promise'],
@@ -73,7 +73,7 @@ const config = {
 			]
 		},
 		plugins: [
-			new BundleAnalyzerPlugin(),
+			// new BundleAnalyzerPlugin(),
 			new HtmlPlugin({
 				title: "DAZ'blog",
 				template: path.join(__dirname, 'blog-client/index.html'),
