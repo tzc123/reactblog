@@ -1,5 +1,5 @@
 import { get, post } from './utils/request'
-const domain = 'http://122.125.205.25:4321'
+const domain = 'http://122.152.205.25:4321'
 
 export function getArticleList(category, index) {
   return get(
