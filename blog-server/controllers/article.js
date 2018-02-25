@@ -1,8 +1,12 @@
 const ArticleModel = require('../models/article')
+const config = require('../config')
+console.log(config)
 
 module.exports = {
   async list(ctx) {
-    const { query: { category, size, index }, request: { url, method } } = ctx
+    const { 
+      query: { category, size, index }, 
+      request: { url, method } } = ctx
     try{
       const articles = await ArticleModel.paginator(category, size || 10, index || 1)
       if (articles.length == 0) {
@@ -27,14 +31,26 @@ module.exports = {
     }
   },
   async index(ctx) {
-    const { params: { id }, query: { rmd }, request: { url, method } } = ctx
+    const { 
+      params: { id }, 
+      query: { rmd }, 
+      request: { url, method } 
+    } = ctx
     try {
       const article = await ArticleModel.findById(id, rmd == 1)
       if (article) {
-        logger.info('查找文章成功', { url, method })              
+        logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,
           data: article
+        }
+        if (rmd != 1) {
+          const {  ok } = await ArticleModel.browse(id, article.browse + 1)
+          if (ok == 1) {
+            logger.info('一次浏览', { url, method })
+          } else {
+            logger.error('数据库错误', { url, method, browse })
+          }
         }
       } else {
         logger.info('无此文章', { url, method })    
@@ -52,7 +68,16 @@ module.exports = {
     }
   },
   async create(ctx) {
-    const { request: { body: { content, description, title, catelog, category, markdown }, url, method } } = ctx 
+    const { request: { body = {}, url, method } } = ctx
+    const { content, description, title, catelog, category, markdown , secret} = body
+    if (secret != config.secret) {
+      logger.info('无权限', { url, method, secret })          
+      ctx.body = {
+        success: false,
+        message: '无权限'
+      }
+      return
+    }
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
@@ -92,7 +117,19 @@ module.exports = {
     }
   },
   async remove(ctx) {
-    const { params: { id }, request: { method, url } } = ctx
+    const { 
+      params: { id }, 
+      request: { method, url , body = {}}, 
+    } = ctx
+    const { secret } = body
+    if (secret != config.secret) {
+      logger.info('无权限', { url, method, secret })          
+      ctx.body = {
+        success: false,
+        message: '无权限'
+      }
+      return
+    }
     if (id) {
       try {
         const res = await ArticleModel.remove(id)
@@ -133,8 +170,16 @@ module.exports = {
     }
   },
   async update(ctx) {
-    console.log(ctx)
-    const { params: { id }, request: { body: { content, description, title, category, markdown, catelog }, url, method } } = ctx
+    const { params: { id }, request: { body = {}, url, method } } = ctx
+    const { content, description, title, category, markdown, catelog, secret } = body
+    if (secret != config.secret) {
+      logger.info('无权限', { url, method, secret })          
+      ctx.body = {
+        success: false,
+        message: '无权限'
+      }
+      return
+    }
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const { ok, nModified, n } = await ArticleModel.update(id, {

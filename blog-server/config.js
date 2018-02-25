@@ -17,5 +17,6 @@ module.exports = {
   session: {
     key: 'kkeeyy',
     httpOnly: true
-  }
+  },
+  secret: '321czt'
 }

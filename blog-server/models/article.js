@@ -53,12 +53,14 @@ async function paginator(category, size, index) {
 } 
 async function findById(id, returnMarkDown = false) {
   const hex = /[0-9A-Fa-f]{6}/g
-  if (hex.test(id)) {
-    const article = await findOne({ _id: id }, returnMarkDown)
-    return article
-  } else {
-    return null
-  }
+  if (!hex.test(id)) return null
+  const article = await ArticleModel.findById(
+    id, 
+    returnMarkDown
+    ? {}
+    : { markdown: 0 }
+  )
+  return article
 }
 async function findOne(filter, returnMarkDown) {
   const article = ArticleModel.findOne(filter, returnMarkDown ? {
@@ -90,6 +92,10 @@ async function update(_id, article) {
   const res = await ArticleModel.updateOne({ _id }, { ...article, updated_at: Date.now() })
   return res
 }
+async function browse(_id, time) {
+  const res = await ArticleModel.updateOne({ _id }, { $set: { browse: time } })
+  return res
+}
 module.exports = {
   findOne,
   create,
@@ -97,5 +103,6 @@ module.exports = {
   findById,
   remove,
   paginator,
-  update
+  update,
+  browse
 }
