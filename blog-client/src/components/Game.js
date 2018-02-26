@@ -135,8 +135,8 @@ export default class Game extends React.Component {
     for (let i = 0; i < 16; i++) {
       const row = Math.ceil((i + 1) / 4) - 1
       const column = i % 4
-      const beginX = (column) * 50 + 0.5
-      const beginY = (row) * 50 + 0.5
+      const beginX = column * 50 + 0.5
+      const beginY = row * 50 + 0.5
       initialBoxs.push({
         row,
         column,

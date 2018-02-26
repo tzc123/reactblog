@@ -1,9 +1,9 @@
 export default function (cb, wait) {
   let timeout
-  return function () {
+  return function (...args) {
     timeout && clearTimeout(timeout)
     setTimeout(() => {
-      cb()
+      cb(...args)
     }, wait)
   }
 }

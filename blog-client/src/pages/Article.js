@@ -121,9 +121,9 @@ export default class Article extends React.Component {
         <aside>
           <div>
             {
-              window.innerWidth > 768 ?
-              catelog.length > 0 ? 
-              <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
+              window.innerWidth > 768 
+              ? catelog.length > 0 
+              ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
               : ''
               : ''
             }
