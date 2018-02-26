@@ -2,15 +2,13 @@
   position: relative;
   margin: 90px auto 0 auto;
   max-width: 1024px;
-  display: flex;
 }
 
 .article>article {
   overflow: hidden;
-  flex: 1;
   background: #fff;
   padding: 30px;
-  margin-right: 20px;
+  margin-right: 260px;
   border-radius: 5px;
   animation: show_to_top .5s;
 }
@@ -49,10 +47,11 @@
 }
 
 .article>aside {
-  top: 90px;
+  position: absolute;
+  top: -90px;
+  right: 0;
   width: 240px;
   height: 100%;
-  position: sticky;
   animation: show_to_left .5s;
 }
 
@@ -61,7 +60,9 @@
   line-height: 300px;
   text-align: center;
 }
-
+.markdown-body {
+  text-align: justify;
+}
 .markdown-body .image-wrapper {
   text-align: center;
 }
@@ -90,6 +91,6 @@
     margin-top: 50px;
   }
   .article>article {
-    padding-right: 0;
+    margin-right: 0;
   }
 }

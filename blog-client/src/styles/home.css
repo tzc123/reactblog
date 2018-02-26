@@ -6,10 +6,10 @@
 }
 
 .home>aside {
-  top: 90px;
+  position: absolute;
+  top: -90px;
+  right: 0;
   width: 240px;
-  height: 100%;  
-  position: sticky;
   animation: show_to_left .5s;
 }
 
