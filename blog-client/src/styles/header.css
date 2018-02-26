@@ -195,9 +195,13 @@
     font-size: 20px;
   }
 
-  .main-header .nav>li:hover>.sub-nav>li:first-child,
-  .main-header .nav>li:hover>.sub-nav>li:last-child {
+  .main-header .nav>li:hover>.sub-nav>li:first-child {
     box-shadow: inset #333333 0 5px 5px;
+  }
+
+  .main-header .nav>li:hover>.sub-nav>li:last-child {
+    box-shadow: inset #333333 0 -5px 5px;
+    
   }
 
   .main-header .nav>li:hover>.sub-nav {
@@ -207,13 +211,15 @@
     z-index: 999;
   }
   .sub-nav>li {
+    line-height: 50px;
+    height: 50px;
     border-radius: 0;
     margin: 0;
     background: #304960;
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
   .search>input{
     width: 150px;
   }
