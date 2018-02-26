@@ -46,7 +46,7 @@ export default class Article extends React.Component {
       catelog: [],
       active: 0
     }
-    this.handleScroll = throttle(handleScroll.bind(this), 100)
+    this.handleScroll = throttle(handleScroll.bind(this), 100, true)
     this.handleLoad = handleLoad.bind(this)
   }
   loadData() {

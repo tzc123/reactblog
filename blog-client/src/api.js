@@ -1,5 +1,7 @@
 import { get, post } from './utils/request'
-const domain = 'http://122.152.205.25:4321'
+const domain = process.env.NODE_ENV == 'production'
+               ? 'http://122.152.205.25:4321'
+               : 'http://localhost:4321'
 
 export function getArticleList(category, index) {
   return get(

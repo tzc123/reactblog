@@ -137,6 +137,10 @@
   .article-list {
     margin-left: 0;
   }
+  .article-item {
+    padding: 20px;
+    padding-bottom: 15px;
+  }
 }
 .article-item>.pic {
   display: none;

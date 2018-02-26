@@ -1,14 +1,16 @@
-export default function (cb, wait) {
+export default function (cb, wait, endTigger = false) {
   let tiggered = false
   let timeout
-  return function () {
-    // 确保结束后还执行一次
-    timeout && clearTimeout(timeout)
-    timeout = setTimeout(() => {
-      cb()
-    }, 50)
+  return function (...args) {
+    if (endTigger) {
+       // 确保结束后还执行一次
+      timeout && clearTimeout(timeout)
+      timeout = setTimeout(() => {
+        cb(...args)
+      }, 50)
+    }
     if (tiggered) return
-    cb()
+    cb(...args)
     tiggered = true
     setTimeout(() => {
       tiggered = false

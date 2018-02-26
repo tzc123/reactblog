@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/game.css'
+import throttle from '../utils/throttle'
 
 const boxType = {
   2: {
@@ -115,16 +116,19 @@ const boxType = {
 export default class Game extends React.Component {
   constructor() {
     super()
+    this.state = {
+      current: 0,
+      best: +localStorage.getItem('best') || 0
+    }
     this.boxs = []
   }
   componentDidMount() {
     const { createInitialBoxs, refs: { game } } = this
     this.ctx = game.getContext('2d')
     this.boxs = createInitialBoxs()
-    this.createBox()
-    this.createBox()    
+    this.setScore(this.createBox() + this.createBox())
     this.draw()
-    window.addEventListener('keydown', this.handleKeyDown.bind(this))
+    window.addEventListener('keydown', throttle(this.handleKeyDown.bind(this), 300))
   }
   createInitialBoxs() {
     const initialBoxs = []
@@ -169,11 +173,12 @@ export default class Game extends React.Component {
     })
     emptyBoxs = emptyBoxs.filter(box => box != null)
     const len = emptyBoxs.length
-    if (len > 0) {
-      const index = emptyBoxs[Math.floor(Math.random() * len)]
-      boxs[index].index = index
-      boxs[index].value = Math.random() < 0.9 ? 2 : 4
-    }
+    if (len <= 0) return 0
+    const index = emptyBoxs[Math.floor(Math.random() * len)]
+    let value = Math.random() < 0.9 ? 2 : 4
+    boxs[index].value = value
+    boxs[index].index = index
+    return value
   }
   drawLine() {
     const { ctx } = this
@@ -386,7 +391,7 @@ export default class Game extends React.Component {
       } else {
         this.mergeBoxs()
         if (moveTasks.length > 0) {
-          this.createBox()
+          this.setScore(this.createBox())
           this.clear()
           this.draw()
         }
@@ -411,14 +416,29 @@ export default class Game extends React.Component {
     }
     this.boxs = newBoxs
   }
+  setScore(score) {
+    const { state: { current, best } } = this
+    const newScore = current + score
+    this.setState({ current: newScore })
+    if (newScore > best) {
+      this.setState({ best: newScore })
+      localStorage.setItem('best', newScore)  
+    }
+  }
   render() {
+    const { state: { current, best } } = this
     return (
-      <canvas className="game" 
-        onKeyDown={this.handleKeyDown.bind(this)} 
-        ref="game" 
-        width="200" 
-        height="200">
-      </canvas>
+      <section className="game-wrapper">
+        <canvas className="game"  
+          ref="game" 
+          width="200" 
+          height="200">
+        </canvas>
+        <div className="score-pannel">
+          <span className="current">CURRENT:  {current}</span>
+          <span className="best">BEST:  {best}</span>
+        </div>
+      </section>
     )
   }
 }
