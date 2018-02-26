@@ -83,6 +83,12 @@
 			}
 		}
 
+		@keyframes pull {
+			from {
+				transform: scaleY(0)
+			}
+		}
+
 		@keyframes show {
 			from {
 				opacity: 0;

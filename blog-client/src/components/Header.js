@@ -66,11 +66,18 @@ export default class Header extends React.Component {
       active: !active
     })
   }
+  handleNavClick(e) {
+    if (e.target.href) {
+      this.setState({
+        active: false
+      })
+    }
+  }
   render() {
     const { state: { nav, active } } = this
 
     return (
-      <header className="main-header">
+      <header className={`main-header ${active ? 'active' : ''}`}>
         <div className="container">
           <Link className="title" to="/">
             DAZ
@@ -80,17 +87,23 @@ export default class Header extends React.Component {
               <input placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
             </div>
-            <ul>
+            <ul className="nav" onClick={this.handleNavClick.bind(this)}>
               {nav.map((item, index) => (
                 <li key={index}>
-                  <Link to={!!item.link ? item.link : '/'}>
-                    {item.text}
-                  </Link>
+                {
+                  item.link
+                  ? <Link to={item.link}>
+                      {item.text}
+                    </Link>
+                  : <div>
+                      {item.text}
+                    </div>
+                }
                   {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
                 </li>
               ))}
             </ul>
-            <div className={ `icon-list ${active ? 'active' : ''}` }
+            <div className="icon-list"
               onClick={this.handleClick.bind(this)}>
               <div className="line line-1"></div>
               <div className="line line-2"></div>
