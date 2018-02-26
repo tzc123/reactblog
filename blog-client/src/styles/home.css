@@ -9,7 +9,8 @@
   top: 90px;
   width: 240px;
   height: 100%;  
-  position: sticky;  
+  position: sticky;
+  animation: show_to_left .5s;
 }
 
 @media screen and (max-width: 768px) {

@@ -158,13 +158,13 @@
   .icon-list .line-2 {
     transition: all .5s;
   }
-  .icon-list:hover .line-1 {
+  .icon-list.active .line-1 {
     transform: translateY(9px) rotateZ(-315deg);
   }
-  .icon-list:hover .line-2 {
+  .icon-list.active .line-2 {
     transform: rotateZ(-315deg);
   }
-  .icon-list:hover .line-3 {
+  .icon-list.active .line-3 {
     transform: translateY(-9px) rotateZ(315deg);
   }
 }

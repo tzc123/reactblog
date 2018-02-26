@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import pic from "../images/bg.jpeg"
-import loading from "../images/loading.gif"
+import pic from "../images/bg.jpeg";
+import loading from "../images/loading.gif";
 
 export default class ArticleItem extends React.Component {
   constructor() {

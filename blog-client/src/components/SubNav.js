@@ -18,7 +18,7 @@ export default (props) => {
         } else if (type == 'common') {
           return (
             <li key={index}>
-              <a href={item.link}>{item.text}</a>
+              <a href={item.link} target="_blank">{item.text}</a>
             </li>
           )
         }

@@ -7,6 +7,7 @@ import '../styles/article.css'
 import 'github-markdown-css'
 import throttle from '../utils/throttle'
 import { getArticle } from '../api'
+
 let i = 0
 function handleScroll() {
   const { tops, state: { active } } = this

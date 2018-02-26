@@ -7,6 +7,7 @@ export default class Header extends React.Component {
   constructor() {
     super()
     this.state = {
+      active: false,
       nav: [
         {
           text: 'home',
@@ -54,12 +55,19 @@ export default class Header extends React.Component {
         },
         {
           text: 'about',
+          link: '/about'
         }
       ]
     }
   }
+  handleClick() {
+    const { state: { active } } = this
+    this.setState({
+      active: !active
+    })
+  }
   render() {
-    let nav = this.state.nav
+    const { state: { nav, active } } = this
 
     return (
       <header className="main-header">
@@ -82,7 +90,8 @@ export default class Header extends React.Component {
                 </li>
               ))}
             </ul>
-            <div className="icon-list">
+            <div className={ `icon-list ${active ? 'active' : ''}` }
+              onClick={this.handleClick.bind(this)}>
               <div className="line line-1"></div>
               <div className="line line-2"></div>
               <div className="line line-3"></div>
