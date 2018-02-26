@@ -186,18 +186,20 @@
     text-align: center;
     background: #222b39;
   }
+
   .sub-nav {
     position: static;
   }
+
   .main-header nav li:hover {
     font-size: 20px;
   }
-  .main-header .nav>li:hover>.sub-nav>li:first-child {
+
+  .main-header .nav>li:hover>.sub-nav>li:first-child,
+  .main-header .nav>li:hover>.sub-nav>li:last-child {
     box-shadow: inset #333333 0 5px 5px;
   }
-  .main-header .nav>li:hover>.sub-nav>li:last-child {
-    box-shadow: inset #333333 0 -5px 5px;
-  }
+
   .main-header .nav>li:hover>.sub-nav {
     animation: none;  
   }
@@ -208,6 +210,12 @@
     border-radius: 0;
     margin: 0;
     background: #304960;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .search>input{
+    width: 150px;
   }
 }
 
