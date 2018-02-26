@@ -1,5 +1,5 @@
 import { get, post } from './utils/request'
-const domain = process.env.NODE_ENV == 'production'
+const domain = process.env.DEV == 'remote'
                ? 'http://122.152.205.25:4321'
                : 'http://localhost:4321'
 

@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import Mask from "./components/Mask"
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 export default () => {
   return (
@@ -13,11 +13,12 @@ export default () => {
       <div>
         {/* <Mask /> */}
         <Header />
-        <Route path="/" exact component={Home} />
-        <Route path="/article/:id" component={Article} />
-        <Route path="/about" component={About} />
-        <Route path='/404' component={NotFound} />
-        <Redirect from='*' to='/404' />
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/article/:id" component={Article} />
+          <Route path="/about" component={About} />
+          <Route path="*" component={NotFound} />
+        </Switch>
       </div>
     </BrowserRouter>
   );
