@@ -21,7 +21,9 @@ export default class Home extends React.Component {
   }
   componentDidMount() {
     scrollTo(0, 0)
-    this.loadData()
+    const { props: { location: { search } } } = this
+    const { category } = queryString(search)
+    this.loadData(category)
   }
   componentWillReceiveProps(props) {
     const { location: { search } } = props

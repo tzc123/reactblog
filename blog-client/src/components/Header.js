@@ -16,11 +16,13 @@ export default class Header extends React.Component {
         {
           text: 'category',
           type: 'category',
+          active: false,
           subNav: []
         },
         {
           text: 'links',
           type: 'common',
+          active: false,
           subNav: [
             {
               text: 'github',
@@ -46,18 +48,23 @@ export default class Header extends React.Component {
       this.setState(state)
     })
   }
-  handleClick() {
+  handlePullList() {
     const { state: { active } } = this
     this.setState({
       active: !active
     })
   }
-  handleNavClick(e) {
+  handleClick(e) {
     if (e.target.href) {
       this.setState({
         active: false
       })
     }
+  }
+  handleTouchStart(index) {
+    const { state } = this
+    state.nav[index].active = !state.nav[index].active
+    this.setState(state)
   }
   render() {
     const { state: { nav, active } } = this
@@ -72,7 +79,7 @@ export default class Header extends React.Component {
               <input placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
             </div>
-            <ul className="nav" onClick={this.handleNavClick.bind(this)}>
+            <ul className="nav" onClick={this.handleClick.bind(this)}>
               {nav.map((item, index) => (
                 <li key={index}>
                   {
@@ -80,21 +87,22 @@ export default class Header extends React.Component {
                     ? <Link to={item.link}>
                         {item.text}
                       </Link>
-                    : <div>
+                    : <a onTouchStart={this.handleTouchStart.bind(this, index)}>
                         {item.text}
-                      </div>
+                      </a>
                   }
                   {
-                    item.subNav 
-                    ? <SubNav type={item.type} 
-                        subNav={item.subNav} /> 
-                    : ''  
+                    item.link
+                    ? ''
+                    : <SubNav type={item.type}
+                        active={nav[index].active}
+                        subNav={item.subNav} />
                   }
                 </li>
               ))}
             </ul>
             <div className="icon-list"
-              onClick={this.handleClick.bind(this)}>
+              onTouchStart={this.handlePullList.bind(this)}>
               <div className="line line-1"></div>
               <div className="line line-2"></div>
               <div className="line line-3"></div>

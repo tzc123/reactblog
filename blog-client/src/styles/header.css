@@ -122,6 +122,7 @@
 
   .main-header .nav {
     display: none; 
+    max-width: none;
   }
 
   .main-header {
@@ -195,20 +196,21 @@
     font-size: 20px;
   }
 
-  .main-header .nav>li:hover>.sub-nav>li:first-child {
+  .main-header .nav>li>.sub-nav>li:first-child {
     box-shadow: inset #333333 0 5px 5px;
   }
 
-  .main-header .nav>li:hover>.sub-nav>li:last-child {
+  .main-header .nav>li>.sub-nav>li:last-child {
     box-shadow: inset #333333 0 -5px 5px;
     
   }
 
   .main-header .nav>li:hover>.sub-nav {
+    display: none;
     animation: none;  
   }
-  .main-header .nav>li:hover>div {
-    z-index: 999;
+  .main-header .nav>li>.sub-nav.active {
+    display: block;
   }
   .sub-nav>li {
     line-height: 50px;
