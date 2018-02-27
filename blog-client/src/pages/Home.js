@@ -3,13 +3,16 @@ import { getArticleList } from '../api'
 import ArticleList from '../components/ArticleList'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
+import queryString from '../utils/queryString'
+import statistics from '../utils/statistics'
 import '../styles/home.css'
 import '../styles/hopscotch.min.css'
 
 
 export default class Home extends React.Component {
-  constructor() {
+  constructor(event) {
     super()
+    this.event = event
     this.state = {
       currentPage: 1,
       total: 0,
@@ -20,10 +23,16 @@ export default class Home extends React.Component {
     scrollTo(0, 0)
     this.loadData()
   }
-  loadData() {
+  componentWillReceiveProps(props) {
+    const { location: { search } } = props
+    const { category } = queryString(search)
+    this.loadData(category)
+  }
+  loadData(category) {
     const { state: { currentPage } } = this
-    getArticleList(null, currentPage)
+    getArticleList(category, currentPage)
       .then(articles => {
+        category || this.event.emit('articleCount', statistics(articles))
         this.setState({
           articles: articles.map(article => ({ ...article, pic: 'http://122.152.205.25:1235/images/bg.jpeg' })),
           total: articles.length

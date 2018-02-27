@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default (props) => {
   if (!props) return ''
@@ -9,10 +10,12 @@ export default (props) => {
         if (type == 'category') {
           return (
             <li key={index}>
-              {item.text}
-              <span className="count color-blue">
-                「{item.count}」
-              </span>
+              <Link to={{pathname: '/', search: `?category=${item.text}`}}>
+                {item.text}
+                <span className="count color-blue">
+                  「{item.count}」
+                </span>
+              </Link>
             </li>
           )
         } else if (type == 'common') {

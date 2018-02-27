@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export function get(url, query) {
   return axios
-  .get(url, query || '')
+  .get(url, { params: query || {} })
   .then(res => {
     if (res.status == 200) {
       return res.data

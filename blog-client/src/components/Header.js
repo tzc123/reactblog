@@ -36,6 +36,10 @@ export default class Header extends React.Component {
             {
               text: 'node',
               count: '15',
+            },
+            {
+              text: 'other',
+              count: '1'
             }
           ]
         },
@@ -60,6 +64,13 @@ export default class Header extends React.Component {
       ]
     }
   }
+  componentDidMount() {
+    const { props: { event }, state, state: { nav: [ , item] } } = this
+    event.on('articleCount', articleCount => {
+      item.subNav = articleCount
+      this.setState(state)
+    })
+  }
   handleClick() {
     const { state: { active } } = this
     this.setState({
@@ -75,7 +86,6 @@ export default class Header extends React.Component {
   }
   render() {
     const { state: { nav, active } } = this
-
     return (
       <header className={`main-header ${active ? 'active' : ''}`}>
         <div className="container">
@@ -90,16 +100,21 @@ export default class Header extends React.Component {
             <ul className="nav" onClick={this.handleNavClick.bind(this)}>
               {nav.map((item, index) => (
                 <li key={index}>
-                {
-                  item.link
-                  ? <Link to={item.link}>
-                      {item.text}
-                    </Link>
-                  : <div>
-                      {item.text}
-                    </div>
-                }
-                  {item.subNav ? <SubNav type={item.type} subNav={item.subNav}/> : ''}
+                  {
+                    item.link
+                    ? <Link to={item.link}>
+                        {item.text}
+                      </Link>
+                    : <div>
+                        {item.text}
+                      </div>
+                  }
+                  {
+                    item.subNav 
+                    ? <SubNav type={item.type} 
+                        subNav={item.subNav} /> 
+                    : ''  
+                  }
                 </li>
               ))}
             </ul>
