@@ -16,32 +16,7 @@ export default class Header extends React.Component {
         {
           text: 'category',
           type: 'category',
-          subNav: [
-            {
-              text: 'js',
-              count: '10',
-            },
-            {
-              text: 'css',
-              count: '20'
-            },
-            {
-              text: 'vue',
-              count: '12',
-            },
-            {
-              text: 'react',
-              count: '13',
-            },
-            {
-              text: 'node',
-              count: '15',
-            },
-            {
-              text: 'other',
-              count: '1'
-            }
-          ]
+          subNav: []
         },
         {
           text: 'links',
