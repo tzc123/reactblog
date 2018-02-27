@@ -1,6 +1,7 @@
 const ArticleModel = require('../models/article')
 const config = require('../config')
-console.log(config)
+const getArticleCount = require('../utils/getArticleCount')
+let articleCount = []
 
 module.exports = {
   async list(ctx) {
@@ -16,7 +17,8 @@ module.exports = {
           message: '没有发现任何相关文章'
         }
       } else {
-        logger.info('查找列表成功', { url, method })      
+        logger.info('查找列表成功', { url, method }) 
+        articleCount = getArticleCount(articles)     
         ctx.body = {
           success: true,
           data: articles
@@ -232,6 +234,12 @@ module.exports = {
         success: false,
         message: '参数错误'
       }
+    }
+  },
+  count(ctx) {
+    ctx.body = {
+      success: true,
+      data: articleCount
     }
   }
 }

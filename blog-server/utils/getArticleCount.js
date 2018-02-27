@@ -1,4 +1,4 @@
-export default function (articles) {
+module.exports = function (articles) {
   const articleCount = {}
   articles.forEach(article => {
     if (articleCount[article.category]) {

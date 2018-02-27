@@ -33,3 +33,16 @@ export function getArticle(id) {
     return null
   })
 }
+
+export function getArticleCount() {
+  return get(domain + '/count')
+  .then(res => {
+    return res.success
+    ? res.data
+    : []
+  })
+  .catch(err => {
+    console.log(err)
+    return []
+  })
+}

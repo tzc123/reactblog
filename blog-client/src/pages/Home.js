@@ -4,7 +4,6 @@ import ArticleList from '../components/ArticleList'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
 import queryString from '../utils/queryString'
-import statistics from '../utils/statistics'
 import '../styles/home.css'
 import '../styles/hopscotch.min.css'
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styles/header.css'
 import { Link } from "react-router-dom";
+import { getArticleCount } from '../api';
 import SubNav from './SubNav'
 
 export default class Header extends React.Component {
@@ -40,6 +41,14 @@ export default class Header extends React.Component {
         }
       ]
     }
+  }
+  componentDidMount() {
+    const { state } = this
+    getArticleCount()
+      .then(res => {
+        state.nav[1].subNav = res
+        this.setState(state)
+      })
   }
   handlePullList() {
     const { state: { active } } = this
