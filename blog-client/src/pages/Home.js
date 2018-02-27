@@ -34,7 +34,6 @@ export default class Home extends React.Component {
     const { state: { currentPage } } = this
     getArticleList(category, currentPage)
       .then(articles => {
-        category || this.event.emit('articleCount', statistics(articles))
         this.setState({
           articles: articles.map(article => ({ ...article, pic: 'http://122.152.205.25:1235/images/bg.jpeg' })),
           total: articles.length

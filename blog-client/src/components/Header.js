@@ -41,13 +41,6 @@ export default class Header extends React.Component {
       ]
     }
   }
-  componentDidMount() {
-    const { props: { event }, state, state: { nav: [ , item] } } = this
-    event.on('articleCount', articleCount => {
-      item.subNav = articleCount
-      this.setState(state)
-    })
-  }
   handlePullList() {
     const { state: { active } } = this
     this.setState({
