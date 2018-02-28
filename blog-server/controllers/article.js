@@ -1,7 +1,53 @@
 const ArticleModel = require('../models/article')
 const config = require('../config')
-const getArticleCount = require('../utils/getArticleCount')
-let articleCount = []
+const cache = require('../cache')
+
+async function flush(url, method) {
+  const res = await cache.flush()
+  res
+  ? logger.info('清除缓存成功', { url, method })
+  : logger.error('清除缓存失败', { url, method })
+}
+
+async function getArticles(category, size, index, url, method) {
+  let articles = await cache.get('articles')
+  if (!articles) {
+    articles = await ArticleModel.paginator(category, size || 10, index || 1)
+    const res = await cache.set('articles', JSON.stringify(articles))
+    res 
+    ? logger.info('缓存articles', url, method)
+    : logger.error('缓存articles失败', url, method)
+  } else {
+    articles = JSON.parse(articles)
+  }
+  return articles
+}
+
+async function getCount(url, method) {
+  let count = await cache.get('articleCount')
+  if (!count) {
+    count = await ArticleModel.count()
+    const res = await cache.set('articleCount', JSON.stringify(count))
+    res 
+    ? logger.info('缓存articleCount', url, method)
+    : logger.error('缓存articleCount失败', url, method)
+  } else {
+    count = JSON.parse(count)
+  }
+  return count
+}
+
+function simpleAuth(ctx, secret) {
+  if (secret != config.secret) {
+    logger.info('无权限', { url, method, secret })          
+    ctx.body = {
+      success: false,
+      message: '无权限'
+    }
+    return false
+  }
+  return true
+}
 
 module.exports = {
   async list(ctx) {
@@ -9,7 +55,7 @@ module.exports = {
       query: { category, size, index }, 
       request: { url, method } } = ctx
     try{
-      const articles = await ArticleModel.paginator(category, size || 10, index || 1)
+      let articles = await getArticles(category, size, index, url, method)
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })
         ctx.body = {
@@ -18,7 +64,6 @@ module.exports = {
         }
       } else {
         logger.info('查找列表成功', { url, method }) 
-        articleCount = getArticleCount(articles)     
         ctx.body = {
           success: true,
           data: articles
@@ -72,14 +117,7 @@ module.exports = {
   async create(ctx) {
     const { request: { body = {}, url, method } } = ctx
     const { content, description, title, catelog, category, markdown , secret} = body
-    if (secret != config.secret) {
-      logger.info('无权限', { url, method, secret })          
-      ctx.body = {
-        success: false,
-        message: '无权限'
-      }
-      return
-    }
+    if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
@@ -97,6 +135,7 @@ module.exports = {
             message: '已有同名文章'
           }
         } else {
+          flush(url, method)
           logger.info('已添加', { id: newArticle._id.toString(), url, method })          
           ctx.body = {
             success: true,
@@ -124,19 +163,13 @@ module.exports = {
       request: { method, url , body = {}}, 
     } = ctx
     const { secret } = body
-    if (secret != config.secret) {
-      logger.info('无权限', { url, method, secret })          
-      ctx.body = {
-        success: false,
-        message: '无权限'
-      }
-      return
-    }
+    if (!simpleAuth(ctx, secret)) return
     if (id) {
       try {
         const res = await ArticleModel.remove(id)
         if (res.ok == 1) {
           if (res.n >= 1) {
+            flush(url, method)
             logger.info('已删除', {  url, method, id })
             ctx.body = {
               success: true,
@@ -174,14 +207,7 @@ module.exports = {
   async update(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
     const { content, description, title, category, markdown, catelog, secret } = body
-    if (secret != config.secret) {
-      logger.info('无权限', { url, method, secret })          
-      ctx.body = {
-        success: false,
-        message: '无权限'
-      }
-      return
-    }
+    if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const { ok, nModified, n } = await ArticleModel.update(id, {
@@ -201,6 +227,7 @@ module.exports = {
                 message: '没有需要更新的地方'
               }
             } else {
+              flush(url, method)
               logger.info('已更新', { url, method, id })
               ctx.body = {
                 success: true,
@@ -236,10 +263,21 @@ module.exports = {
       }
     }
   },
-  count(ctx) {
-    ctx.body = {
-      success: true,
-      data: articleCount
+  async count(ctx) {
+    const { request: { url, method } } = ctx
+    try {
+      let count = await getCount(url, method)
+      logger.info('查询成功', url, method)
+      ctx.body = {
+        success: true,
+        data: count
+      }
+    } catch (e) {
+      logger.error('数据库错误', url, method)      
+      ctx.body = {
+        success: false,
+        message: '未知错误'
+      }
     }
   }
 }

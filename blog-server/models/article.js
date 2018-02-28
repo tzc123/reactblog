@@ -97,6 +97,19 @@ async function browse(_id, time) {
   const res = await ArticleModel.updateOne({ _id }, { $set: { browse: time } })
   return res
 }
+async function count() {
+  const res = await ArticleModel.aggregate(
+    [
+      {
+        $group: {
+          _id: '$category',
+          count: { $sum: 1 }
+        }
+      }
+    ]
+  )
+  return res.map(cate => ({text: cate._id, count: cate.count}))
+}
 module.exports = {
   findOne,
   create,
@@ -105,5 +118,6 @@ module.exports = {
   remove,
   paginator,
   update,
-  browse
+  browse,
+  count
 }

@@ -4,7 +4,7 @@ require('winston-daily-rotate-file')
 
 const { Logger, transports: { DailyRotateFile, File } } = winston
 
-module.exports = new Logger({
+global.logger = new Logger({
     transports: [
       new DailyRotateFile({
         name: 'info',
