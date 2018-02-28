@@ -80,6 +80,7 @@ export default class Article extends React.Component {
       document.querySelectorAll('.markdown-body img'),
       img => img.removeEventListener('load', this.handleLoad)
     )
+    this.frameId && cancelAnimationFrame(this.frameId)
   }
   shouldComponentUpdate(props, state) {
     return this.state.title != state.title || this.state.active != state.active
@@ -100,7 +101,7 @@ export default class Article extends React.Component {
         location.hash = `#heading-${index}`
         return
       }
-      requestAnimationFrame(handle)
+      this.frameId = requestAnimationFrame(handle)
       scrollBy(0, 
         distance < 0
         ? -speed

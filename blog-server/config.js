@@ -6,6 +6,10 @@ module.exports = {
   },
   cache: {
     port: 6379,
+    expires: {
+      article: 300,
+      articles: 300
+    }
   },
   database: {
     uri: process.env.NODE_ENV == 'production' 

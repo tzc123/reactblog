@@ -12,21 +12,37 @@ async function flush(url, method) {
 async function getArticles(category, size, index, url, method) {
   let articles = await cache.get(`articles${category || ''}`) 
   if (!articles) {
-    console.log('from db')
     articles = await ArticleModel.paginator(category)
     const res = await cache.set(
-        `articles${category || ''}`, 
-        JSON.stringify(articles),
-        300
-      )
+      `articles${category || ''}`, 
+      JSON.stringify(articles),
+      config.cache.expires.articles
+    )
     res 
-    ? logger.info(`缓存articles${category || ''}`, url, method)
-    : logger.error(`缓存articles${category || ''}失败`, url, method)
+    ? logger.info(`缓存articles${category || ''}`, { url, method })
+    : logger.error(`缓存articles${category || ''}失败`, { url, method })
   } else {
-    console.log('from cache') 
     articles = JSON.parse(articles)
   }
   return articles
+}
+
+async function getArticle(id, url, method) {
+  let article = await cache.get(id)
+  if (!article) {
+    article = await ArticleModel.findById(id)
+    const res = cache.set(
+      id, 
+      JSON.stringify(article), 
+      config.cache.expires.article
+    )
+    res
+    ? logger.info(`缓存${id}`, { url, method })
+    : logger.error(`缓存${id}失败`, { url, method })
+  } else {
+    article = JSON.parse(article)
+  }
+  return article
 }
 
 async function getCount(url, method) {
@@ -35,8 +51,8 @@ async function getCount(url, method) {
     count = await ArticleModel.count()
     const res = await cache.set('articleCount', JSON.stringify(count))
     res 
-    ? logger.info('缓存articleCount', url, method)
-    : logger.error('缓存articleCount失败', url, method)
+    ? logger.info('缓存articleCount', { url, method })
+    : logger.error('缓存articleCount失败', { url, method })
   } else {
     count = JSON.parse(count)
   }
@@ -94,7 +110,9 @@ module.exports = {
       request: { url, method } 
     } = ctx
     try {
-      const article = await ArticleModel.findById(id, rmd == 1)
+      const article = rmd == 1
+      ? await ArticleModel.findById(id, true)
+      : await getArticle(id, url, method)
       if (article) {
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
@@ -250,7 +268,7 @@ module.exports = {
         unknownError(ctx, e, url, method)
       }  
     } else {
-      logger.info('参数错误', { url: url, method: method, id  })
+      logger.info('参数错误', { url, method, id  })
       ctx.body = {
         success: false,
         message: '参数错误'
