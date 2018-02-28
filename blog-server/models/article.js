@@ -44,7 +44,7 @@ const ArticleSchema = new Schema({
   }
 })
 const ArticleModel = mongoose.model('article', ArticleSchema)
-async function paginator(category, size, index) {
+async function paginator(category, size=10, index=1) {
   const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0, catelog: 0 })
                         .sort({ created_at: -1 })
                         .limit(+size)

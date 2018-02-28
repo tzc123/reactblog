@@ -12,7 +12,7 @@ async function flush(url, method) {
 async function getArticles(category, size, index, url, method) {
   let articles = await cache.get(`articles${category || ''}`)
   if (!articles) {
-    articles = await ArticleModel.paginator(category, size || 10, index || 1)
+    articles = await ArticleModel.paginator(category)
     const res = await cache.set(`articles${category || ''}`, JSON.stringify(articles))
     res 
     ? logger.info(`缓存articles${category || ''}`, url, method)
