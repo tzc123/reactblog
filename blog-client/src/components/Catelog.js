@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/catelog.css'
 import initCatelog from '../utils/initCatelog'
 

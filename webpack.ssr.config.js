@@ -3,19 +3,18 @@ const path = require('path')
 const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const outputPath = path.join(__dirname, 'asset')
-const appPath = path.join(__dirname, "blog-client/src/app.js")
+const outputPath = path.join(__dirname, 'ssr')
+const appPath = path.join(__dirname, "blog-client/src/serverRouter.js")
 const serverDomain = 'http://122.152.205.25:1234/'
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
-			vendor: ['react', 'react-dom', 'react-router-dom', 'axios', 'es6-promise'],
-			app: appPath,
+			app: appPath
 		},
     output: {
         path: outputPath,
-				filename: 'js/[name].[chunkhash:8].js',
-				publicPath: serverDomain
+				filename: 'js/[name].js',
+				libraryTarget: 'commonjs2' 
     },
     module: {
 			strictExportPresence: true,
@@ -25,17 +24,7 @@ const config = {
 					exclude: /node_modules/,
 					loader: 'babel-loader',
 					options: {
-						presets: [['env', {
-							"targets": {
-								"browsers": ["last 2 versions", "safari >= 7"]
-							},
-							"useBuiltIns": true,
-						}], 'stage-3', 'react'],
-						plugins: [['transform-runtime', {
-							"polyfill": true,
-							"regenerator": false,
-							"moduleName": "babel-runtime"
-						}]]
+						presets: ['env', 'react', 'stage-3']
 					}
 				}, 
 				{
@@ -67,36 +56,25 @@ const config = {
 					loader: 'url-loader',
 					query: {
 						limit: 8192,
-						name: 'images/[name].[ext]?[hash]'
+						name: 'images/[name].[ext]'
 					}
 				}
 			]
 		},
 		plugins: [
 			// new BundleAnalyzerPlugin(),
-			new HtmlPlugin({
-				title: "DAZ'blog",
-				template: path.join(__dirname, 'blog-client/index.html'),
-				favicon: path.join(__dirname, 'blog-client/favicon.ico')				
-			}),
 			new webpack.DefinePlugin({
 				"process.env.NODE_ENV": '"production"'
 			}),
-			new ExtractTextPlugin("css/style.[contenthash:8].css"),
-			new webpack.optimize.CommonsChunkPlugin({
-				name: ['vender', 'manifest'],
-				minChunks: 2,
-			}),
+			new ExtractTextPlugin("css/style.css"),
 			new webpack.ProvidePlugin({
 				React: 'react'
-			}),
-			new webpack.optimize.UglifyJsPlugin({
-				extractComments: true
 			}),
 			new CleanPlugin(outputPath, {
 				beforeEmit: true
 			})
 		],
+		target: 'node',
 		node: {
 			dgram: 'empty',
 			fs: 'empty',

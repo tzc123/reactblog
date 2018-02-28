@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/notfound.css'
 
 export default class NotFound extends React.Component {

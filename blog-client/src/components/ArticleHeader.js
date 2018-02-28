@@ -1,5 +1,3 @@
-import React from 'react';
-
 export default class ArticleHeader extends React.Component {
   render() {
     const { props: { title, browse, category, created_at } } = this

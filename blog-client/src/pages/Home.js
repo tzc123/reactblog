@@ -1,17 +1,21 @@
-import React from 'react'
-import { getArticleList } from '../api'
 import ArticleList from '../components/ArticleList'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
-import queryString from '../utils/queryString'
-import '../styles/home.css'
-import '../styles/hopscotch.min.css'
 
+const isNode = typeof window === 'undefined'
+
+if (isNode) {
+
+} else {
+  import { getArticleList } from '../api'
+  import queryString from '../utils/queryString'
+  import '../styles/home.css'
+  import '../styles/hopscotch.min.css'
+}
 
 export default class Home extends React.Component {
-  constructor(event) {
+  constructor() {
     super()
-    this.event = event
     this.state = {
       currentPage: 1,
       total: 0,
@@ -48,7 +52,9 @@ export default class Home extends React.Component {
         <ArticleList {...{currentPage, articles}}/>
         <aside>
           {
-            window.innerWidth > 768
+            isNode 
+            ? <Game />
+            : window.innerWidth > 768
             ? <Game/>
             : ''
           }

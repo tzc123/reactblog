@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/game.css'
 import throttle from '../utils/throttle'
 

@@ -4,3 +4,4 @@ blog-server/static/
 blog-backend/
 static/
 asset/
+ssr/

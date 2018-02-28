@@ -1,4 +1,3 @@
-import React from 'react'
 import '../styles/mask.css'
 import debounce from '../utils/debounce'
 

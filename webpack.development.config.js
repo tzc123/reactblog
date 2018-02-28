@@ -64,6 +64,9 @@ const config = {
 				"process.env.NODE_ENV": `"development"`,
 				"process.env.DEV": `"${process.env.DEV}"`				
 			}),
+			new webpack.ProvidePlugin({
+				React: 'react'
+			}),
 			new ExtractTextPlugin("css/style.css"),
 			new HtmlPlugin({
 				title: "DAZ'blog",

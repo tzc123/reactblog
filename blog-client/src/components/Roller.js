@@ -1,4 +1,3 @@
-import React from 'react';
 import '../styles/roller.css'
 
 export default class Roller extends React.Component {

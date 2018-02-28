@@ -1,4 +1,3 @@
-import React from 'react'
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
@@ -130,6 +129,7 @@ export default class Article extends React.Component {
             }
           </div>
         </aside>
+        {/* <img className="top" src={require('../images/arrow.png')}/> */}
       </main>
     ) : ''
   }

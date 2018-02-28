@@ -56,6 +56,13 @@
   animation: show_to_left .5s;
 }
 
+.top {
+  position: fixed;
+  right: 20%;
+  bottom: 10%;
+  width: 30px;
+}
+
 .article>article>footer {
   height: 300px;
   line-height: 300px;

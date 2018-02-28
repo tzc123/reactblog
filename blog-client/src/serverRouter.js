@@ -4,11 +4,15 @@ import Header from "./components/Header";
 import Mask from "./components/Mask"
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
+import { Route, Redirect, Switch, StaticRouter } from "react-router-dom";
 
-export default () => {
-  return (
-    <BrowserRouter>
+const ReactDOMServer = require('react-dom/server')
+
+export default function (url, context) {
+  return ReactDOMServer.renderToString(
+    <StaticRouter
+      location={url}
+      context={context} >
       <div>
         {/* <Mask /> */}
         <Header/>
@@ -19,6 +23,6 @@ export default () => {
           <Route path="*" component={NotFound} />
         </Switch>
       </div>
-    </BrowserRouter>
-  );
-};
+    </StaticRouter>
+  )
+}
