@@ -6,16 +6,16 @@ import loading from "../images/loading.gif";
 export default class ArticleItem extends React.Component {
   constructor() {
     super();
-    this.state = {
-      loading: true
-    }
+    // this.state = {
+    //   loading: true
+    // }
   }
   componentDidMount() {
-    this.refs.pic.onload = () => {
-      this.setState({
-        loading: false
-      })
-    }
+    // this.refs.pic.onload = () => {
+    //   this.setState({
+    //     loading: false
+    //   })
+    // }
   }
   render() {
     const { props: { title, browse, created_at, _id, index, description, category } } = this;
@@ -40,8 +40,8 @@ export default class ArticleItem extends React.Component {
           <img className="time" src={require("../images/time.png")}/>          
           <span>{(new Date(created_at).toLocaleDateString().replace(/\//g,'-'))}</span>
         </div>
-        <img className={`pic ${this.state.loading ? 'hidden' : ''}`} src={pic} ref="pic"/>
-        <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={loading} />
+        {/* <img className={`pic ${this.state.loading ? 'hidden' : ''}`} src={pic} ref="pic"/> */}
+        {/* <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={loading} /> */}
       </li>
     );
   }
