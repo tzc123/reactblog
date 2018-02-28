@@ -10,13 +10,13 @@ async function flush(url, method) {
 }
 
 async function getArticles(category, size, index, url, method) {
-  let articles = await cache.get('articles')
+  let articles = await cache.get(`articles${category || ''}`)
   if (!articles) {
     articles = await ArticleModel.paginator(category, size || 10, index || 1)
-    const res = await cache.set('articles', JSON.stringify(articles))
+    const res = await cache.set(`articles${category || ''}`, JSON.stringify(articles))
     res 
-    ? logger.info('缓存articles', url, method)
-    : logger.error('缓存articles失败', url, method)
+    ? logger.info(`缓存articles${category || ''}`, url, method)
+    : logger.error(`缓存articles${category || ''}失败`, url, method)
   } else {
     articles = JSON.parse(articles)
   }
@@ -92,7 +92,7 @@ module.exports = {
           data: article
         }
         if (rmd != 1) {
-          const {  ok } = await ArticleModel.browse(id, article.browse + 1)
+          const { ok } = await ArticleModel.browse(id, article.browse + 1)
           if (ok == 1) {
             logger.info('一次浏览', { url, method })
           } else {
