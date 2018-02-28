@@ -1,9 +1,8 @@
 const Router = require("koa-router");
-const koaBody = require('koa-body')
 const path = require('path')
 const router = new Router();
 
-const { article, login, image } = require('./controllers/index')
+const { article, login, image: { parser, upload } } = require('./controllers/index')
 
 router
   .get('/login', login.index)
@@ -13,21 +12,6 @@ router
   .post('/article', article.create)
   .post('/article/:id/remove', article.remove)
   .post('/article/:id', article.update)
-  .post('/image', koaBody({
-    multipart: true,
-    onError(err, ctx) {
-      ctx.body = {
-        success: false,
-        message: err.stack
-      }
-    },
-    formidable: {
-      onFileBegin(name, file) {
-        if (name == 'file' && file.type.indexOf('image') != -1) {
-          file.path = path.join(__dirname, '../static/images/') + file.name
-        } 
-      }
-    }
-  }), image.upload)
+  .post('/image', parser, upload)
 
 module.exports = router;
