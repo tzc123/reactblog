@@ -24,7 +24,9 @@ module.exports = {
       })
     })
   },
-  set(key, value) {
+  set(key, value, expire) {
+    if (expire) return client.set(key, value, 'EX', expire)
+
     return client.set(key, value)
   },
   flush: client.flushdb.bind(client)

@@ -5,6 +5,8 @@ module.exports = {
   parser: koaBody({
     multipart: true,
     onError(err, ctx) {
+      const { request: { url, method } } = this
+      logger.error('未知错误', { url, method, err: err.stack })
       ctx.body = {
         success: false,
         message: err.stack
@@ -19,16 +21,19 @@ module.exports = {
     }
   }),
   upload(ctx) {
-    const file = ctx.request.body.files.file
+    const { request: { body: { files: file }, url, method } } = ctx
+
     if (file && file.type.indexOf('image') != -1) {
+      logger.info('上传成功', { url, method, filename: file.name })
       ctx.body = {
         success: true,
-        message: ctx.request.body.files.file.name
+        message: file.name
       }
     } else {
+      logger.info('格式错误', { url, method })
       ctx.body = {
         success: false,
-        message: '文件格式错误'
+        message: '格式错误'
       }
     }
   }

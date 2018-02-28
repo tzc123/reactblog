@@ -7,7 +7,7 @@ export default function (cb, wait, endTigger = false) {
       timeout && clearTimeout(timeout)
       timeout = setTimeout(() => {
         cb(...args)
-      }, 50)
+      }, wait)
     }
     if (tiggered) return
     cb(...args)

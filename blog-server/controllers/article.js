@@ -10,14 +10,20 @@ async function flush(url, method) {
 }
 
 async function getArticles(category, size, index, url, method) {
-  let articles = await cache.get(`articles${category || ''}`)
+  let articles = await cache.get(`articles${category || ''}`) 
   if (!articles) {
+    console.log('from db')
     articles = await ArticleModel.paginator(category)
-    const res = await cache.set(`articles${category || ''}`, JSON.stringify(articles))
+    const res = await cache.set(
+        `articles${category || ''}`, 
+        JSON.stringify(articles),
+        300
+      )
     res 
     ? logger.info(`缓存articles${category || ''}`, url, method)
     : logger.error(`缓存articles${category || ''}失败`, url, method)
   } else {
+    console.log('from cache') 
     articles = JSON.parse(articles)
   }
   return articles
