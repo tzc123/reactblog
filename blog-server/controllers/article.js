@@ -37,7 +37,15 @@ async function getCount(url, method) {
   return count
 }
 
-function simpleAuth(ctx, secret) {
+function unknownError(ctx, err, url, method) {
+  logger.error('未知错误', { url, method, err: err.stack })
+  ctx.body = {
+    success: false,
+    message: '未知错误'
+  }
+}
+
+function simpleAuth(ctx, secret, url, method) {
   if (secret != config.secret) {
     logger.info('无权限', { url, method, secret })          
     ctx.body = {
@@ -70,11 +78,7 @@ module.exports = {
         }
       }
     } catch (e) {
-      logger.error('未知错误', { url, method, err: e.stack })
-      ctx.body = {
-        success: false,
-        message: '未知错误'
-      }
+      unknownError(ctx, e, url, method)
     }
   },
   async index(ctx) {
@@ -107,17 +111,13 @@ module.exports = {
         }
       }
     } catch (e) {
-      logger.error('未知错误', { url, method, err: e.stack })      
-      ctx.body = {
-        success: false,
-        message: '未知错误'
-      }
+      unknownError(ctx, e, url, method)
     }
   },
   async create(ctx) {
     const { request: { body = {}, url, method } } = ctx
     const { content, description, title, catelog, category, markdown , secret} = body
-    if (!simpleAuth(ctx, secret)) return
+    if (!simpleAuth(ctx, secret, url, method)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
@@ -143,11 +143,7 @@ module.exports = {
           }
         }
       } catch (e) {
-        ctx.body = {
-          success: false,
-          message: '未知错误'
-        }
-        logger.error('未知错误', {  url, method, err: e.stack })
+        unknownError(ctx, e, url, method)
       }
     } else {
       logger.info('参数错误', {  url, method })
@@ -163,7 +159,7 @@ module.exports = {
       request: { method, url , body = {}}, 
     } = ctx
     const { secret } = body
-    if (!simpleAuth(ctx, secret)) return
+    if (!simpleAuth(ctx, secret, url, method)) return
     if (id) {
       try {
         const res = await ArticleModel.remove(id)
@@ -190,11 +186,7 @@ module.exports = {
           }
         }
       } catch (e) {
-        logger.error('未知错误', { url, method, id, err: e.stack })
-        ctx.body = {
-          success: false,
-          message: '未知错误'
-        }
+        unknownError(ctx, e, url, method)
       }
     } else {
       logger.info('参数错误', { url, method, id })
@@ -207,7 +199,7 @@ module.exports = {
   async update(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
     const { content, description, title, category, markdown, catelog, secret } = body
-    if (!simpleAuth(ctx, secret)) return
+    if (!simpleAuth(ctx, secret, url, method)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const { ok, nModified, n } = await ArticleModel.update(id, {
@@ -249,14 +241,10 @@ module.exports = {
           }
         }
       } catch (e) {
-        logger.error('未知错误', { url, method, id, err: e.stack })
-        ctx.body = {
-          success: false,
-          message: '未知错误'
-        }
+        unknownError(ctx, e, url, method)
       }  
     } else {
-      logger.info('参数错误', { url: ctx.request.url, method: ctx.request.method, content, description, title, category, markdown, id  })
+      logger.info('参数错误', { url: url, method: method, id  })
       ctx.body = {
         success: false,
         message: '参数错误'
@@ -273,11 +261,7 @@ module.exports = {
         data: count
       }
     } catch (e) {
-      logger.error('数据库错误', url, method)      
-      ctx.body = {
-        success: false,
-        message: '未知错误'
-      }
+      unknownError(ctx, e, url, method)
     }
   }
 }
