@@ -73,6 +73,7 @@ function handleLoad () {
       img => img.removeEventListener('load', this.handleLoad)
     )
     this.frameId && cancelAnimationFrame(this.frameId)
+    this.props.article.clear()
   }
   handleCatelogClick(index, e) {
     e.preventDefault()
