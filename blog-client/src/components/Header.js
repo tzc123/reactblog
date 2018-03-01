@@ -1,74 +1,64 @@
+import { observer } from "mobx-react"
+import { observable, computed } from "mobx"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
 import { getArticleCount } from '../api';
 import SubNav from './SubNav'
 
-export default class Header extends React.Component {
-  constructor() {
-    super()
-    this.state = {
+@observer class Header extends React.Component {
+  @observable active = false
+  @observable nav = [
+    {
+      text: 'home',
+      link: '/'
+    },
+    {
+      text: 'category',
+      type: 'category',
       active: false,
-      nav: [
+      subNav: []
+    },
+    {
+      text: 'links',
+      type: 'common',
+      active: false,
+      subNav: [
         {
-          text: 'home',
-          link: '/'
+          text: 'github',
+          link: 'https://github.com/tzc123'
         },
         {
-          text: 'category',
-          type: 'category',
-          active: false,
-          subNav: []
-        },
-        {
-          text: 'links',
-          type: 'common',
-          active: false,
-          subNav: [
-            {
-              text: 'github',
-              link: 'https://github.com/tzc123'
-            },
-            {
-              text: 'juejin',
-              link: 'https://juejin.im/user/5936123afe88c20061db655d'
-            }
-          ]
-        },
-        {
-          text: 'about',
-          link: '/about'
+          text: 'juejin',
+          link: 'https://juejin.im/user/5936123afe88c20061db655d'
         }
       ]
+    },
+    {
+      text: 'about',
+      link: '/about'
     }
-  }
+  ]
+  
   componentDidMount() {
-    const { state } = this
     getArticleCount()
       .then(res => {
-        state.nav[1].subNav = res
-        this.setState(state)
+        this.nav[1].subNav = res
       })
   }
   handlePullList() {
-    const { state: { active } } = this
-    this.setState({
-      active: !active
-    })
+    const { active } = this
+    this.active = !active
   }
   handleClick(e) {
     if (e.target.href) {
-      this.setState({
-        active: false
-      })
+      this.active = false
     }
   }
   handleTouchStart(index) {
-    const { state } = this
-    state.nav[index].active = !state.nav[index].active
-    this.setState(state)
+    this.nav[index].active = !this.nav[index].active
   }
   render() {
-    const { state: { nav, active } } = this
+    const { nav, active } = this
     return (
       <header className={`main-header ${active ? 'active' : ''}`}>
         <div className="container">
@@ -114,3 +104,5 @@ export default class Header extends React.Component {
     )
   }
 }
+
+export default Header

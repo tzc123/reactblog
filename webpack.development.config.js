@@ -22,12 +22,17 @@ const config = {
             exclude: /node_modules/,
 						loader: 'babel-loader',
 						options: {
-							presets: ['env', 'stage-3', 'react'],
-							plugins: [['transform-runtime', {
-								"polyfill": false,
-								"regenerator": false,
-								"moduleName": "babel-runtime"
-							}]]
+							presets: ['env', 'react', 'stage-3'],
+							plugins: [
+									['transform-runtime', {
+									"polyfill": false,
+									"regenerator": false,
+									"moduleName": "babel-runtime"
+									}],
+									"transform-decorators-legacy",
+									"transform-decorators",
+									"transform-class-properties"
+							]
 						}
 					}, 
 					{

@@ -1,4 +1,10 @@
 export default class ArticleHeader extends React.Component {
+  static defaultProps = {
+    title: '',
+    browse: 0,
+    category: 'null',
+    created_at: '0000-00-00'
+  }
   render() {
     const { props: { title, browse, category, created_at } } = this
     return (
@@ -18,11 +24,4 @@ export default class ArticleHeader extends React.Component {
       
     )
   }
-}
-
-ArticleHeader.defaultProps = {
-  title: '',
-  browse: 0,
-  category: 'null',
-  created_at: '0000-00-00'
 }

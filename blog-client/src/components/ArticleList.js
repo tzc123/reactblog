@@ -2,9 +2,6 @@ import ArticleItem from './ArticleItem.js'
 import '../styles/articlelist.css'
 
 export default class ArticleList extends React.Component {
-  constructor() {
-    super()
-  }
   render() {
     const { props: { articles } } = this
     return (

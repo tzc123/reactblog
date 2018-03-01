@@ -2,6 +2,9 @@ import '../styles/catelog.css'
 import initCatelog from '../utils/initCatelog'
 
 export default class Catelog extends React.Component {
+  static defaultProps = {
+    catelog: []
+  }
   render() {
     const { props: { catelog, active, handleClick } } = this
     return (
@@ -25,7 +28,4 @@ export default class Catelog extends React.Component {
   }
 }
 
-Catelog.defaultProps = {
-  catelog: []
-}
 

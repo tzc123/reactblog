@@ -1,8 +1,9 @@
 import '../styles/roller.css'
 
 export default class Roller extends React.Component {
-  constructor () {
-    super()
+  static defaultProps = {
+    total: 1,
+    currentPage: 1
   }
 
   render() {
@@ -28,9 +29,4 @@ export default class Roller extends React.Component {
       </nav>
     )
   }
-}
-
-Roller.defaultProps = {
-  total: 1,
-  currentPage: 1
 }

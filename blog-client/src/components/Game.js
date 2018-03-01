@@ -1,3 +1,5 @@
+import { observer } from "mobx-react"
+import { observable } from "mobx"
 import '../styles/game.css'
 import throttle from '../utils/throttle'
 
@@ -112,15 +114,11 @@ const boxType = {
   },
 }
 
-export default class Game extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      current: 0,
-      best: +localStorage.getItem('best') || 0
-    }
-    this.boxs = []
-  }
+@observer class Game extends React.Component {
+  @observable current = 0
+  @observable best = +localStorage.getItem('best') || 0
+  boxs = []
+
   componentDidMount() {
     const { createInitialBoxs, refs: { game } } = this
     this.ctx = game.getContext('2d')
@@ -416,16 +414,16 @@ export default class Game extends React.Component {
     this.boxs = newBoxs
   }
   setScore(score) {
-    const { state: { current, best } } = this
+    const { current, best } = this
     const newScore = current + score
-    this.setState({ current: newScore })
+    this.current = newScore 
     if (newScore > best) {
-      this.setState({ best: newScore })
+      this.best = newScore
       localStorage.setItem('best', newScore)  
     }
   }
   render() {
-    const { state: { current, best } } = this
+    const { current, best } = this
     return (
       <section className="game-wrapper">
         <canvas className="game"  
@@ -441,3 +439,5 @@ export default class Game extends React.Component {
     )
   }
 }
+
+export default Game

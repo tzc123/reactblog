@@ -1,19 +1,6 @@
 import { Link } from "react-router-dom";
 
 export default class ArticleItem extends React.Component {
-  constructor() {
-    super();
-    // this.state = {
-    //   loading: true
-    // }
-  }
-  componentDidMount() {
-    // this.refs.pic.onload = () => {
-    //   this.setState({
-    //     loading: false
-    //   })
-    // }
-  }
   render() {
     const { props: { title, browse, created_at, _id, index, description, category } } = this;
     return (

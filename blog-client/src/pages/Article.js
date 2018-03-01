@@ -1,3 +1,5 @@
+import { observer } from "mobx-react"
+import { observable, computed } from "mobx"
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
@@ -9,7 +11,7 @@ import { getArticle } from '../api'
 
 let i = 0
 function handleScroll() {
-  const { tops, state: { active } } = this
+  const { tops, active  } = this
   if (!tops) return
   const activeLine = window.scrollY || window.pageYOffset
   let newActive = active
@@ -23,7 +25,7 @@ function handleScroll() {
       }
     }
   })
-  this.setState({ active: newActive })
+  this.active = newActive
 }
 
 function handleLoad () {
@@ -34,40 +36,41 @@ function handleLoad () {
   this.handleScroll()
 }
 
-export default class Article extends React.Component {
+@observer class Article extends React.Component {
+  @observable article = {
+    title: '',
+    content: '',
+    browse: 0,
+    category: '',
+    created_at: '0000-00-00',
+    catelog: []
+  }
+
+  @observable active = 0
+  
   constructor() {
     super()
-    this.state = {
-      title: '',
-      content: '',
-      browse: 0,
-      category: '',
-      created_at: '0000-00-00',
-      catelog: [],
-      active: 0
-    }
     this.handleScroll = throttle(handleScroll.bind(this), 100, true)
     this.handleLoad = handleLoad.bind(this)
   }
   loadData() {
     getArticle(this.props.match.params.id)
       .then(article => {
-        article && this.setState({
-          ...article,
-        }, state => {
-          if (window.innerWidth > 768) {
-            this.headings = document.querySelectorAll('.heading')
-            this.tops = [].map.call(
-              this.headings, 
-              heading => heading.offsetTop + 80
-            )
-            window.addEventListener('scroll', this.handleScroll, false);
-            [].map.call(
-              document.querySelectorAll('.markdown-body img'),
-              img => img.addEventListener('load', this.handleLoad)
-            )
-          }
-        })
+        if (article) {
+          this.article = article
+        } 
+        if (window.innerWidth > 768) {
+          this.headings = document.querySelectorAll('.heading')
+          this.tops = [].map.call(
+            this.headings, 
+            heading => heading.offsetTop + 80
+          )
+          window.addEventListener('scroll', this.handleScroll, false);
+          [].map.call(
+            document.querySelectorAll('.markdown-body img'),
+            img => img.addEventListener('load', this.handleLoad)
+          )
+        }
       })
   }
   componentWillMount() {
@@ -80,9 +83,6 @@ export default class Article extends React.Component {
       img => img.removeEventListener('load', this.handleLoad)
     )
     this.frameId && cancelAnimationFrame(this.frameId)
-  }
-  shouldComponentUpdate(props, state) {
-    return this.state.title != state.title || this.state.active != state.active
   }
   handleCatelogClick(index, e) {
     e.preventDefault()
@@ -110,7 +110,7 @@ export default class Article extends React.Component {
     handle()
   }
   render() {
-    const { state: { title, content, browse, category, created_at, catelog, active }, handleScroll } = this
+    const { article: { title, content, browse, category, created_at, catelog, handleScroll }, active } = this
     return title ? (
       <main className="article">
         <article>
@@ -134,3 +134,5 @@ export default class Article extends React.Component {
     ) : ''
   }
 }
+
+export default Article
