@@ -1,10 +1,16 @@
 import {  observable, action } from 'mobx'
 import { getArticleList } from '../api';
 
+const { initialData } = window
+
 class HomeStore {
   @observable currentPage = 1
-  @observable total = 0
-  @observable articles = []
+  @observable total = initialData 
+    ? initialData.home.total
+    : 0
+  @observable articles = initialData
+    ? initialData.home.articles
+    : []
 
   loadData(category) {
     getArticleList(category, this.currentPage)

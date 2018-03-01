@@ -9,6 +9,9 @@ import '../styles/hopscotch.min.css'
 
 const isNode = typeof window === 'undefined'
 
+let initialData = isNode
+  ? null
+  : window.initialData
 @inject('home')
 @observer class Home extends React.Component {
 

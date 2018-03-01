@@ -1,9 +1,13 @@
 import {  observable, action, computed } from 'mobx'
 import { getArticleCount } from '../api';
 
+const { initialData } = window
+
 class HeaderStore {
   @observable active = false
-  @observable nav = [
+  @observable nav = initialData
+  ? initialData.header.nav
+  : [
     {
       text: 'home',
       link: '/'
@@ -35,7 +39,7 @@ class HeaderStore {
     }
   ]
   @computed get activeClass() {
-    return `main-header ${this.active ? 'active' : ''}`
+    return `main-header${this.active ? ' active' : ''}`
   }
   @action setArticleCount(articleCount) {
     this.nav[1].subNav = articleCount
@@ -58,7 +62,7 @@ class HeaderStore {
     this.nav[index].active = !this.nav[index].active
   }
   constructor () {
-    this.loadData()
+    initialData || this.loadData()
     this.changeActive = this.changeActive.bind(this)
     this.closeActive = this.closeActive.bind(this)
     this.changeSubNavActive = this.changeSubNavActive.bind(this)

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react"
-import { observable } from "mobx"
+import { observable, action } from "mobx"
 import '../styles/game.css'
 import throttle from '../utils/throttle'
 const isNode = typeof window === 'undefined'
@@ -117,9 +117,7 @@ const boxType = {
 @observer class Game extends React.Component {
   
   @observable current = 0
-  @observable best = !isNode
-    ?+localStorage.getItem('best') || 0
-    : 0
+  @observable best = 0
   boxs = []
 
   componentDidMount() {
@@ -128,6 +126,7 @@ const boxType = {
     this.boxs = createInitialBoxs()
     this.setScore(this.createBox() + this.createBox())
     this.draw()
+    this.best = +localStorage.getItem('best') || 0
     window.addEventListener('keydown', throttle(this.handleKeyDown.bind(this), 300))
   }
   createInitialBoxs() {
@@ -416,7 +415,7 @@ const boxType = {
     }
     this.boxs = newBoxs
   }
-  setScore(score) {
+  @action setScore(score) {
     const { current, best } = this
     const newScore = current + score
     this.current = newScore 

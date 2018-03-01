@@ -15,6 +15,7 @@ const config = {
     output: {
         path: outputPath,
 				filename: 'js/[name].js',
+				library: 'server',
 				libraryTarget: 'commonjs2' 
     },
     module: {
@@ -37,20 +38,14 @@ const config = {
 					test: /\.css$/,
 					use: ExtractTextPlugin.extract({
 						fallback: "style-loader",
-						use:[
-							{
-								loader: 'css-loader',
-								options:{
-										minimize: true
-								}
-							}
-						]
+						use: 'css-loader'
 					})
 				},
 				{
 					test: /\.(jpeg|png|jpg|gif)$/,
 					loader: 'url-loader',
-					query: {						
+					query: {
+						limit: 8192,
 						name: 'images/[name].[ext]'
 					}
 				}

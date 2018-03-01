@@ -82,10 +82,20 @@ const config = {
 		plugins: [
 			// new BundleAnalyzerPlugin(),
 			new HtmlPlugin({
+				filename: 'index.html',
 				title: "DAZ'blog",
 				template: path.join(__dirname, 'blog-client/index.html'),
 				favicon: path.join(__dirname, 'blog-client/favicon.ico'),
-				ssr: '<%- ssr %>'		
+				ssr: '',
+				initialData: '{}'
+			}),
+			new HtmlPlugin({
+				filename: 'ssr.html',
+				title: "DAZ'blog",
+				template: path.join(__dirname, 'blog-client/index.html'),
+				favicon: path.join(__dirname, 'blog-client/favicon.ico'),
+				ssr: '<%- ssr %>',
+				initialData: '<%- initialData %>'
 			}),
 			new webpack.DefinePlugin({
 				"process.env.NODE_ENV": '"production"'

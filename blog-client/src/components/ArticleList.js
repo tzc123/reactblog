@@ -3,8 +3,6 @@ import '../styles/articlelist.css'
 
 export default ({children}) => {
   return (
-    <ul className="article-list">
-      {children}
-    </ul>
+    <ul className="article-list">{children}</ul>
   )
 }
