@@ -128,12 +128,12 @@ function handleLoad () {
           <div>
             {
               isNode
-              ? window.innerWidth > 768 
-                ? catelog.length > 0 
-                  ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
-                  : ''
+              ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} />
+              : window.innerWidth > 768 
+              ? catelog.length > 0 
+                ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
                 : ''
-              :  <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
+              : ''
             }
           </div>
         </aside>
