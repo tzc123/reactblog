@@ -31,11 +31,18 @@ const config = {
 							},
 							"useBuiltIns": true,
 						}], 'stage-3', 'react'],
-						plugins: [['transform-runtime', {
-							"polyfill": true,
-							"regenerator": false,
-							"moduleName": "babel-runtime"
-						}]]
+						plugins: [
+							[
+								'transform-runtime', {
+									"polyfill": true,
+									"regenerator": false,
+									"moduleName": "babel-runtime"
+								}
+							],									
+							"transform-decorators-legacy",
+							"transform-decorators",
+							"transform-class-properties"
+						]
 					}
 				}, 
 				{

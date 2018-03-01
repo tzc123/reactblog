@@ -24,11 +24,13 @@ const config = {
 						options: {
 							presets: ['env', 'react', 'stage-3'],
 							plugins: [
-									['transform-runtime', {
-									"polyfill": false,
-									"regenerator": false,
-									"moduleName": "babel-runtime"
-									}],
+									[
+										'transform-runtime', {
+											"polyfill": false,
+											"regenerator": false,
+											"moduleName": "babel-runtime"
+										}
+									],
 									"transform-decorators-legacy",
 									"transform-decorators",
 									"transform-class-properties"
