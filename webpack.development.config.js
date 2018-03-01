@@ -78,7 +78,8 @@ const config = {
 			new HtmlPlugin({
 				title: "DAZ'blog",
 				template: path.join(__dirname, 'blog-client/index.html'),
-				favicon: path.join(__dirname, 'blog-client/favicon.ico')
+				favicon: path.join(__dirname, 'blog-client/favicon.ico'),
+				ssr: '<%- ssr %>'		
 			})
 		],
 	devServer: {

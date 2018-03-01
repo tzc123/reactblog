@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const path = require('path')
+const nodeExternals = require('webpack-node-externals');
 const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const outputPath = path.join(__dirname, 'ssr')
-const appPath = path.join(__dirname, "blog-client/src/serverRouter.js")
+const appPath = path.join(__dirname, "blog-client/src/serverRender.js")
 const serverDomain = 'http://122.152.205.25:1234/'
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
@@ -24,7 +25,12 @@ const config = {
 					exclude: /node_modules/,
 					loader: 'babel-loader',
 					options: {
-						presets: ['env', 'react', 'stage-3']
+						presets: ['env', 'react', 'stage-3'],
+						plugins: [						
+							"transform-decorators-legacy",
+							"transform-decorators",
+							"transform-class-properties"
+						]
 					}
 				}, 
 				{
@@ -36,16 +42,6 @@ const config = {
 								loader: 'css-loader',
 								options:{
 										minimize: true
-								}
-							},
-							{
-								loader: 'postcss-loader',
-								options: {
-									ident: 'postcss',
-									plugins: () => [
-										require('autoprefixer')({browsers: ['last 5 version']}),
-										require('postcss-px2rem')({remUnit: 16})
-									]
 								}
 							}
 						]
@@ -81,7 +77,8 @@ const config = {
 			net: 'empty',
 			tls: 'empty',
 			child_process: 'empty',
-		}
+		},
+		externals: [nodeExternals()]
 };
 
 module.exports = config

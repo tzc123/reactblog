@@ -2,7 +2,7 @@ import { observer } from "mobx-react"
 import { observable } from "mobx"
 import '../styles/game.css'
 import throttle from '../utils/throttle'
-
+const isNode = typeof window === 'undefined'
 const boxType = {
   2: {
     color: '#eee4da',
@@ -115,8 +115,11 @@ const boxType = {
 }
 
 @observer class Game extends React.Component {
+  
   @observable current = 0
-  @observable best = +localStorage.getItem('best') || 0
+  @observable best = !isNode
+    ?+localStorage.getItem('best') || 0
+    : 0
   boxs = []
 
   componentDidMount() {

@@ -1,10 +1,8 @@
 import { observer, inject } from "mobx-react"
-import { observable, action } from "mobx"
 import ArticleList from '../components/ArticleList'
 import ArticleItem from '../components/ArticleItem'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
-import { getArticleList } from '../api'
 import queryString from '../utils/queryString'
 import '../styles/home.css'
 import '../styles/hopscotch.min.css'
@@ -13,12 +11,10 @@ const isNode = typeof window === 'undefined'
 
 @inject('home')
 @observer class Home extends React.Component {
-  @observable currentPage = 1
-  @observable total = 0
-  @observable articles = []
 
   componentDidMount() {
     scrollTo(0, 0)
+    this.props.home.loadData(null)
   }
   componentWillReceiveProps(props) {
     const { location: { search } } = props

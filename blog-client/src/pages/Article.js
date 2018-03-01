@@ -1,13 +1,11 @@
 import { observer, inject } from "mobx-react"
-import { observable, action } from "mobx"
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
 import Catelog from '../components/Catelog'
 import '../styles/article.css'
-import 'github-markdown-css'
+import '../styles/github-markdown.css'
 import throttle from '../utils/throttle'
-import { getArticle } from '../api'
 
 const isNode = typeof window === 'undefined'
 

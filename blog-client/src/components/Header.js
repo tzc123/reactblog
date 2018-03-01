@@ -1,5 +1,4 @@
 import { observer, inject } from "mobx-react"
-import { observable, action } from "mobx"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
 import { getArticleCount } from '../api';

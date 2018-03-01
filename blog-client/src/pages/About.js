@@ -1,6 +1,7 @@
 import '../styles/about.css';
 
 export default class About extends React.Component {
+  
   render() {
     return (
       <main className="about">

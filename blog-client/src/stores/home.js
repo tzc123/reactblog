@@ -15,10 +15,6 @@ class HomeStore {
     this.articles = articles
     this.total = articles.length
   }
-
-  constructor() {
-    this.loadData(null)
-  }
 }
 
 export default new HomeStore()
