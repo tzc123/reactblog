@@ -12,7 +12,7 @@ export default () => {
   return (
     <BrowserRouter>
       <Provider {...stores}>
-        <div data-reactroot>
+        <div>
           <Header/>
           <Switch>
             <Route path="/" exact component={Home}/>

@@ -2,6 +2,6 @@ import ReactDom from 'react-dom'
 import RouterComponent from './router.js'
 import './styles/base.css'
 
-ReactDom.render(
+ReactDom.hydrate(
 	<RouterComponent />, document.getElementById('app')
 )

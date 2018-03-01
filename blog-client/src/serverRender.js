@@ -4,15 +4,17 @@ import Header from "./components/Header";
 import Mask from "./components/Mask"
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
-import { Provider } from 'mobx-react';
 import { Route, Redirect, Switch, StaticRouter } from "react-router-dom";
+import { Provider } from "mobx-react";
 
-const ReactDOMServer = require('react-dom/server')
+const ReactDOMServer = require('react-dom/cjs/react-dom-server.node.development.js')
 
 export default function (url, context, store) {
   return ReactDOMServer.renderToString(
-    <StaticRouter location={url} context={context}>
-      <Provider {...store}>
+    <Provider {...store}>
+    <StaticRouter
+      location={url}
+      context={context} >
         <div>
           {/* <Mask /> */}
           <Header/>
@@ -23,7 +25,7 @@ export default function (url, context, store) {
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
-      </Provider>
     </StaticRouter>
+    </Provider>
   )
 }

@@ -50,8 +50,7 @@ const config = {
 				{
 					test: /\.(jpeg|png|jpg|gif)$/,
 					loader: 'url-loader',
-					query: {
-						limit: 8192,
+					query: {						
 						name: 'images/[name].[ext]'
 					}
 				}
