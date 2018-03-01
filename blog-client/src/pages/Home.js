@@ -22,7 +22,7 @@ let initialData = isNode
   componentWillReceiveProps(props) {
     const { location: { search } } = props
     const { category } = queryString(search)
-    this.props.home.loadDate(category)
+    this.props.home.loadData(category)
   }
   render() {
     const { articles, currentPage, total } = this.props.home
