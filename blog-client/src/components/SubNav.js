@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 export default (props) => {
   if (!props) return ''
   const { type, subNav, active } = props
+
   return (
     <ul className={`sub-nav ${active ? 'active' : ''}`}>
       {subNav.map((item, index) => {

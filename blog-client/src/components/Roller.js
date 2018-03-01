@@ -1,4 +1,5 @@
 import '../styles/roller.css'
+import { computed } from 'mobx'
 
 export default class Roller extends React.Component {
   static defaultProps = {

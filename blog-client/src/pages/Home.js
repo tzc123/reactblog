@@ -1,6 +1,7 @@
 import { observer } from "mobx-react"
-import { observable } from "mobx"
+import { observable, action } from "mobx"
 import ArticleList from '../components/ArticleList'
+import ArticleItem from '../components/ArticleItem'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
 import { getArticleList } from '../api'
@@ -29,10 +30,12 @@ const isNode = typeof window === 'undefined'
   loadData(category) {
     const { currentPage } = this
     getArticleList(category, currentPage)
-      .then(articles => {
+      .then(action(
+        articles => {
         this.articles = articles
         this.total = articles.length
-      })
+        }
+      ))
   }
   render() {
     const { currentPage, total, articles } = this
@@ -40,7 +43,15 @@ const isNode = typeof window === 'undefined'
     ? (
       <main className="home">
         <Roller currentPage={currentPage} total={total}/>
-        <ArticleList {...{currentPage, articles}}/>
+        <ArticleList>
+          {
+            articles.map(
+              (article, index) => (
+                <ArticleItem {...{...article, index}} key={index} />
+              ) 
+            )
+          }
+        </ArticleList>
         <aside>
           {
             isNode 

@@ -1,5 +1,5 @@
 import { observer } from "mobx-react"
-import { observable, computed } from "mobx"
+import { observable, action } from "mobx"
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
@@ -9,8 +9,9 @@ import 'github-markdown-css'
 import throttle from '../utils/throttle'
 import { getArticle } from '../api'
 
-let i = 0
-function handleScroll() {
+const isNode = typeof window === 'undefined'
+
+const handleScroll = action (function () {
   const { tops, active  } = this
   if (!tops) return
   const activeLine = window.scrollY || window.pageYOffset
@@ -26,7 +27,7 @@ function handleScroll() {
     }
   })
   this.active = newActive
-}
+})
 
 function handleLoad () {
   this.tops = [].map.call(
@@ -55,23 +56,28 @@ function handleLoad () {
   }
   loadData() {
     getArticle(this.props.match.params.id)
-      .then(article => {
-        if (article) {
-          this.article = article
-        } 
-        if (window.innerWidth > 768) {
-          this.headings = document.querySelectorAll('.heading')
-          this.tops = [].map.call(
-            this.headings, 
-            heading => heading.offsetTop + 80
-          )
-          window.addEventListener('scroll', this.handleScroll, false);
-          [].map.call(
-            document.querySelectorAll('.markdown-body img'),
-            img => img.addEventListener('load', this.handleLoad)
-          )
+      .then(action(
+        article => {
+          if (article) {
+            this.article = article
+          } 
+          if (window.innerWidth > 768) {
+            setTimeout(() => {
+              this.headings = document.querySelectorAll('.heading')
+              this.tops = [].map.call(
+                this.headings, 
+                heading => heading.offsetTop + 80
+              )
+              window.addEventListener('scroll', this.handleScroll, false);
+              [].map.call(
+                document.querySelectorAll('.markdown-body img'),
+                img => img.addEventListener('load', this.handleLoad)
+              )
+            }, 0);
+          }
         }
-      })
+      )
+    )
   }
   componentWillMount() {
     this.loadData()
@@ -121,11 +127,13 @@ function handleLoad () {
         <aside>
           <div>
             {
-              window.innerWidth > 768 
-              ? catelog.length > 0 
-              ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
-              : ''
-              : ''
+              isNode
+              ? window.innerWidth > 768 
+                ? catelog.length > 0 
+                  ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
+                  : ''
+                : ''
+              :  <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
             }
           </div>
         </aside>

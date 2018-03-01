@@ -1,19 +1,24 @@
 import '../styles/catelog.css'
-import initCatelog from '../utils/initCatelog'
+import { computed } from 'mobx'
 
 export default class Catelog extends React.Component {
+  @computed get top() {
+    const { props: { active } } = this
+    return `${(36 + active * 26) / 16}rem`
+  }
   static defaultProps = {
     catelog: []
   }
   render() {
-    const { props: { catelog, active, handleClick } } = this
+    const { props: { catelog, handleClick }, top } = this
+
     return (
       <section className="catelog">
         <header>目录</header>
-        <div className="active" style={{top: `${(36 + active * 26) / 16}rem`}}></div>
+        <div className="active" style={{ top }}></div>
         <ul>
           {
-            initCatelog(catelog).map((cate, index) => (
+            catelog.map((cate, index) => (
               <li className={`t${cate.t}`} key={index}>
                 <a href={`#heading-${index}`}
                   onClick={handleClick.bind(null, index)}>

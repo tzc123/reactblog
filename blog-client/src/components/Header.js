@@ -1,5 +1,5 @@
 import { observer } from "mobx-react"
-import { observable, computed } from "mobx"
+import { observable, action } from "mobx"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
 import { getArticleCount } from '../api';
@@ -41,20 +41,23 @@ import SubNav from './SubNav'
   
   componentDidMount() {
     getArticleCount()
-      .then(res => {
-        this.nav[1].subNav = res
-      })
+      .then(action(
+          res => {
+            this.nav[1].subNav = res
+          }
+        )
+      )
   }
-  handlePullList() {
+  @action handlePullList() {
     const { active } = this
     this.active = !active
   }
-  handleClick(e) {
+  @action handleClick(e) {
     if (e.target.href) {
       this.active = false
     }
   }
-  handleTouchStart(index) {
+  @action handleTouchStart(index) {
     this.nav[index].active = !this.nav[index].active
   }
   render() {
