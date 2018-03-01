@@ -1,8 +1,6 @@
 const getHtml = require('../ssr/js/app').default;
 const Router = require('koa-router')
 const React = require('react')
-const { renderToString } = require('react-dom/server')
-const { Provider } = require('mobx-react')
 const path = require('path')
 const router = new Router()
 const getHeaderStore = require('./store/header')

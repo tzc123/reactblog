@@ -10,8 +10,8 @@ import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 export default () => {
   return (
-    <BrowserRouter>
-      <Provider {...stores}>
+    <Provider {...stores}>
+      <BrowserRouter>
         <div>
           <Header/>
           <Switch>
@@ -21,7 +21,7 @@ export default () => {
             <Route path="*" component={NotFound} />
           </Switch>
         </div>
-      </Provider>
-    </BrowserRouter>
+      </BrowserRouter>
+    </Provider>
   );
 };

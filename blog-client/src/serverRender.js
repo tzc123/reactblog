@@ -7,25 +7,25 @@ import NotFound from "./pages/NotFound";
 import { Route, Redirect, Switch, StaticRouter } from "react-router-dom";
 import { Provider } from "mobx-react";
 
-const ReactDOMServer = require('react-dom/cjs/react-dom-server.node.development.js')
+const ReactDOMServer = require('react-dom/server')
 
 export default function (url, context, store) {
   return ReactDOMServer.renderToString(
     <Provider {...store}>
-    <StaticRouter
-      location={url}
-      context={context} >
-        <div>
-          {/* <Mask /> */}
-          <Header/>
-          <Switch>
-            <Route path="/" exact component={Home}/>
-            <Route path="/article/:id" component={Article} />
-            <Route path="/about" component={About} />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </div>
-    </StaticRouter>
+      <StaticRouter
+        location={url}
+        context={context} >
+          <div>
+            {/* <Mask /> */}
+            <Header/>
+            <Switch>
+              <Route path="/" exact component={Home}/>
+              <Route path="/article/:id" component={Article} />
+              <Route path="/about" component={About} />
+              <Route path="*" component={NotFound} />
+            </Switch>
+          </div>
+      </StaticRouter>
     </Provider>
   )
 }
