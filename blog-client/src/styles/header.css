@@ -75,6 +75,12 @@
   transition: font-size .5s;
 }
 
+.main-header .nav a {
+  display: block;
+  height: 100%;
+  outline: none;
+}
+
 .main-header nav li:hover {
   font-size: 25px;
 }
@@ -95,11 +101,14 @@
   line-height: 70px;
   height: 70px;
   margin-top: 1px;
-  border-radius: 3px;  
-  padding-left: 10px;
+  border-radius: 3px;
   background: #222b39;
   font-size: 20px;
   transition: font-size .5s;  
+}
+
+.sub-nav>li>a {
+  padding-left: 10px;
 }
 
 .sub-nav .count {

@@ -1,69 +1,18 @@
-import { observer } from "mobx-react"
+import { observer, inject } from "mobx-react"
 import { observable, action } from "mobx"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
 import { getArticleCount } from '../api';
 import SubNav from './SubNav'
 
-@observer class Header extends React.Component {
-  @observable active = false
-  @observable nav = [
-    {
-      text: 'home',
-      link: '/'
-    },
-    {
-      text: 'category',
-      type: 'category',
-      active: false,
-      subNav: []
-    },
-    {
-      text: 'links',
-      type: 'common',
-      active: false,
-      subNav: [
-        {
-          text: 'github',
-          link: 'https://github.com/tzc123'
-        },
-        {
-          text: 'juejin',
-          link: 'https://juejin.im/user/5936123afe88c20061db655d'
-        }
-      ]
-    },
-    {
-      text: 'about',
-      link: '/about'
-    }
-  ]
-  
-  componentDidMount() {
-    getArticleCount()
-      .then(action(
-          res => {
-            this.nav[1].subNav = res
-          }
-        )
-      )
-  }
-  @action handlePullList() {
-    const { active } = this
-    this.active = !active
-  }
-  @action handleClick(e) {
-    if (e.target.href) {
-      this.active = false
-    }
-  }
-  @action handleTouchStart(index) {
-    this.nav[index].active = !this.nav[index].active
-  }
+@inject('header')
+@observer 
+class Header extends React.Component {
   render() {
-    const { nav, active } = this
+    const store = this.props.header
+    const { nav, active, activeClass, changeActive, changeSubNavActive, closeActive } = store
     return (
-      <header className={`main-header ${active ? 'active' : ''}`}>
+      <header className={activeClass}>
         <div className="container">
           <Link className="title" to="/">
             DAZ
@@ -73,7 +22,7 @@ import SubNav from './SubNav'
               <input placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
             </div>
-            <ul className="nav" onClick={this.handleClick.bind(this)}>
+            <ul className="nav" onClick={closeActive}>
               {nav.map((item, index) => (
                 <li key={index}>
                   {
@@ -81,7 +30,7 @@ import SubNav from './SubNav'
                     ? <Link to={item.link}>
                         {item.text}
                       </Link>
-                    : <a onTouchStart={this.handleTouchStart.bind(this, index)}>
+                    : <a onTouchStart={changeSubNavActive.bind(null, index)}>
                         {item.text}
                       </a>
                   }
@@ -96,7 +45,7 @@ import SubNav from './SubNav'
               ))}
             </ul>
             <div className="icon-list"
-              onTouchStart={this.handlePullList.bind(this)}>
+              onTouchStart={changeActive}>
               <div className="line line-1"></div>
               <div className="line line-2"></div>
               <div className="line line-3"></div>

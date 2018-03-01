@@ -1,4 +1,10 @@
+import { computed } from 'mobx'
 export default class ArticleHeader extends React.Component {
+  @computed get created_at() {
+    return new Date(this.props.created_at)
+      .toLocaleDateString()
+      .replace(/\//g,'-')
+  }
   static defaultProps = {
     title: '',
     browse: 0,
@@ -6,7 +12,7 @@ export default class ArticleHeader extends React.Component {
     created_at: '0000-00-00'
   }
   render() {
-    const { props: { title, browse, category, created_at } } = this
+    const { props: { title, browse, category }, created_at } = this
     return (
       <header className="article-header">
         <h1>
@@ -18,7 +24,7 @@ export default class ArticleHeader extends React.Component {
           <img className="category" src={require("../images/category.png")} alt="" />          
           <span>{category}</span>
           <img className="time" src={require("../images/time.png")} alt="" />          
-          <span>{(new Date(created_at).toLocaleDateString().replace(/\//g,'-'))}</span>
+          <span>{created_at}</span>
         </div>
       </header>
       

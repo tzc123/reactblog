@@ -4,21 +4,24 @@ import Header from "./components/Header";
 import Mask from "./components/Mask"
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import { Provider } from 'mobx-react'
+import stores from './stores'
 import { BrowserRouter, Route, Redirect, Switch } from "react-router-dom";
 
 export default () => {
   return (
     <BrowserRouter>
-      <div>
-        {/* <Mask /> */}
-        <Header/>
-        <Switch>
-          <Route path="/" exact component={Home}/>
-          <Route path="/article/:id" component={Article} />
-          <Route path="/about" component={About} />
-          <Route path="*" component={NotFound} />
-        </Switch>
-      </div>
+      <Provider {...stores}>
+        <div>
+          <Header/>
+          <Switch>
+            <Route path="/" exact component={Home}/>
+            <Route path="/article/:id" component={Article} />
+            <Route path="/about" component={About} />
+            <Route path="*" component={NotFound} />
+          </Switch>
+        </div>
+      </Provider>
     </BrowserRouter>
   );
 };

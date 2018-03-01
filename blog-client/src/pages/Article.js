@@ -1,4 +1,4 @@
-import { observer } from "mobx-react"
+import { observer, inject } from "mobx-react"
 import { observable, action } from "mobx"
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
@@ -11,8 +11,8 @@ import { getArticle } from '../api'
 
 const isNode = typeof window === 'undefined'
 
-const handleScroll = action (function () {
-  const { tops, active  } = this
+const handleScroll = function () {
+  const { tops, active, props: { article: { setActive } }  } = this
   if (!tops) return
   const activeLine = window.scrollY || window.pageYOffset
   let newActive = active
@@ -26,8 +26,8 @@ const handleScroll = action (function () {
       }
     }
   })
-  this.active = newActive
-})
+  setActive(newActive)
+}
 
 function handleLoad () {
   this.tops = [].map.call(
@@ -36,51 +36,35 @@ function handleLoad () {
   )
   this.handleScroll()
 }
-
+@inject('article')
 @observer class Article extends React.Component {
-  @observable article = {
-    title: '',
-    content: '',
-    browse: 0,
-    category: '',
-    created_at: '0000-00-00',
-    catelog: []
-  }
-
-  @observable active = 0
   
   constructor() {
     super()
-    this.handleScroll = throttle(handleScroll.bind(this), 100, true)
+    this.handleScroll = throttle(handleScroll.bind(this), 50, true)
     this.handleLoad = handleLoad.bind(this)
   }
-  loadData() {
-    getArticle(this.props.match.params.id)
-      .then(action(
-        article => {
-          if (article) {
-            this.article = article
-          } 
-          if (window.innerWidth > 768) {
-            setTimeout(() => {
-              this.headings = document.querySelectorAll('.heading')
-              this.tops = [].map.call(
-                this.headings, 
-                heading => heading.offsetTop + 80
-              )
-              window.addEventListener('scroll', this.handleScroll, false);
-              [].map.call(
-                document.querySelectorAll('.markdown-body img'),
-                img => img.addEventListener('load', this.handleLoad)
-              )
-            }, 0);
-          }
-        }
-      )
-    )
-  }
+
   componentWillMount() {
-    this.loadData()
+    const { loadData } = this.props.article
+    loadData(this.props.match.params.id)
+      .then(() => {
+        if (window.innerWidth > 768) {
+          this.headings = document.querySelectorAll('.heading')
+          this.tops = [].map.call(
+            this.headings, 
+            heading => heading.offsetTop + 80
+          )
+          window.addEventListener('scroll', this.handleScroll, false);
+          [].map.call(
+            document.querySelectorAll('.markdown-body img'),
+            img => img.addEventListener('load', this.handleLoad)
+          )
+        }
+        setTimeout(() => {
+          scroll(0, 0)
+        }, 0);
+      })
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -116,8 +100,18 @@ function handleLoad () {
     handle()
   }
   render() {
-    const { article: { title, content, browse, category, created_at, catelog, handleScroll }, active } = this
-    return title ? (
+    const { article: { 
+        title, 
+        content, 
+        browse, 
+        category, 
+        created_at, 
+        catelog, 
+        handleScroll 
+      }, active } = this.props.article
+    const catelogComponent = <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} />
+    return title 
+    ? (
       <main className="article">
         <article>
           <ArticleHeader {...{title, browse, category, created_at}}/>
@@ -128,18 +122,21 @@ function handleLoad () {
           <div>
             {
               isNode
-              ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} />
+              ? catelogComponent
               : window.innerWidth > 768 
-              ? catelog.length > 0 
-                ? <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} /> 
+                ? catelog.length > 0 
+                  ? catelogComponent
+                  : ''
                 : ''
-              : ''
             }
           </div>
         </aside>
         {/* <img className="top" src={require('../images/arrow.png')}/> */}
       </main>
-    ) : ''
+    ) 
+    : <main className="home">
+        <h1>加载中...</h1>
+      </main>
   }
 }
 
