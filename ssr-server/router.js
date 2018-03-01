@@ -16,7 +16,7 @@ router.get('/', async ctx => {
 
 	await ctx.render('ssr', {
 			ssr: html,
-			initialData: store
+			initialData: JSON.stringify(store)
 	})
 })
 
