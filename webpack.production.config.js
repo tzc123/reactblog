@@ -87,7 +87,7 @@ const config = {
 				template: path.join(__dirname, 'blog-client/index.html'),
 				favicon: path.join(__dirname, 'blog-client/favicon.ico'),
 				ssr: '',
-				initialData: '{}'
+				initialData: 'null'
 			}),
 			new HtmlPlugin({
 				filename: 'ssr.html',
