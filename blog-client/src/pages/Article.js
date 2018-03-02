@@ -134,7 +134,7 @@ function handleLoad () {
       </main>
     ) 
     : <main className="home">
-        <h1>加载中...</h1>
+        <h1 className="loading">加载中...</h1>
       </main>
   }
 }
