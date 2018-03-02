@@ -108,8 +108,9 @@ module.exports = {
     return res
   },
   simpleAuth(ctx, secret) {
+    const { request: { url, method } } = ctx
     if (secret != config.secret) {
-      logger.info('无权限', { request: ctx.request, secret })          
+      logger.info('无权限', { url, method, secret })          
       ctx.body = {
         success: false,
         message: '无权限'
@@ -119,7 +120,8 @@ module.exports = {
     return true
   },
   unknownError(ctx, err) {
-    logger.error('未知错误', { request: ctx.request, err: err.stack })
+    const { request: { url, method } } = ctx
+    logger.error('未知错误', { url, method, err: err.stack })
     ctx.body = {
       success: false,
       message: '未知错误'
