@@ -5,6 +5,7 @@ const cache = require('../cache')
 
 module.exports = {
   async flush() {
+    let res = false
     try {
       const browses = await cache.hgetall('browse')
       if (typeof browses === 'object') {
@@ -13,7 +14,7 @@ module.exports = {
           await ArticleModel.setBrowse(key, browses[key])
         }
       }
-      const res = await cache.flush()
+      res = await cache.flush()
     } catch (err) {
       logger.error('flush', { err: err.stack })
       return false
@@ -97,8 +98,9 @@ module.exports = {
     return browses
   },
   async setBrowse(id) {
+    let res = false
     try {
-      const res = await cache.hincrby('browse', id, 1)
+      res = await cache.hincrby('browse', id, 1)
     } catch (err) {
       logger.error('browse', { id, err: err.stack })      
       return false
