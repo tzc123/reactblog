@@ -86,7 +86,6 @@ module.exports = {
     if (!browses) {
       try {
         browses = await ArticleModel.getBrowses()
-        const promises = []
         for (browse of browses) {
           await cache.hset('browse', browse.id, browse.browse)
         }

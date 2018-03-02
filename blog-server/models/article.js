@@ -99,11 +99,11 @@ async function setBrowse(_id, icrement) {
 }
 async function getBrowse(_id) {
   const res = await ArticleModel.findById(id, { browse: 1, _id: 1 })
-  console.log(res)
   return res
 }
 async function getBrowses(_id) {
   const res = await ArticleModel.find({}, { browse: 1, _id: 1 })
+  return res
 }
 async function count() {
   const res = await ArticleModel.aggregate(

@@ -2,7 +2,7 @@ const ArticleModel = require('../models/article')
 const config = require('../config')
 const cache = require('../cache')
 
-const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse } = require('../services/article')
+const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses } = require('../services/article')
 
 module.exports = {
   async list(ctx) {
@@ -11,7 +11,7 @@ module.exports = {
       request: { url, method } } = ctx
     try{
       let articles = await getArticles(category, size, index)
-      const browses = await ArticleModel.getBrowses()
+      const browses = await getBrowses()
       articles.map(article => {
         const browse = browses[article._id] || 0
         return {
