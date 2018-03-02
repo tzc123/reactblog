@@ -23,13 +23,11 @@ module.exports = {
   }),
   upload(ctx) {
     const { request: { body: { files: file }, url, method } } = ctx
-    console.log(file)
-
     if (file && file.file && file.file.type.indexOf('image') != -1) {
-      logger.info('上传成功', { url, method, filename: file.name })
+      logger.info('上传成功', { url, method, filename: file.file.name })
       ctx.body = {
         success: true,
-        message: file.name
+        message: file.file.name
       }
     } else {
       logger.info('格式错误', { url, method })
