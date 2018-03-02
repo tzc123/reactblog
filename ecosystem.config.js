@@ -13,7 +13,7 @@ module.exports = {
       "env": {
         "NODE_ENV": "production"
       },
-      "ignore_watch": ["node_modules", "blog-server/logs", ".git", "blog-client", "package-lock.json", "package.json", "ssr"]
+      "ignore_watch": ["node_modules", "blog-server/logs", ".git", "blog-client", "package-lock.json", "package.json", "ssr", "static"]
     },
 
     // Second application
@@ -30,7 +30,7 @@ module.exports = {
       "env": {
         "NODE_ENV": "production"
       },
-      "ignore_watch": ["node_modules", "blog-server", ".git", "blog-client", "package-lock.json", "package.json", "asset"]
+      "ignore_watch": ["node_modules", "blog-server", ".git", "blog-client", "package-lock.json", "package.json", "asset", "static"]
     }
   ]
 };

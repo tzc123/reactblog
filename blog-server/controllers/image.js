@@ -14,7 +14,6 @@ module.exports = {
     },
     formidable: {
       onFileBegin(name, file) {
-        console.log(file)
         if (name == 'file' && file.type.indexOf('image') != -1) {
           file.path = path.join(__dirname, '../../static/images/') + file.name
         } 
@@ -22,7 +21,7 @@ module.exports = {
     }
   }),
   upload(ctx) {
-    const { request: { body: { files: file }, url, method } } = ctx
+    const { request: { body: { files: file }, url, method } } = ctx 
     if (file && file.file && file.file.type.indexOf('image') != -1) {
       logger.info('上传成功', { url, method, filename: file.file.name })
       ctx.body = {
