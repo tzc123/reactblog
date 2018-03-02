@@ -47,14 +47,12 @@ module.exports = {
       ? await ArticleModel.findById(id, true)
       : await getArticle(id)
       const browse = await getBrowse(id)
+      article.browse = browse
       if (article) {
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,
-          data: {
-            ...article,
-            browse
-          }
+          data: article
         }
         const res = await setBrowse(id)
         res || await ArticleModel.setBrowse(id, 1)
