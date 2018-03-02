@@ -8,7 +8,7 @@ module.exports = {
     let res = false
     try {
       const browses = await cache.hgetall('browse')
-      if (typeof browses === 'object') {
+      if (typeof browses == 'object') {
         const keys = Object.keys(browses)
         for(key of keys) {
           await ArticleModel.setBrowse(key, browses[key])
@@ -84,7 +84,7 @@ module.exports = {
   },
   async getBrowses() {
     let browses = await cache.hgetall('browse')
-    if (!browses) {
+    if (typeof browses != 'object' || browses == null) {
       try {
         browses = await ArticleModel.getBrowses()
         for (browse of browses) {
