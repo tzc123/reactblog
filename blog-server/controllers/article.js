@@ -2,82 +2,7 @@ const ArticleModel = require('../models/article')
 const config = require('../config')
 const cache = require('../cache')
 
-async function flush(url, method) {
-  const res = await cache.flush()
-  res
-  ? logger.info('清除缓存成功', { url, method })
-  : logger.error('清除缓存失败', { url, method })
-}
-
-async function getArticles(category, size, index, url, method) {
-  let articles = await cache.get(`articles${category || ''}`) 
-  if (!articles) {
-    articles = await ArticleModel.paginator(category)
-    const res = await cache.set(
-      `articles${category || ''}`, 
-      JSON.stringify(articles),
-      config.cache.expires.articles
-    )
-    res 
-    ? logger.info(`缓存articles${category || ''}`, { url, method })
-    : logger.error(`缓存articles${category || ''}失败`, { url, method })
-  } else {
-    articles = JSON.parse(articles)
-  }
-  return articles
-}
-
-async function getArticle(id, url, method) {
-  let article = await cache.get(id)
-  if (!article) {
-    article = await ArticleModel.findById(id)
-    const res = cache.set(
-      id, 
-      JSON.stringify(article), 
-      config.cache.expires.article
-    )
-    res
-    ? logger.info(`缓存${id}`, { url, method })
-    : logger.error(`缓存${id}失败`, { url, method })
-  } else {
-    article = JSON.parse(article)
-  }
-  return article
-}
-
-async function getCount(url, method) {
-  let count = await cache.get('articleCount')
-  if (!count) {
-    count = await ArticleModel.count()
-    const res = await cache.set('articleCount', JSON.stringify(count))
-    res 
-    ? logger.info('缓存articleCount', { url, method })
-    : logger.error('缓存articleCount失败', { url, method })
-  } else {
-    count = JSON.parse(count)
-  }
-  return count
-}
-
-function unknownError(ctx, err, url, method) {
-  logger.error('未知错误', { url, method, err: err.stack })
-  ctx.body = {
-    success: false,
-    message: '未知错误'
-  }
-}
-
-function simpleAuth(ctx, secret, url, method) {
-  if (secret != config.secret) {
-    logger.info('无权限', { url, method, secret })          
-    ctx.body = {
-      success: false,
-      message: '无权限'
-    }
-    return false
-  }
-  return true
-}
+const { flush, getArticles, getArticle, getCount, getBrowse, unknownErrorm, setBrowse } = require('../services/article')
 
 module.exports = {
   async list(ctx) {
@@ -85,7 +10,7 @@ module.exports = {
       query: { category, size, index }, 
       request: { url, method } } = ctx
     try{
-      let articles = await getArticles(category, size, index, url, method)
+      let articles = await getArticles(category, size, index)
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })
         ctx.body = {
@@ -99,8 +24,8 @@ module.exports = {
           data: articles
         }
       }
-    } catch (e) {
-      unknownError(ctx, e, url, method)
+    } catch (err) {
+      unknownError(ctx, err)
     }
   },
   async index(ctx) {
@@ -112,21 +37,19 @@ module.exports = {
     try {
       const article = rmd == 1
       ? await ArticleModel.findById(id, true)
-      : await getArticle(id, url, method)
+      : await getArticle(id)
+      const browse = await getBrowse(id)
       if (article) {
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,
-          data: article
-        }
-        if (rmd != 1) {
-          const { ok } = await ArticleModel.browse(id, article.browse + 1)
-          if (ok == 1) {
-            logger.info('一次浏览', { url, method })
-          } else {
-            logger.error('数据库错误', { url, method, browse })
+          data: {
+            ...article,
+            browse
           }
         }
+        const res = await setBrowse(id)
+        res || await ArticleModel.setBrowse(id, 1)
       } else {
         logger.info('无此文章', { url, method })    
         ctx.body = {
@@ -134,14 +57,14 @@ module.exports = {
           message: '文章不存在'
         }
       }
-    } catch (e) {
-      unknownError(ctx, e, url, method)
+    } catch (err) {
+      unknownError(ctx, err)
     }
   },
   async create(ctx) {
     const { request: { body = {}, url, method } } = ctx
     const { content, description, title, catelog, category, markdown , secret} = body
-    if (!simpleAuth(ctx, secret, url, method)) return
+    if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const newArticle = await ArticleModel.create({
@@ -166,8 +89,8 @@ module.exports = {
             message: '添加成功'
           }
         }
-      } catch (e) {
-        unknownError(ctx, e, url, method)
+      } catch (err) {
+        unknownError(ctx, err)
       }
     } else {
       logger.info('参数错误', {  url, method })
@@ -183,7 +106,7 @@ module.exports = {
       request: { method, url , body = {}}, 
     } = ctx
     const { secret } = body
-    if (!simpleAuth(ctx, secret, url, method)) return
+    if (!simpleAuth(ctx, secret)) return
     if (id) {
       try {
         const res = await ArticleModel.remove(id)
@@ -209,8 +132,8 @@ module.exports = {
             message: '数据库错误'
           }
         }
-      } catch (e) {
-        unknownError(ctx, e, url, method)
+      } catch (err) {
+        unknownError(ctx, err)
       }
     } else {
       logger.info('参数错误', { url, method, id })
@@ -223,7 +146,7 @@ module.exports = {
   async update(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
     const { content, description, title, category, markdown, catelog, secret } = body
-    if (!simpleAuth(ctx, secret, url, method)) return
+    if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
         const { ok, nModified, n } = await ArticleModel.update(id, {
@@ -264,8 +187,8 @@ module.exports = {
             message: '数据库错误'
           }
         }
-      } catch (e) {
-        unknownError(ctx, e, url, method)
+      } catch (err) {
+        unknownError(ctx, err)
       }  
     } else {
       logger.info('参数错误', { url, method, id  })
@@ -278,14 +201,14 @@ module.exports = {
   async count(ctx) {
     const { request: { url, method } } = ctx
     try {
-      let count = await getCount(url, method)
+      let count = await getCount()
       logger.info('查询成功', url, method)
       ctx.body = {
         success: true,
         data: count
       }
-    } catch (e) {
-      unknownError(ctx, e, url, method)
+    } catch (err) {
+      unknownError(ctx, err)
     }
   }
 }

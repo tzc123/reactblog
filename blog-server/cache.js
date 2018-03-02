@@ -24,10 +24,25 @@ module.exports = {
       })
     })
   },
-  set(key, value, expire) {
-    if (expire) return client.set(key, value, 'EX', expire)
-
-    return client.set(key, value)
+  set: client.set,
+  hset: client.hset.bind(client),
+  hget(hashkey, key) {
+    return new Promise((resolve, reject) => {
+      client.hget(hashkey, key, (err, res) => {
+        err && reject(err)
+        resolve(res)
+      })
+    })
   },
-  flush: client.flushdb.bind(client)
+  hgetall(hashkey) {
+    return new Promise((resolve, reject) => {
+      client.hgetall(hashkey, (err, res) => {
+        err && reject(err)
+        resolve(res)
+      })
+    })
+  },
+  exists: client.exists.bind(client),
+  flush: client.flushdb.bind(client),
+  hincrby: client.hincrby.bind(client)
 }

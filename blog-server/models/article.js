@@ -93,8 +93,13 @@ async function update(_id, article) {
   const res = await ArticleModel.updateOne({ _id }, { ...article, updated_at: Date.now() })
   return res
 }
-async function browse(_id, time) {
-  const res = await ArticleModel.updateOne({ _id }, { $set: { browse: time } })
+async function setBrowse(_id, icrement) {
+  const res = await ArticleModel.updateOne({ _id }, { $inc: { browse: icrement } })
+  return res
+}
+async function getBrowse(_id) {
+  const res = await ArticleModel.findById(id, { browse: 1 })
+  console.log(res)
   return res
 }
 async function count() {
@@ -118,6 +123,7 @@ module.exports = {
   remove,
   paginator,
   update,
-  browse,
-  count
+  setBrowse,
+  count,
+  getBrowse
 }
