@@ -24,7 +24,7 @@ module.exports = {
       })
     })
   },
-  set: client.set,
+  set: client.set.bind(client),
   hset: client.hset.bind(client),
   hget(hashkey, key) {
     return new Promise((resolve, reject) => {
