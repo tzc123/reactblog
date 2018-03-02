@@ -122,11 +122,11 @@ const boxType = {
 
   componentDidMount() {
     const { createInitialBoxs, refs: { game } } = this
+    this.best = +localStorage.getItem('best') || 0
     this.ctx = game.getContext('2d')
     this.boxs = createInitialBoxs()
     this.setScore(this.createBox() + this.createBox())
     this.draw()
-    this.best = +localStorage.getItem('best') || 0
     window.addEventListener('keydown', throttle(this.handleKeyDown.bind(this), 300))
   }
   createInitialBoxs() {
