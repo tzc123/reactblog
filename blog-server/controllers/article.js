@@ -11,10 +11,7 @@ module.exports = {
       request: { url, method } } = ctx
     try{
       let articles = await getArticles(category, size, index)
-      console.log(articles)
       const browses = await getBrowses()
-      console.log(browses)
-      
       articles = articles.map(article => {
         const browse = browses[article._id] || 0
         return {
