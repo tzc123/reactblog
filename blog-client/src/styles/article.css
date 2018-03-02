@@ -6,6 +6,7 @@
 }
 
 .article>article {
+  flex: 1;
   overflow: hidden;
   background: #fff;
   padding: 30px;

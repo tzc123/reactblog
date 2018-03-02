@@ -79,7 +79,8 @@ const config = {
 				title: "DAZ'blog",
 				template: path.join(__dirname, 'blog-client/index.html'),
 				favicon: path.join(__dirname, 'blog-client/favicon.ico'),
-				ssr: '<%- ssr %>'		
+				ssr: ''	,
+				initialData: 'null'	
 			})
 		],
 	devServer: {
