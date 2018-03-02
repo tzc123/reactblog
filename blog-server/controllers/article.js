@@ -2,7 +2,7 @@ const ArticleModel = require('../models/article')
 const config = require('../config')
 const cache = require('../cache')
 
-const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses } = require('../services/article')
+const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses, simpleAuth } = require('../services/article')
 
 module.exports = {
   async list(ctx) {
