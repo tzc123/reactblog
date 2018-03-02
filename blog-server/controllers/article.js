@@ -11,6 +11,14 @@ module.exports = {
       request: { url, method } } = ctx
     try{
       let articles = await getArticles(category, size, index)
+      const browses = await getBrowses()
+      articles.map(article => {
+        const browse = browses[article._id] || 0
+        return {
+          ...article,
+          browse
+        }
+      })
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })
         ctx.body = {

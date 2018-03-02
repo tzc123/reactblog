@@ -98,9 +98,12 @@ async function setBrowse(_id, icrement) {
   return res
 }
 async function getBrowse(_id) {
-  const res = await ArticleModel.findById(id, { browse: 1 })
+  const res = await ArticleModel.findById(id, { browse: 1, _id: 1 })
   console.log(res)
   return res
+}
+async function getBrowses(_id) {
+  const res = await ArticleModel.find({}, { browse: 1, _id: 1 })
 }
 async function count() {
   const res = await ArticleModel.aggregate(
@@ -125,5 +128,6 @@ module.exports = {
   update,
   setBrowse,
   count,
-  getBrowse
+  getBrowse,
+  getBrowses  
 }

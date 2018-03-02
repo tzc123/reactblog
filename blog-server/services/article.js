@@ -70,7 +70,7 @@ module.exports = {
   },
   async getBrowse(id) {
     let browse = await cache.hget('browse',id)
-    if (isNaN(count)) {
+    if (isNaN(browse)) {
       try {
         browse = await ArticleModel.getBrowse(id)
         await cache.hset('browse', id, browse)
@@ -80,6 +80,22 @@ module.exports = {
       }
     }
     return browse
+  },
+  async getBrowses() {
+    let browses = await cache.hgetall('browse')
+    if (!browses) {
+      try {
+        browses = await ArticleModel.getBrowses()
+        const promises = []
+        for (browse of browses) {
+          await cache.hset('browse', browse.id, browse.browse)
+        }
+      } catch (err) {
+        logger.error('getBrowses', { err: err.stack })
+        return {}
+      }
+    }
+    return browses
   },
   async setBrowse(id) {
     try {
