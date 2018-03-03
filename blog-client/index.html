@@ -17,8 +17,7 @@
 </head>
 <body>
 	<!-- 挂载点 -->
-	<div id="app"><%= htmlWebpackPlugin.options.ssr %>
-		<script>window.initialData=<%= htmlWebpackPlugin.options.initialData %></script>
-	</div>
+	<div id="app"><%= htmlWebpackPlugin.options.ssr %></div>
+	<script>window.initialData=<%= htmlWebpackPlugin.options.initialData %></script>
 </body>
 </html>

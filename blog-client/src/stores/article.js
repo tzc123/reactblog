@@ -14,7 +14,7 @@ const initialArticle = {
 
 class ArticleStore {
   @observable article = initialData
-  ? initialData.article
+  ? initialData.article.article
   : initialArticle
   @observable active = 0
 
