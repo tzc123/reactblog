@@ -1,6 +1,6 @@
 const winston = require('winston')
 const path = require('path')
-const { server: { logPath } } = config
+const { server: { logPath } } = require('./config')
 require('winston-daily-rotate-file')
 
 const { Logger, transports: { DailyRotateFile, File } } = winston

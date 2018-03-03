@@ -3,7 +3,7 @@ const path = require('path')
 module.exports = {
   server: {
     port: 4321,
-    logPath: path.join(__dirname, 'logs')
+    logPath: path.join(__dirname, 'logs/')
   },
   cache: {
     port: 6379
