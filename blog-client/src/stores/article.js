@@ -13,9 +13,7 @@ const initialArticle = {
 }
 
 class ArticleStore {
-  @observable article = initialData
-  ? initialData.article.article
-  : initialArticle
+  @observable article = initialArticle
   @observable active = 0
 
   @action setArticle(article) {
@@ -38,6 +36,11 @@ class ArticleStore {
   constructor() {
     this.loadData = this.loadData.bind(this)
     this.setActive = this.setActive.bind(this)
+    this.Article(
+      initialData
+      ? initialData.article.article
+      : initialArticle
+    )
   }
 }
 

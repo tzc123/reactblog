@@ -5,13 +5,9 @@ const { initialData } = window
 
 class HomeStore {
   @observable currentPage = 1
-  @observable total = initialData 
-    ? initialData.home.total
-    : 0
-  @observable articles = initialData
-    ? initialData.home.articles
-    : []
-
+  @observable total = 0
+  @observable articles = []
+  
   loadData(category) {
     getArticleList(category, this.currentPage)
       .then(this.setArticleList.bind(this))
@@ -20,6 +16,14 @@ class HomeStore {
   @action setArticleList(articles) {
     this.articles = articles
     this.total = articles.length
+  }
+
+  constructor() {
+    this.setArticleList(
+      initialData
+      ? initialData.home.articles
+      : []
+    )
   }
 }
 
