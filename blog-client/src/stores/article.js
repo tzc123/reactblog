@@ -2,6 +2,7 @@ import {  observable, action, autorun } from 'mobx'
 
 import { getArticle } from '../api'
 
+const { initialData } = window
 const initialArticle = {
   title: '',
   content: '',
@@ -12,7 +13,9 @@ const initialArticle = {
 }
 
 class ArticleStore {
-  @observable article = initialArticle
+  @observable article = initialData
+  ? initialData.article
+  : initialArticle
   @observable active = 0
 
   @action setArticle(article) {
