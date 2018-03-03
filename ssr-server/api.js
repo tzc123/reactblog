@@ -19,5 +19,14 @@ module.exports = {
       }
     }
     return []
+  },
+  async getArticle(id) {
+    const res = await axios.get(`${domain}/article/${id}`)
+    if (res.status == 200) {
+      if (res.data.success) {
+        return res.data.data
+      }
+    }
+    return {}
   }
 }

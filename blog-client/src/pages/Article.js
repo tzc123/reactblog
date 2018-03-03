@@ -43,7 +43,7 @@ function handleLoad () {
     this.handleLoad = handleLoad.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { loadData } = this.props.article
     loadData(this.props.match.params.id)
       .then(() => {
