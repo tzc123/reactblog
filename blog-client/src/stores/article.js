@@ -36,7 +36,7 @@ class ArticleStore {
   constructor() {
     this.loadData = this.loadData.bind(this)
     this.setActive = this.setActive.bind(this)
-    this.Article(
+    this.setArticle(
       initialData
       ? initialData.article.article
       : initialArticle
