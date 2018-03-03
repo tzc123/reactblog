@@ -18,7 +18,6 @@ let initialData = isNode
   componentDidMount() {
     scrollTo(0, 0)
     this.props.home.loadData(null)
-    delete window.initialData
   }
   componentWillReceiveProps(props) {
     const { location: { search } } = props

@@ -21,7 +21,9 @@ class HomeStore {
   constructor() {
     this.setArticleList(
       initialData
-      ? initialData.home.articles
+      ? initialData.home
+        ? initialData.home.articles
+        : []
       : []
     )
   }
