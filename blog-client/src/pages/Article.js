@@ -63,6 +63,7 @@ function handleLoad () {
           scroll(0, 0)
         }, 0);
       })
+      delete window.initialData
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
