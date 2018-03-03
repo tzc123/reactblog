@@ -1,6 +1,5 @@
 const redis = require('redis')
-const { cache: { port } } = require('./config')
-const client = redis.createClient(port)
+const client = redis.createClient('6379')
 
 client.on('error', err => {
   logger.error('redis连接失败', { err: err.stack })

@@ -2,8 +2,8 @@ const Koa = require('koa');
 const router = require('./router')
 const render = require('koa-ejs');
 const path = require('path')
-
 const app = new Koa()
+require('./logger')
 
 render(app, {
   root: path.join(__dirname, '../asset'),
@@ -14,5 +14,5 @@ render(app, {
 app.use(router.routes())
 
 app.listen(2333, function () {
-  console.log('后端渲染已部署')
+  logger.info('后端渲染已部署')
 })

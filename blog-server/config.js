@@ -3,13 +3,10 @@ const path = require('path')
 module.exports = {
   server: {
     port: 4321,
+    logPath: path.join(__dirname, 'logs')
   },
   cache: {
-    port: 6379,
-    expires: {
-      article: 300,
-      articles: 300
-    }
+    port: 6379
   },
   database: {
     uri: process.env.NODE_ENV == 'production' 
