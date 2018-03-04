@@ -14,10 +14,8 @@ module.exports = {
       const browses = await getBrowses()
       articles = articles.map(article => {
         const browse = browses[article._id] || 0
-        return {
-          ...article,
-          browse
-        }
+        article.browse = browse
+        return article
       })
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })
