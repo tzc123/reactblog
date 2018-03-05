@@ -26,7 +26,7 @@ const config = {
 					exclude: /node_modules/,
 					loader: 'babel-loader',
 					options: {
-						presets: ['env', 'react', 'stage-3'],
+						presets: ['react', 'stage-3'],
 						plugins: [						
 							"transform-decorators-legacy",
 							"transform-decorators",
