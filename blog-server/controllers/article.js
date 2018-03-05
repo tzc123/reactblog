@@ -52,8 +52,10 @@ module.exports = {
           success: true,
           data: article
         }
-        const res = await setBrowse(id)
-        res || await ArticleModel.setBrowse(id, 1)
+        if (rmd != 1) {
+          const res = await setBrowse(id)
+          res || await ArticleModel.setBrowse(id, 1)
+        } 
       } else {
         logger.info('无此文章', { url, method })    
         ctx.body = {
