@@ -5,7 +5,6 @@ import Roller from '../components/Roller'
 import Game from '../components/Game'
 import queryString from '../utils/queryString'
 import '../styles/home.css'
-import '../styles/hopscotch.min.css'
 
 const isNode = typeof window === 'undefined'
 

@@ -4,7 +4,6 @@ import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
 import Catelog from '../components/Catelog'
 import '../styles/article.css'
-import '../styles/github-markdown.css'
 import throttle from '../utils/throttle'
 
 const isNode = typeof window === 'undefined'
