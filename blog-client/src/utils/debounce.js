@@ -1,9 +1,17 @@
-export default function (cb, wait) {
+export default function (cb, wait, keep) {
   let timeout
   return function (...args) {
+    let target
+    if (keep) {
+      target = args[0].target
+    }
     timeout && clearTimeout(timeout)
-    setTimeout(() => {
-      cb(...args)
+    timeout = setTimeout(() => {
+      if (keep) {
+        cb(target)
+      } else {
+        cb(...args)
+      }
     }, wait)
   }
 }

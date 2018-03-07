@@ -9,6 +9,7 @@ router
   .get('/article', article.list)
   .get('/article/:id', article.index)
   .get('/count', article.count)
+  .get('/search', article.search)
   .post('/article', article.create)
   .post('/article/:id/remove', article.remove)
   .post('/article/:id', article.update)

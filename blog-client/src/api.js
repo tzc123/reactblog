@@ -10,39 +10,52 @@ export function getArticleList(category, index) {
     ? { category, size: 10, index } 
     : { size: 10, index }
   )
-  .then(res => {
-    return res.success
-    ? res.data
-    : []
-  })
-  .catch(err => {
-    console.log(err)
-    return []
-  })
+    .then(res => {
+      return res.success
+      ? res.data
+      : []
+    })
+    .catch(err => {
+      console.log(err)
+      return []
+    })
 }
 
 export function getArticle(id) {
   return get(domain + '/article/' + id)
-  .then(res => {
-    return res.success 
-    ? res.data
-    : null
-  })
-  .catch(err => {
-    console.log(err)
-    return null
-  })
+    .then(res => {
+      return res.success 
+      ? res.data
+      : null
+    })
+    .catch(err => {
+      console.log(err)
+      return null
+    })
 }
 
 export function getArticleCount() {
   return get(domain + '/count')
-  .then(res => {
-    return res.success
-    ? res.data
-    : []
-  })
-  .catch(err => {
-    console.log(err)
-    return []
-  })
+    .then(res => {
+      return res.success
+      ? res.data
+      : []
+    })
+    .catch(err => {
+      console.log(err)
+      return []
+    })
+}
+
+export function search(keyword) {
+  return get(
+    domain + '/search', {
+      keyword
+    }
+  )
+    .then(res => {
+      return res.success
+      ? res.data
+      : []
+    })
 }

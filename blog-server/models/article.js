@@ -118,6 +118,19 @@ async function count() {
   )
   return res.map(cate => ({text: cate._id, count: cate.count}))
 }
+async function search(keyword) {
+  console.log(keyword)  
+  const regex = new RegExp(`${keyword}`, 'i')
+  const res = await ArticleModel.find(
+    { 
+      title: { $regex:  regex }
+    }, 
+    {
+      title: 1
+    }
+  )
+  return res
+}
 module.exports = {
   findOne,
   create,
@@ -129,5 +142,6 @@ module.exports = {
   setBrowse,
   count,
   getBrowse,
-  getBrowses  
+  getBrowses,
+  search
 }

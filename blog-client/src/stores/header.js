@@ -1,5 +1,6 @@
 import {  observable, action, computed } from 'mobx'
-import { getArticleCount } from '../api';
+import { getArticleCount, search } from '../api'
+import debounce from '../utils/debounce'
 
 const { initialData } = window
 
@@ -38,6 +39,8 @@ class HeaderStore {
       link: '/about'
     }
   ]
+  @observable result = []
+  @observable focused = false
   @computed get activeClass() {
     return `main-header${this.active ? ' active' : ''}`
   }
@@ -50,13 +53,27 @@ class HeaderStore {
       this.setArticleCount(res)
     })
   }
+  search = debounce((function (target) {
+    const keyword = target.value
+    search(keyword)
+      .then(res => {
+        res && this.setResult(res)
+      })
+  }).bind(this), 500, true)
+  @action setResult(result) {
+    this.result = result
+  }
   @action changeActive() {
     this.active = !this.active
   }
-  @action closeActive(e) {
+  @action cancelActive(e) {
     if (e.target.href) {
       this.active = false
     }
+  }
+  @action setFocused(focused) {
+    this.focused = focused
+    focused || this.setResult([])
   }
   @action changeSubNavActive(index) {
     this.nav[index].active = !this.nav[index].active
@@ -64,7 +81,9 @@ class HeaderStore {
   constructor () {
     initialData || this.loadData()
     this.changeActive = this.changeActive.bind(this)
-    this.closeActive = this.closeActive.bind(this)
+    this.cancelActive = this.cancelActive.bind(this)
+    this.setResult = this.setResult.bind(this)
+    this.setFocused = this.setFocused.bind(this)
     this.changeSubNavActive = this.changeSubNavActive.bind(this)
   }
 }

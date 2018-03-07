@@ -43,13 +43,37 @@
   outline: none;
 }
 
+.search>.result {
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 47.5px;
+}
+
+.search>.result>li {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 10px;
+  font-size: 15px;
+  margin-top: 1px;
+  background: #222b39;
+  border-radius: 3px;
+  animation: show .3s;
+  color: #ddd;
+}
+
+.search>.result>li:hover {
+  font-size: 15px;
+  color: #fff;
+}
+
 .search>img {
   position: absolute;
   right: 5px;
   top: -1px;
   width: 25px;
   height: 25px;
-  transition: transform .5s;
+  transition: transform .3s;
 }
 .main-header>.container>nav {
   display: flex;
@@ -72,7 +96,7 @@
   text-align: center;
   line-height: 70px;
   font-size: 20px;
-  transition: font-size .5s;
+  transition: font-size .3s;
 }
 
 .main-header .nav a {
@@ -87,7 +111,7 @@
 
 .main-header .nav>li:hover>.sub-nav {
   display: block;
-  animation: show .5s;
+  animation: show .3s;
 }
 
 .sub-nav {
@@ -104,7 +128,7 @@
   border-radius: 3px;
   background: #222b39;
   font-size: 20px;
-  transition: font-size .5s;  
+  transition: font-size .3s;  
 }
 
 .sub-nav>li>a {
@@ -127,6 +151,18 @@
 @media screen and (max-width: 768px) {
   .search {
     margin-right: 20px;
+  }
+
+  .search>.result {
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .search>.result>li {
+    padding-left: 20px;
   }
 
   .main-header .nav {
@@ -162,11 +198,11 @@
 
   .icon-list .line-1,
   .icon-list .line-3 { 
-    transition: transform .5s;
+    transition: transform .3s;
   }
 
   .icon-list .line-2 {
-    transition: all .5s;
+    transition: all .3s;
   }
 
   .main-header.active .icon-list .line-1 {

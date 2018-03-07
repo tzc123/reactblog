@@ -82,7 +82,7 @@ module.exports = {
           description: description || ''
         })
         if (!newArticle) {
-          logger.info('同名', { title, url, method })
+          logger.info('同名', { url, method, title })
           ctx.body = {
             success: false,
             message: '已有同名文章'
@@ -208,13 +208,33 @@ module.exports = {
     const { request: { url, method } } = ctx
     try {
       let count = await getCount()
-      logger.info('查询成功', url, method)
+      logger.info('查询成功', { url, method })
       ctx.body = {
         success: true,
         data: count
       }
     } catch (err) {
       unknownError(ctx, err)
+    }
+  },
+  async search(ctx) {
+    const { request: { url, method }, query: { keyword } } = ctx
+    if (!keyword) {
+      logger.info('无有效关键字', { url, method, keyword })
+      ctx.body = {
+        success: false,
+        message: '无有效关键字'
+      }
+      return
+    }
+    try {
+      const res = await ArticleModel.search(keyword)
+      ctx.body = {
+        success: true,
+        data: res
+      }
+    } catch (err) {
+      unknownError(ctx, err)      
     }
   }
 }

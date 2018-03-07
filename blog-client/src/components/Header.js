@@ -1,15 +1,26 @@
 import { observer, inject } from "mobx-react"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
-import { getArticleCount } from '../api';
 import SubNav from './SubNav'
 
 @inject('header')
 @observer 
 class Header extends React.Component {
+
   render() {
     const store = this.props.header
-    const { nav, active, activeClass, changeActive, changeSubNavActive, closeActive } = store
+    const { 
+      nav, 
+      active, 
+      activeClass, 
+      changeActive, 
+      changeSubNavActive, 
+      cancelActive, 
+      setFocused,
+      focused,
+      search, 
+      result
+    } = store
     return (
       <header className={activeClass}>
         <div className="container">
@@ -18,10 +29,26 @@ class Header extends React.Component {
           </Link>
           <nav>
             <div className="search">
-              <input placeholder="你倒是搜啊..."/>
+              <input name="search" 
+              onInput={search}
+              onFocus={() => { setFocused(true) }}
+              onBlur={() => { setFocused(false) }}
+              placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
+              <ul className={`result${focused ? '' : ' hidden'}`}>
+                {
+                  result.map(
+                    item => 
+                      <li key={item._id}>
+                        <Link to={`/article/${item._id}`}>
+                          {item.title}
+                        </Link>
+                      </li>
+                  )
+                }
+              </ul>
             </div>
-            <ul className="nav" onClick={closeActive}>
+            <ul className="nav" onClick={cancelActive}>
               {nav.map((item, index) => (
                 <li key={index}>
                   {
