@@ -41,8 +41,9 @@ class Header extends React.Component {
                   ? result.length > 0
                     ? result.map(
                         item => 
-                          <li key={item._id} className="ellipsis">
-                            <Link to={`/article/${item._id}`}>
+                          <li key={item._id}>
+                            <Link className="ellipsis"
+                              to={`/article/${item._id}`}>
                               {item.title}
                             </Link>
                           </li>

@@ -62,6 +62,11 @@
   color: #ddd;
 }
 
+.search>.result>li>a {
+  display: block;
+  height: 100%;
+}
+
 .search>.result>li:hover {
   font-size: 15px;
   color: #fff;
