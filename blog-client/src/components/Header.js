@@ -50,7 +50,7 @@ class Header extends React.Component {
             </div>
             <ul className="nav" onClick={cancelActive}>
               {nav.map((item, index) => (
-                <li key={index}>
+                <li key={index} className="ellipsis">
                   {
                     item.link
                     ? <Link to={item.link}>

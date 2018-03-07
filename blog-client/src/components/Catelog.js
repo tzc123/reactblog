@@ -19,7 +19,7 @@ export default class Catelog extends React.Component {
         <ul>
           {
             catelog.map((cate, index) => (
-              <li className={`t${cate.t}`} key={index}>
+              <li className={`t${cate.t} ellipsis`} key={index}>
                 <a href={`#heading-${index}`}
                   onClick={handleClick.bind(null, index)}>
                   {cate.text}
