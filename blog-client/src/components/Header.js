@@ -39,7 +39,7 @@ class Header extends React.Component {
                 {
                   result.map(
                     item => 
-                      <li key={item._id}>
+                      <li key={item._id} className="ellipsis">
                         <Link to={`/article/${item._id}`}>
                           {item.title}
                         </Link>
@@ -50,7 +50,7 @@ class Header extends React.Component {
             </div>
             <ul className="nav" onClick={cancelActive}>
               {nav.map((item, index) => (
-                <li key={index} className="ellipsis">
+                <li key={index}>
                   {
                     item.link
                     ? <Link to={item.link}>
