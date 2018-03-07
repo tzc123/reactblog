@@ -2,7 +2,7 @@ node_modules/
 blog-server/logs/
 blog-server/static/
 blog-backend/
-static/
+/static/
 asset/
 ssr/
 ssr-server/logs/
