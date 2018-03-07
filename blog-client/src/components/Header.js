@@ -28,23 +28,27 @@ class Header extends React.Component {
             DAZ
           </Link>
           <nav>
-            <div className="search">
+            <div className="search"
+              onBlur={() => { setFocused(false) }}>
               <input name="search" 
               onInput={search}
               onFocus={() => { setFocused(true) }}
-              onBlur={() => { setFocused(false) }}
               placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
-              <ul className={`result${focused ? '' : ' hidden'}`}>
-                {
-                  result.map(
-                    item => 
-                      <li key={item._id} className="ellipsis">
-                        <Link to={`/article/${item._id}`}>
-                          {item.title}
-                        </Link>
-                      </li>
-                  )
+              <ul className={`result${result ? '' : ' hidden'}`}>
+                { 
+                  result
+                  ? result.length > 0
+                    ? result.map(
+                        item => 
+                          <li key={item._id} className="ellipsis">
+                            <Link to={`/article/${item._id}`}>
+                              {item.title}
+                            </Link>
+                          </li>
+                      ) 
+                    : <li>无任何匹配的结果</li>
+                  : ''
                 }
               </ul>
             </div>

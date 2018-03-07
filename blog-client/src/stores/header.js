@@ -39,7 +39,7 @@ class HeaderStore {
       link: '/about'
     }
   ]
-  @observable result = []
+  @observable result = null
   @observable focused = false
   @computed get activeClass() {
     return `main-header${this.active ? ' active' : ''}`
@@ -72,8 +72,14 @@ class HeaderStore {
     }
   }
   @action setFocused(focused) {
-    this.focused = focused
-    focused || this.setResult([])
+    if (focused) {
+      this.focused = focused
+    } else {
+      setTimeout(action(() => {
+        this.focused = focused
+        this.setResult(null)
+      }), 200);
+    }
   }
   @action changeSubNavActive(index) {
     this.nav[index].active = !this.nav[index].active

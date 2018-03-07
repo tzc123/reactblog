@@ -163,6 +163,9 @@
 
   .search>.result>li {
     padding-left: 20px;
+    animation: none;
+    margin: 0;
+    border-radius: 0;
   }
 
   .main-header .nav {

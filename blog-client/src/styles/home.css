@@ -10,7 +10,7 @@
   top: -90px;
   right: 0;
   width: 240px;
-  animation: show_to_left .5s;
+  animation: show_to_left .3s;
 }
 
 @media screen and (max-width: 768px) {

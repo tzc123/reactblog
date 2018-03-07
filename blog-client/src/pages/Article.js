@@ -33,6 +33,24 @@ function handleLoad () {
   )
   this.handleScroll()
 }
+
+function initArticle() {
+  if (window.innerWidth > 768) {
+    this.headings = document.querySelectorAll('.heading')
+    this.tops = [].map.call(
+      this.headings, 
+      heading => heading.offsetTop + 80
+    )
+    window.addEventListener('scroll', this.handleScroll, false);
+    [].map.call(
+      document.querySelectorAll('.markdown-body img'),
+      img => img.addEventListener('load', this.handleLoad)
+    )
+  }
+  setTimeout(() => {
+    scroll(0, 0)
+  }, 0);
+}
 @inject('article')
 @observer class Article extends React.Component {
   
@@ -43,25 +61,9 @@ function handleLoad () {
   }
 
   componentDidMount() {
-    const { loadData } = this.props.article
+    const { match: { params: { id } }, article: { loadData } } = this.props
     loadData(this.props.match.params.id)
-      .then(() => {
-        if (window.innerWidth > 768) {
-          this.headings = document.querySelectorAll('.heading')
-          this.tops = [].map.call(
-            this.headings, 
-            heading => heading.offsetTop + 80
-          )
-          window.addEventListener('scroll', this.handleScroll, false);
-          [].map.call(
-            document.querySelectorAll('.markdown-body img'),
-            img => img.addEventListener('load', this.handleLoad)
-          )
-        }
-        setTimeout(() => {
-          scroll(0, 0)
-        }, 0);
-      })
+      .then(initArticle.bind(this))
   }
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
@@ -71,6 +73,11 @@ function handleLoad () {
     )
     this.frameId && cancelAnimationFrame(this.frameId)
     this.props.article.clear()
+  }
+  componentWillReceiveProps(props) {
+    const { match: { params: { id } }, article: { loadData } } = props
+    loadData(id)
+      .then(initArticle.bind(this))
   }
   handleCatelogClick(index, e) {
     e.preventDefault()
