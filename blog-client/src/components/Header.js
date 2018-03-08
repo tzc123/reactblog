@@ -36,7 +36,7 @@ class Header extends React.Component {
               <i></i>
               <ul className={`result${result ? '' : ' hidden'}`}>
                 { 
-                  result
+                  ({}).toString.call(result) == '[object Array]'
                   ? result.length > 0
                     ? result.map(
                         item => 
