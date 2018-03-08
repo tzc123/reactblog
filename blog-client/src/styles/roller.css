@@ -53,6 +53,8 @@
   user-select: none;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   background: #f4f4f4;
+  /* border-radius: 20px;   */
+  transition: all .3s;
 }
 
 .page.active, .page:hover {
