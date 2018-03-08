@@ -11,13 +11,13 @@ class HomeStore {
 
   list = [
     {
-      text: '时间'
+      text: 'time'
     },
     {
-      text: '热度'
+      text: 'browse'
     },
     {
-      text: '默认'
+      text: 'default'
     }
   ]
   
