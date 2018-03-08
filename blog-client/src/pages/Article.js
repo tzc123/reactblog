@@ -47,9 +47,7 @@ function initArticle() {
       img => img.addEventListener('load', this.handleLoad)
     )
   }
-  setTimeout(() => {
-    scroll(0, 0)
-  }, 0);
+  setTimeout(() => scrollTo(0, 0), 0)  
 }
 @inject('article')
 @observer class Article extends React.Component {
@@ -76,6 +74,7 @@ function initArticle() {
   }
   componentWillReceiveProps(props) {
     const { match: { params: { id } }, article: { loadData } } = props
+    if (id == this.props.match.params.id) return
     loadData(id)
       .then(initArticle.bind(this))
   }
@@ -113,8 +112,8 @@ function initArticle() {
         created_at, 
         catelog, 
         handleScroll 
-      }, active } = this.props.article
-    const catelogComponent = <Catelog {...{...{catelog, active}}} handleClick={this.handleCatelogClick.bind(this)} />
+      }, active, top } = this.props.article
+    const catelogComponent = <Catelog catelog={catelog} top={top} handleClick={this.handleCatelogClick.bind(this)} />
     return title 
     ? (
       <main className="article">

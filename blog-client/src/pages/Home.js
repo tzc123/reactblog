@@ -18,15 +18,17 @@ let initialData = isNode
   componentDidMount() {
     scrollTo(0, 0)
     this.props.home.loadData('')
+      .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
   componentWillReceiveProps(props) {
+    console.log(props, this.props)
     const { location: { search } } = props
     const { category } = queryString(search)
     this.props.home.loadData(category || '')
+      .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
   render() {
-    const { articles, currentPage, total } = this.props.home
-
+    const { articles, currentPage, total, active, setActive, list } = this.props.home
     const gameComponent = isNode 
       ? <Game />
       : window.innerWidth > 768
@@ -36,9 +38,9 @@ let initialData = isNode
     ? (
       <main className="home">
         <Roller currentPage={currentPage} total={total}/>
-        <ArticleList articles={articles}/>
+        <ArticleList articles={articles} active={active}/>
         <aside>
-          <SortNav />
+          <SortNav list={list} setActive={setActive} active={active} />
           {gameComponent}
         </aside>
       </main>

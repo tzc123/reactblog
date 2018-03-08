@@ -23,7 +23,7 @@ class HomeStore {
   
   loadData(category) {
     if (typeof category != 'string') return
-    getArticleList(category, this.currentPage)
+    return getArticleList(category, this.currentPage)
       .then(this.setArticleList.bind(this))
   }
 

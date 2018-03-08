@@ -17,6 +17,7 @@
   text-align: center;
   height: 30px;
   line-height: 30px;
+  cursor: pointer;
 }
 
 .sort-nav>ul>li:first-child {

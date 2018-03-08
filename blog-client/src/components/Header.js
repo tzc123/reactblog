@@ -8,7 +8,6 @@ import SubNav from './SubNav'
 class Header extends React.Component {
 
   render() {
-    const store = this.props.header
     const { 
       nav, 
       active, 
@@ -20,7 +19,7 @@ class Header extends React.Component {
       focused,
       search, 
       result
-    } = store
+    } = this.props.header
     return (
       <header className={activeClass}>
         <div className="container">
@@ -29,10 +28,10 @@ class Header extends React.Component {
           </Link>
           <nav>
             <div className="search"
-              onBlur={() => { setFocused(false) }}>
+              onBlur={() => setFocused(false)}>
               <input name="search" 
               onInput={search}
-              onFocus={() => { setFocused(true) }}
+              onFocus={() => setFocused(true)}
               placeholder="你倒是搜啊..."/>
               <img src={require('../images/search.png')}></img>
               <ul className={`result${result ? '' : ' hidden'}`}>
@@ -61,7 +60,7 @@ class Header extends React.Component {
                     ? <Link to={item.link}>
                         {item.text}
                       </Link>
-                    : <a onTouchStart={changeSubNavActive.bind(null, index)}>
+                    : <a onTouchStart={() => changeSubNavActive(index)}>
                         {item.text}
                       </a>
                   }

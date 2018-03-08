@@ -1,17 +1,9 @@
 import '../styles/catelog.css'
-import { computed } from 'mobx'
+import { inject } from 'mobx-react';
 
-export default class Catelog extends React.Component {
-  @computed get top() {
-    const { props: { active } } = this
-    return `${(36 + active * 26) / 16}rem`
-  }
-  static defaultProps = {
-    catelog: []
-  }
+class Catelog extends React.Component {
   render() {
-    const { props: { catelog, handleClick }, top } = this
-
+    const { catelog , top , handleClick } = this.props
     return (
       <section className="catelog">
         <header>目录</header>
@@ -32,5 +24,7 @@ export default class Catelog extends React.Component {
     )
   }
 }
+
+export default Catelog
 
 

@@ -1,8 +1,8 @@
 import {  observable, action, autorun } from 'mobx'
-
+import { computed } from 'mobx'
 import { getArticle } from '../api'
-
 const { initialData } = window
+
 const initialArticle = {
   title: '',
   content: '',
@@ -15,6 +15,9 @@ const initialArticle = {
 class ArticleStore {
   @observable article = initialArticle
   @observable active = 0
+  @computed get top() {
+    return `${(36 + this.active * 26) / 16}rem`
+  }
 
   @action setArticle(article) {
     this.article = article
