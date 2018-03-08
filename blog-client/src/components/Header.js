@@ -6,7 +6,6 @@ import SubNav from './SubNav'
 @inject('header')
 @observer 
 class Header extends React.Component {
-
   render() {
     const { 
       nav, 
@@ -35,8 +34,8 @@ class Header extends React.Component {
               placeholder="你倒是搜啊..."/>
               <i></i>
               <ul className={`result${result ? '' : ' hidden'}`}>
-                { 
-                  ({}).toString.call(result) == '[object Array]'
+                {
+                  result != null
                   ? result.length > 0
                     ? result.map(
                         item => 
