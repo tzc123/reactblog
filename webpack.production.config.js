@@ -9,7 +9,7 @@ const serverDomain = 'http://122.152.205.25:1234/'
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const config = {
     entry: {
-			vendor: ['react', 'react-dom', 'react-router-dom', 'axios', 'es6-promise'],
+			vendor: ['react', 'react-dom', 'react-router-dom', 'axios', 'es6-promise', 'mobx', 'mobx-react'],
 			app: appPath,
 		},
     output: {

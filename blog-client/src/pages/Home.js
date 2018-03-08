@@ -3,6 +3,7 @@ import ArticleList from '../components/ArticleList'
 import ArticleItem from '../components/ArticleItem'
 import Roller from '../components/Roller'
 import Game from '../components/Game'
+import SortNav from '../components/SortNav'
 import queryString from '../utils/queryString'
 import '../styles/home.css'
 
@@ -25,6 +26,12 @@ let initialData = isNode
   }
   render() {
     const { articles, currentPage, total } = this.props.home
+
+    const gameComponent = isNode 
+      ? <Game />
+      : window.innerWidth > 768
+        ? <Game/>
+        : ''
     return articles.length != 0
     ? (
       <main className="home">
@@ -39,13 +46,8 @@ let initialData = isNode
           }
         </ArticleList>
         <aside>
-          {
-            isNode 
-            ? <Game />
-            : window.innerWidth > 768
-              ? <Game/>
-              : ''
-          }
+          <SortNav />
+          {gameComponent}
         </aside>
       </main>
     )
