@@ -165,7 +165,6 @@
     width: 0;
     height: 25px;
     background: #222b39;
-    transition: all .5s;
   }
 
   .search>input:focus {
