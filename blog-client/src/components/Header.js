@@ -33,7 +33,7 @@ class Header extends React.Component {
               onInput={search}
               onFocus={() => setFocused(true)}
               placeholder="你倒是搜啊..."/>
-              <img src={require('../images/search.png')}></img>
+              <i></i>
               <ul className={`result${result ? '' : ' hidden'}`}>
                 { 
                   result
