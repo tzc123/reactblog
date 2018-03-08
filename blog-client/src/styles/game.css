@@ -5,7 +5,7 @@
 .game {
   box-sizing: border-box;
   border: 2px solid rgb(187, 173, 160);
-  background: rgba(238, 228, 218, 1);
+  background: rgba(238, 228, 218, .35);
   border-radius: 5px;
   width: 240px;
   height: 240px;

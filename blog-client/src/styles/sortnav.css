@@ -22,14 +22,21 @@
 .sort-nav>ul>li:first-child {
   border-top-left-radius: 6px;
   border-bottom-left-radius: 6px;
+  border-right: 1px solid #f4f4f4;
 }
 
 .sort-nav>ul>li:last-child {
   border-top-right-radius: 6px;
   border-bottom-right-radius: 6px;
+  border-left: 1px solid #f4f4f4;  
 }
 
 .sort-nav>ul>li.active {
+  background: #222b39;
+  color: #fff;
+}
+
+.sort-nav>ul>li:hover {
   background: #222b39;
   color: #fff;
 }

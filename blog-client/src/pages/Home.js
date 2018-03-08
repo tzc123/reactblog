@@ -17,12 +17,12 @@ let initialData = isNode
 
   componentDidMount() {
     scrollTo(0, 0)
-    this.props.home.loadData(null)
+    this.props.home.loadData('')
   }
   componentWillReceiveProps(props) {
     const { location: { search } } = props
     const { category } = queryString(search)
-    this.props.home.loadData(category)
+    this.props.home.loadData(category || '')
   }
   render() {
     const { articles, currentPage, total } = this.props.home
@@ -36,15 +36,7 @@ let initialData = isNode
     ? (
       <main className="home">
         <Roller currentPage={currentPage} total={total}/>
-        <ArticleList>
-          {
-            articles.map(
-              (article, index) => (
-                <ArticleItem {...{...article, index}} key={index} />
-              ) 
-            )
-          }
-        </ArticleList>
+        <ArticleList articles={articles}/>
         <aside>
           <SortNav />
           {gameComponent}

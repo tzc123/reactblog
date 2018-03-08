@@ -1,27 +1,13 @@
 import '../styles/sortnav.css'
 import { Link } from 'react-router-dom'
 import { observable, action } from 'mobx'
-import { observer } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
 
+@inject('home')
 @observer
 class SortNav extends React.Component {
-  @observable active = 2
-  list = [
-    {
-      text: '时间'
-    },
-    {
-      text: '热度'
-    },
-    {
-      text: '默认'
-    }
-  ]
-  @action handleClick(index) {
-    this.active = index
-  }
   render() {
-    const { list, handleClick, active } = this 
+    const { list, setActive, active } = this.props.home
     return (
       <nav className="sort-nav">
         <ul>
@@ -29,7 +15,7 @@ class SortNav extends React.Component {
             list.map(
               (item, index) => 
                 <li className={active == index ? 'active' : ''} key={index}>
-                  <Link to="/" onClick={handleClick.bind(this, index)} >
+                  <Link to="/" onClick={() => setActive(index)} >
                     {item.text}
                   </Link>
                 </li>
