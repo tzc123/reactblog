@@ -4,7 +4,19 @@ module.exports = async function () {
   const store = {
     currentPage: 1,
     total: 0,
-    articles: []
+    articles: [],
+    list: [
+      {
+        text: 'time'
+      },
+      {
+        text: 'browse'
+      },
+      {
+        text: 'default'
+      }
+    ],
+    active: 2
   }
 
   const articles = await getArticles()
