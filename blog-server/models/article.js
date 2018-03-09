@@ -94,7 +94,7 @@ async function update(_id, article) {
   return res
 }
 async function setBrowse(_id, icrement) {
-  const res = await ArticleModel.updateOne({ _id }, { $inc: { browse: icrement } })
+  const res = await ArticleModel.updateOne({ _id }, { $set: { browse: icrement } })
   return res
 }
 async function getBrowse(_id) {

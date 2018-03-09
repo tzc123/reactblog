@@ -8,7 +8,7 @@ module.exports = {
     let res = false
     try {
       const browses = await cache.hgetall('browse')
-      if (typeof browses == 'object') {
+      if (typeof browses == 'object' || browses != null) {
         const keys = Object.keys(browses)
         for(key of keys) {
           await ArticleModel.setBrowse(key, browses[key])
@@ -84,7 +84,7 @@ module.exports = {
     let browse = await cache.hget('browse',id)
     if (isNaN(browse)) {
       try {
-        browse = await ArticleModel.getBrowse(id)
+        browse = await ArticleModel.getBrowse(id)       
         await cache.hset('browse', id, browse)
       } catch (err) {
         logger.error('getBrowse', { id, err: err.stack })
@@ -97,15 +97,17 @@ module.exports = {
     let browses = await cache.hgetall('browse')
     if (typeof browses != 'object' || browses == null) {
       try {
-        browses = await ArticleModel.getBrowses()
-        for (browse of browses) {
+        browses = {}
+        const newBrowses = await ArticleModel.getBrowses()
+        for (browse of newBrowses) {
+          browses[browse.id] = browse.browse
           await cache.hset('browse', browse.id, browse.browse)
         }
       } catch (err) {
         logger.error('getBrowses', { err: err.stack })
         return {}
       }
-    }
+    } 
     return browses
   },
   async setBrowse(id) {
