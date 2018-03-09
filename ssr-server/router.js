@@ -34,5 +34,16 @@ router
       initialData: JSON.stringify(store)
     })
   })
+  .get('/about', async ctx => {
+    const store = {
+      header: await getHeaderStore()
+    }
+    const context = {}
+    const html = getHtml(`/about`, context, store)
+    await ctx.render('ssr', {
+      ssr: html,
+      initialData: JSON.stringify(store)
+    })
+  })
 
 module.exports = router
