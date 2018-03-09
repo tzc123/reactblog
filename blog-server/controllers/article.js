@@ -236,5 +236,18 @@ module.exports = {
     } catch (err) {
       unknownError(ctx, err)      
     }
+  },
+  async flush(ctx) {
+    const { request: { url, method }, query: { secret } } = ctx
+    if (!simpleAuth(ctx, secret)) return
+    try {
+      await flush(url, method)
+    } catch (err) {
+      unknownError(ctx, err)
+    }
+    ctx.body = {
+      success: true,
+      message: 'OK'
+    }
   }
 }
