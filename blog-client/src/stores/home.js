@@ -8,23 +8,34 @@ class HomeStore {
   @observable total = 0
   @observable articles = []
   @observable active = 2
+  @observable category = ''
 
   list = [
     {
-      text: 'time'
+      text: 'time',
+      sortby: 'created_at'
     },
     {
-      text: 'browse'
+      text: 'browse',
+      sortby: 'browse'      
     },
     {
-      text: 'default'
+      text: 'default',
+      sortby: 'created_at'      
     }
   ]
   
-  loadData(category) {
-    if (typeof category != 'string') return
-    return getArticleList(category, this.currentPage)
+  loadData() {
+    return getArticleList({
+      category: this.category,
+      sortby: this.list[this.active].sortby
+    })
       .then(this.setArticleList.bind(this))
+  }
+
+  @action setCategory(category) {
+    this.category = category
+    return this.loadData()
   }
 
   @action setArticleList(articles) {
@@ -35,8 +46,13 @@ class HomeStore {
 
   @action setActive(active) {
     if (active > 2 || action < 0) return
+    const oldActive = this.active
     this.active = active
+    if (oldActive == 1 || active == 1) {
+      this.loadData()
+    }
   }
+
   constructor() {
     this.setArticleList(
       initialData
@@ -46,6 +62,7 @@ class HomeStore {
       : []
     )
     this.setActive = this.setActive.bind(this)
+    this.loadData()
   }
 }
 

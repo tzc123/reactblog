@@ -127,7 +127,7 @@
   height: 40px;
   line-height: 40px;
   font-size: 20px;
-  animation: show_to_right .5s;
+  animation: show_to_bottom .3s;
 }
 @media screen and (max-width: 768px) {
 

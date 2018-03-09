@@ -7,10 +7,10 @@ const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBr
 module.exports = {
   async list(ctx) {
     const { 
-      query: { category, size, index }, 
+      query: { category, size, index, sortby }, 
       request: { url, method } } = ctx
     try{
-      let articles = await getArticles(category, size, index)
+      let articles = await getArticles(category, size, index, sortby)
       const browses = await getBrowses()
       articles = articles.map(article => {
         const browse = browses[article._id] || 0

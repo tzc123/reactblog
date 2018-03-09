@@ -21,7 +21,7 @@ module.exports = {
     }
     return res
   },
-  async getArticles(category, size, index) {
+  async getArticles(category, size, index, sortby) {
     let articles = await cache.hget('articles', category || '') 
     if (!articles) {
       try {
@@ -36,6 +36,17 @@ module.exports = {
       }
     } else {
       articles = JSON.parse(articles)
+      articles = articles.sort((a, b) => {
+        if (sortby != 'browse') {
+          const timeA = new Date(a.created_at).getTime()
+          const timeB = new Date(b.created_at).getTime()
+          return timeB - timeA
+        } else {
+          const browseA = +a.browse
+          const browseB = +b.browse
+          return browseB - browseA
+        }
+      })
     }
     return articles
   },

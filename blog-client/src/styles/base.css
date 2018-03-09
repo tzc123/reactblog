@@ -78,6 +78,13 @@
 			}
 		}
 
+		@keyframes show_to_bottom {
+			from {
+				opacity: 0;
+				transform: translateY(-20px)
+			}
+		}
+
 		@keyframes show_to_left {
 			from {
 				opacity: 0;

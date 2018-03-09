@@ -3,12 +3,14 @@ const domain = process.env.DEV == 'local'
                ? 'http://localhost:4321'
                : 'http://122.152.205.25:4321'
 
-export function getArticleList(category, index) {
+export function getArticleList(options) {
   return get(
-    domain + '/article', 
-    category 
-    ? { category, size: 10, index } 
-    : { size: 10, index }
+    domain + '/article', {
+      category: options.category || '',
+      size: options.size || 10,
+      index: options.index || 1,
+      sortby: options.sortby || 'created_at'
+    }
   )
     .then(res => {
       return res.success

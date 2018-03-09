@@ -16,15 +16,13 @@ let initialData = isNode
 @observer class Home extends React.Component {
 
   componentDidMount() {
-    scrollTo(0, 0)
-    this.props.home.loadData('')
-      .then(() => setTimeout(() => scrollTo(0, 0), 0))
+    setTimeout(() => scrollTo(0, 0))
   }
+
   componentWillReceiveProps(props) {
-    console.log(props, this.props)
     const { location: { search } } = props
     const { category } = queryString(search)
-    this.props.home.loadData(category || '')
+    this.props.home.setCategory(category || '')
       .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
   render() {

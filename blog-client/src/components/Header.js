@@ -19,7 +19,6 @@ class Header extends React.Component {
       search, 
       result
     } = this.props.header
-    console.log(result)
     return (
       <header className={activeClass}>
         <div className="container">
