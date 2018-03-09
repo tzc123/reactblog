@@ -3,3 +3,12 @@
   margin: 90px auto 0 auto;
   max-width: 1024px;
 }
+
+.about li {
+  line-height: 30px;
+}
+
+.about h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
