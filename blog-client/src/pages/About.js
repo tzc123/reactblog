@@ -43,7 +43,7 @@ export default class About extends React.Component {
         </ul>
         <h2>关于博客</h2>
         <p>
-          后端渲染启动在<a href="http://122.152.205.25">2333端口</a>
+          后端渲染启动在<a href="http://122.152.205.25:2333">2333端口</a>
         </p>
       </main>
     )
