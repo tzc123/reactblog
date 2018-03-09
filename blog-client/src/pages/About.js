@@ -41,6 +41,10 @@ export default class About extends React.Component {
             逻辑性强，能够使用canvas编写一些小游戏。  
           </li>         
         </ul>
+        <h2>关于博客</h2>
+        <p>
+          后端渲染启动在<a href="http://122.152.205.25">2333端口</a>
+        </p>
       </main>
     )
   }

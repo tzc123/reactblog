@@ -12,3 +12,9 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
+
+.about a {
+  margin-right: 10px;
+  margin-left: 10px;
+  color: skyblue;
+}
