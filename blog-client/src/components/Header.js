@@ -33,21 +33,19 @@ class Header extends React.Component {
               onFocus={() => setFocused(true)}
               placeholder="你倒是搜啊..."/>
               <i></i>
-              <ul className={`result${result ? '' : ' hidden'}`}>
+              <ul className={`result${focused ? '' : ' hidden'}`}>
                 {
-                  result[0] !== null
-                  ? result.length > 0
-                    ? result.map(
-                        item => 
-                          <li key={item._id}>
-                            <Link className="ellipsis"
-                              to={`/article/${item._id}`}>
-                              {item.title}
-                            </Link>
-                          </li>
-                      ) 
-                    : <li>无任何匹配的结果</li>
-                  : ''
+                  result.length > 0
+                  ? result.map(
+                      item => 
+                        <li key={item._id}>
+                          <Link className="ellipsis"
+                            to={`/article/${item._id}`}>
+                            {item.title}
+                          </Link>
+                        </li>
+                    ) 
+                  : <li>无任何匹配的结果</li>
                 }
               </ul>
             </div>
