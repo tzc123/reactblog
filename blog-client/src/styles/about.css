@@ -2,6 +2,7 @@
   position: relative;
   margin: 90px auto 0 auto;
   max-width: 1024px;
+  padding-left: 30px;
 }
 
 .about li {

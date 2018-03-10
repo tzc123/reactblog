@@ -39,7 +39,7 @@ class HeaderStore {
       link: '/about'
     }
   ]
-  @observable result = null
+  @observable result = [null]
   @observable focused = false
   @computed get activeClass() {
     return `main-header${this.active ? ' active' : ''}`
@@ -77,7 +77,7 @@ class HeaderStore {
     } else {
       setTimeout(action(() => {
         this.focused = focused
-        this.setResult(null)
+        this.setResult([null])
       }), 200);
     }
   }
