@@ -1,5 +1,6 @@
 
 const ArticleModel = require('../models/article')
+const md5 = require('md5')
 const config = require('../config')
 const cache = require('../cache')
 
@@ -122,7 +123,7 @@ module.exports = {
   },
   simpleAuth(ctx, secret) {
     const { request: { url, method } } = ctx
-    if (secret != config.secret) {
+    if (md5(secret) != config.secret) {
       logger.info('无权限', { url, method, secret })          
       ctx.body = {
         success: false,

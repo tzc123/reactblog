@@ -17,5 +17,5 @@ module.exports = {
     key: 'kkeeyy',
     httpOnly: true
   },
-  secret: '321czt'
+  secret: 'b946de9eb0fde32fa158f3749de92dc8'
 }
