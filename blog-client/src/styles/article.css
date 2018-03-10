@@ -69,9 +69,15 @@
   line-height: 300px;
   text-align: center;
 }
+
 .markdown-body {
   text-align: justify;
 }
+
+.markdown-body p {
+  word-break: break-all;
+}
+
 .markdown-body .image-wrapper {
   text-align: center;
 }
