@@ -35,7 +35,8 @@ module.exports = async function () {
     ],
     active: false,
     changeSubNavActive: () => {},
-    activeClass: 'main-header'
+    activeClass: 'main-header',
+    result: []
   }
   return store
 }
