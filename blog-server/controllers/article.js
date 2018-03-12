@@ -220,7 +220,7 @@ module.exports = {
   async search(ctx) {
     const { request: { url, method }, query: { keyword } } = ctx
     if (!keyword) {
-      logger.info('无有效关键字', { url, method, keyword })
+      logger.info('无有效关键字', { url, method })
       ctx.body = {
         success: false,
         message: '无有效关键字'

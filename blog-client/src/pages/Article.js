@@ -16,11 +16,9 @@ const handleScroll = function () {
   let minDistance = Infinity
   tops.forEach((top, index) => {
     const distance = activeLine - top
-    if (distance > 0) {
-      if (distance < minDistance) {
-        minDistance = distance
-        newActive = index
-      }
+    if (distance > 0 && distance < minDistance) {
+      minDistance = distance
+      newActive = index
     }
   })
   setActive(newActive)

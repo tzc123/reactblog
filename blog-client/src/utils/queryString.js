@@ -1,5 +1,5 @@
 export default function (str) {
-  if (!str) return {}
+  if (!str || typeof str != 'string' ) return {}
   str = str.split('?')[1]
   const res = {}
   str.split('&').forEach(item => {
