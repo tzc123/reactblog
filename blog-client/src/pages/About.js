@@ -7,10 +7,9 @@ export default class About extends React.Component {
       <main className="about">
         <h2>关于博主</h2>
         <p>
-          97年生人，男，普通大学的普通大学生，今年毕业，目前没有工作。
-        </p>      
-        <h2>所以说...</h2>     
-        <h2>求职</h2>      
+          97年生人，男，普通大学的普通大学生。
+        </p>       
+        <h2>技能--实事求是，不含水分</h2>      
         <ul>
           <li>
             有react-mobx、vue-vuex的项目经验。
