@@ -14,7 +14,7 @@
   max-width: 1024px;
   height: 70px;
   display: flex;
-  color: #fff;
+  color: #ddd;
 }
 
 .main-header .title {
@@ -22,6 +22,7 @@
   line-height: 70px;
   font-size: 35px;
   font-weight: 700;
+  color: #fff;
 }
 
 .search {
@@ -58,7 +59,6 @@
   margin-top: 1px;
   background: #222b39;
   border-radius: 3px;
-  animation: show .3s;
   color: #ddd;
 }
 
@@ -82,17 +82,22 @@
   height: 20px;
   pointer-events: none;
 }
+
 .main-header>.container>nav {
   display: flex;
   align-items: center;
 }
+
 .main-header .nav {
-  max-width: 700px;
   display: flex;
   justify-content: space-between;
   letter-spacing: 3px;
   font-weight: 100;
   user-select:none;
+}
+
+.main-header .nav>li:nth-child(2) {
+  width: 150px;
 }
 
 .main-header .nav>li {
@@ -113,11 +118,13 @@
 }
 
 .main-header nav li:hover {
-  font-size: 25px;
+  color: #fff;
+  text-shadow: 0 0 1px #fff;
 }
 
 .main-header .nav>li:hover>.sub-nav {
   display: block;
+  transform-origin: center top;
   animation: show .3s;
 }
 
@@ -127,13 +134,15 @@
   left: 0;
   right: 0;
   top: 70px;
+  color: #ddd;
+  text-shadow: 0 0 0;
+  background: #222b39;
+  border-radius: 0 0 3px 3px;
 }
 .sub-nav>li {
   line-height: 70px;
   height: 70px;
-  margin-top: 1px;
-  border-radius: 3px;
-  background: #222b39;
+  border-top: 1px solid rgba(255,255,255,.1);
   font-size: 20px;
   transition: font-size .3s;  
 }
@@ -196,7 +205,6 @@
 
   .search>.result>li {
     padding-left: 20px;
-    animation: none;
     margin: 0;
     border-radius: 0;
   }
@@ -296,7 +304,7 @@
   .sub-nav>li {
     line-height: 50px;
     height: 50px;
-    border-radius: 0;
+    border: none;
     margin: 0;
     background: #304960;
   }

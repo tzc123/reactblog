@@ -108,7 +108,7 @@
 		@keyframes show {
 			from {
 				opacity: 0;
-				transform: translateY(20px);
+				transform: scale(1,0);
 			}
 		}
 

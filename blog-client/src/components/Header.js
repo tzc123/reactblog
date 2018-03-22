@@ -26,6 +26,28 @@ class Header extends React.Component {
             DAZ
           </Link>
           <nav>
+            <ul className="nav" onClick={cancelActive}>
+              {nav.map((item, index) => (
+                <li key={index}>
+                  {
+                    item.link
+                    ? <Link to={item.link}>
+                        {item.text}
+                      </Link>
+                    : <a onTouchStart={() => changeSubNavActive(index)}>
+                        {item.text}
+                      </a>
+                  }
+                  {
+                    item.link
+                    ? ''
+                    : <SubNav type={item.type}
+                        active={nav[index].active}
+                        subNav={item.subNav} />
+                  }
+                </li>
+              ))}
+            </ul>
             <div className="search"
               onBlur={() => setFocused(false)}>
               <input name="search" 
@@ -49,28 +71,6 @@ class Header extends React.Component {
                 }
               </ul>
             </div>
-            <ul className="nav" onClick={cancelActive}>
-              {nav.map((item, index) => (
-                <li key={index}>
-                  {
-                    item.link
-                    ? <Link to={item.link}>
-                        {item.text}
-                      </Link>
-                    : <a onTouchStart={() => changeSubNavActive(index)}>
-                        {item.text}
-                      </a>
-                  }
-                  {
-                    item.link
-                    ? ''
-                    : <SubNav type={item.type}
-                        active={nav[index].active}
-                        subNav={item.subNav} />
-                  }
-                </li>
-              ))}
-            </ul>
             <div className="icon-list"
               onTouchStart={changeActive}>
               <div className="line line-1"></div>

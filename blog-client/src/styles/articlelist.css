@@ -19,8 +19,7 @@
 
 
 .article-item:hover {
-  box-shadow: #6c727c 0px 7px 15px;
-  /* border: 1px solid #999999;   */
+  box-shadow: #cccccc 0px 7px 15px;
   transform: scale(1.02, 1.02) translateZ(0);
 }
 
