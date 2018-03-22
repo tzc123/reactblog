@@ -6,6 +6,7 @@
  height: 70px;
  background: #222b39;
  z-index: 9999;
+ box-shadow: 0 5px 5px rgba(160,160,160,.5);
 }
 .main-header>.container {
   justify-content: space-between;
@@ -286,12 +287,11 @@
   }
 
   .main-header .nav>li>.sub-nav>li:first-child {
-    box-shadow: inset #333333 0 5px 5px;
+    box-shadow: inset 0 5px 5px rgba(60,60,60,.5);
   }
 
   .main-header .nav>li>.sub-nav>li:last-child {
-    box-shadow: inset #333333 0 -5px 5px;
-    
+    box-shadow: inset 0 -5px 5px rgba(60,60,60,.5); 
   }
 
   .main-header .nav>li:hover>.sub-nav {
