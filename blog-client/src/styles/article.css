@@ -1,6 +1,6 @@
 .article {
   position: relative;
-  margin: 90px auto 0 auto;
+  margin: 85px auto 0 auto;
   max-width: 1024px;
   display: flex;
 }
@@ -10,7 +10,7 @@
   overflow: hidden;
   background: #fff;
   padding: 30px;
-  margin-right: 260px;
+  margin-right: 255px;
   border-radius: 5px;
   animation: show_to_top .3s;
 }
@@ -50,7 +50,7 @@
 
 .article>aside {
   position: absolute;
-  top: -90px;
+  top: -85px;
   right: 0;
   width: 240px;
   height: 100%;
