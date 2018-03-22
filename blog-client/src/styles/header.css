@@ -99,7 +99,7 @@
 }
 
 .main-header .nav>li:nth-child(2) {
-  width: 150px;
+  width: 180px;
 }
 
 .main-header .nav>li {
@@ -139,6 +139,12 @@
   background: #222b39;
   border-radius: 0 0 3px 3px;
 }
+
+.main-header .nav>li:nth-child(2)>.sub-nav {
+  left: 20px;
+  right: 20px;
+}
+
 .sub-nav>li {
   line-height: 70px;
   height: 70px;
