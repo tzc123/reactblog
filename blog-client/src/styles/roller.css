@@ -1,6 +1,6 @@
 .roller-wrapper {
   position: fixed;
-  top: 90px;
+  top: 85px;
   bottom: 0;
   width: 30px;
   padding-right: 100px;
@@ -64,8 +64,12 @@
 }
 @media screen and (max-width: 768px) {
   .roller-wrapper {
+    left: 10px;
     top: 50px;
     background: #fff;
+  }
+  .roller-mark {
+    top: 50px;
   }
   .page {
     background: #fff;

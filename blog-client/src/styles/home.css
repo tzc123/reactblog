@@ -1,13 +1,13 @@
 .home {
   position: relative;
-  margin: 90px auto 0 auto;
+  margin: 85px auto 0 auto;
   max-width: 1024px;
   display: flex;
 }
 
 .home>aside {
   position: absolute;
-  top: -90px;
+  top: -85px;
   right: 0;
   width: 240px;
   animation: show_to_left .3s;

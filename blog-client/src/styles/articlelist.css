@@ -1,7 +1,7 @@
 .article-list {
   flex: 1;
   position: relative;
-  margin: 0 260px 0 50px;
+  margin: 0 255px 0 50px;
   animation: show_to_top .3s;
   background: #f4f4f4;
 }
