@@ -16,7 +16,8 @@ module.exports = async function () {
         text: 'default'
       }
     ],
-    active: 2
+    active: 2,
+    animated: true
   }
 
   const articles = await getArticles()
