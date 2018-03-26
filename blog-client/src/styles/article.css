@@ -12,7 +12,7 @@
   padding: 30px;
   margin-right: 255px;
   border-radius: 5px;
-  animation: show_to_top .3s;
+  animation: show_to_top .5s;
 }
 
 .article-header {
@@ -54,7 +54,7 @@
   right: 0;
   width: 240px;
   height: 100%;
-  animation: show_to_left .3s;
+  animation: show_to_left .5s;
 }
 
 .top {

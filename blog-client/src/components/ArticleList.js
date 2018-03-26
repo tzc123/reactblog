@@ -1,12 +1,9 @@
 import ArticleItem from './ArticleItem.js'
 import '../styles/articlelist.css'
-import { inject } from 'mobx-react';
 
 class ArticleList extends React.Component {
-  componentWillReceiveProps(props) {
-  }
   render() {
-    const { articles, active } = this.props
+    const { articles, active, animated } = this.props
     let articleItemComponent
     if (active == 0) {
       const date = {}
@@ -38,7 +35,7 @@ class ArticleList extends React.Component {
     }
     
     return (
-      <ul className="article-list">
+      <ul className={'article-list' + (animated ? ' animated' : '')}>
         {articleItemComponent}
       </ul>
     )

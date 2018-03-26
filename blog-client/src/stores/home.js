@@ -9,6 +9,7 @@ class HomeStore {
   @observable articles = []
   @observable active = 2
   @observable category = ''
+  @observable animated = false
 
   list = [
     {
@@ -33,15 +34,22 @@ class HomeStore {
       .then(this.setArticleList.bind(this))
   }
 
+  triggerAnimation() {
+    this.setAnimated(true)
+    setTimeout(() => {
+      this.setAnimated(false)
+    }, 500);
+  }
+
   @action setCategory(category) {
     this.category = category
     return this.loadData()
   }
 
   @action setArticleList(articles) {
-    // if (({}).toString.call(articles) != '[object Array]') return
     this.articles = articles
     this.total = articles.length
+    this.triggerAnimation()
   }
 
   @action setActive(active) {
@@ -50,9 +58,14 @@ class HomeStore {
     this.active = active
     if (oldActive == 1 || active == 1) {
       this.loadData()
+    } else {
+      this.triggerAnimation()
     }
   }
 
+  @action setAnimated(animated) {
+    this.animated = animated
+  }
   constructor() {
     this.setArticleList(
       initialData
@@ -62,6 +75,7 @@ class HomeStore {
       : []
     )
     this.setActive = this.setActive.bind(this)
+    this.triggerAnimation = this.triggerAnimation.bind(this)
     this.loadData()
   }
 }

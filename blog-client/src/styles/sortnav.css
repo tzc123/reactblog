@@ -18,7 +18,7 @@
   height: 30px;
   line-height: 30px;
   cursor: pointer;
-  transition: all .3s;
+  transition: all .5s;
 }
 
 .sort-nav>ul>li:first-child {

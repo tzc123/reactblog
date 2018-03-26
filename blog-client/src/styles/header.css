@@ -125,7 +125,7 @@
 .main-header .nav>li:hover>.sub-nav {
   display: block;
   transform-origin: center top;
-  animation: show .3s;
+  animation: show .5s;
 }
 
 .sub-nav {
@@ -247,11 +247,11 @@
 
   .icon-list .line-1,
   .icon-list .line-3 { 
-    transition: transform .3s;
+    transition: transform .5s;
   }
 
   .icon-list .line-2 {
-    transition: all .3s;
+    transition: all .5s;
   }
 
   .main-header.active .icon-list .line-1 {

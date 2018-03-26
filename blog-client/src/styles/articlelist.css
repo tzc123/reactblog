@@ -2,8 +2,11 @@
   flex: 1;
   position: relative;
   margin: 0 255px 0 50px;
-  animation: show_to_top .3s;
   background: #f4f4f4;
+}
+
+.animated {
+  animation: show_to_top .5s;
 }
 
 .article-item {
@@ -13,7 +16,7 @@
   padding: 25px;
   background: #fff;
   overflow: hidden;
-  transition: all .3s;
+  transition: all .5s;
   transform: translateZ(0);
 }
 
@@ -52,7 +55,7 @@
   width: 180px;
   right: 25px;
   top: 35px;
-  animation: show_pic .3s;
+  animation: show_pic .5s;
   border-radius: 2px;
 }
 
@@ -111,7 +114,7 @@
 }
 
 .underline>.mask {
-  transition: transform .3s;
+  transition: transform .5s;
   height: 100%;
   width: 100%;
   background: #fff;
@@ -127,7 +130,6 @@
   line-height: 40px;
   padding-left: 10px;
   font-size: 20px;
-  animation: show_to_bottom .3s;
 }
 @media screen and (max-width: 768px) {
 

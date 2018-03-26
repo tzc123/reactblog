@@ -17,6 +17,7 @@ let initialData = isNode
 
   componentDidMount() {
     setTimeout(() => scrollTo(0, 0), 50)
+    this.props.home.triggerAnimation()
   }
 
   componentWillReceiveProps(props) {
@@ -25,8 +26,9 @@ let initialData = isNode
     this.props.home.setCategory(category || '')
       .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
+
   render() {
-    const { articles, currentPage, total, active, setActive, list } = this.props.home
+    const { articles, currentPage, total, active, setActive, list, animated } = this.props.home
     const gameComponent = isNode 
       ? <Game />
       : window.innerWidth > 768
@@ -36,7 +38,7 @@ let initialData = isNode
     ? (
       <main className="home">
         <Roller currentPage={currentPage} total={total}/>
-        <ArticleList articles={articles} active={active}/>
+        <ArticleList articles={articles} active={active} animated={animated}/>
         <aside>
           <SortNav list={list} setActive={setActive} active={active} />
           {gameComponent}
