@@ -16,7 +16,6 @@ let initialData = isNode
 @observer class Home extends React.Component {
 
   componentDidMount() {
-    setTimeout(() => scrollTo(0, 0), 50)
     this.props.home.triggerAnimation()
   }
 

@@ -39,6 +39,7 @@ class HomeStore {
     setTimeout(() => {
       this.setAnimated(false)
     }, 500);
+    setTimeout(() => scrollTo(0, 0), 0)
   }
 
   @action setCategory(category) {
