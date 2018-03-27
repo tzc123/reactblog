@@ -219,24 +219,30 @@ module.exports = {
   },
   async comment(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
-    const { text } = body
+    let { text } = body
     if (!checkId(ctx, id)) return
-    if (!text) {
+    if (!text || (typeof text != 'string' && typeof text != 'number')) {
       logger.info('无内容', { url, method })
       ctx.body = {
         success: false,
         message: '请输入评论'
       }
+    } else if (text.length > 500) {
+      ctx.body = {
+        success: false,
+        message: '你的话太多了'
+      }
     } else {
       try {
         const { ok, nModified, n } = await ArticleModel.setComment(id, { text })
         if (ok) {
+          logger.info('评论成功', { url, method, id })                    
           ctx.body = {
             success: true,
-            message: 'success'
+            message: '评论成功'
           }
         } else {
-          logger.error('数据库错误', { url, method, id, res })          
+          logger.error('数据库错误', { url, method, id, text })          
           ctx.body = {
             success: false,
             message: '数据库错误'

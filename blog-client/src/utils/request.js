@@ -18,7 +18,7 @@ export function get(url, query) {
 }
 
 export function post(url, data) {
-  if (typeof url != 'string' || (query && query.toString() != '[Object object]')) {
+  if (typeof url != 'string' || (data && data.toString() != '[object Object]')) {
     return console.error(new Error('post([string], [object])'))
   }
 
