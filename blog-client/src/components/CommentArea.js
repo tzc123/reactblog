@@ -26,18 +26,26 @@ class CommentArea extends React.Component {
   }
 
   handleSubmit() {
+    const { props: { id, article: { loadComments } }, refs: { input } } = this
     comment(
-      this.props.id,
-      this.refs.input.innerText
+      id,
+      input.innerText
     )
+      .then(loadComments.bind(null, id))
+  }
+
+  handleBlur(e) {
+    const { setEmpty } = this.props.article
+    console.log(e.target.innerText)
+    setEmpty(!e.target.innerText)
   }
 
   render() {
-    const { handleSubmit, props: { id, article: { sticky } } } = this
+    const { handleSubmit, handleBlur, props: { id, sticky, empty  } } = this
 
     return (
       <section className={'comment-area' + (sticky ? ' sticky' : '')} ref="sticky">
-        <p contentEditable="true" ref="input"></p>
+        <p className={empty ? 'empty' : ''} contentEditable="true" ref="input" onBlur={handleBlur.bind(this)}></p>
         <div className="submit" onClick={handleSubmit.bind(this)}>crazy bb</div>
       </section>
     )

@@ -1,8 +1,9 @@
 import '../styles/sortnav.css'
 import { Link } from 'react-router-dom'
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 
 @inject('home')
+@observer
 class SortNav extends React.Component {
   
   render() {

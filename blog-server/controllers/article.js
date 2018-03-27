@@ -32,7 +32,8 @@ module.exports = {
     const { 
       params: { id }, 
       query: { rmd }, 
-      request: { url, method } 
+      request: { url, method },
+      session
     } = ctx
     if (!checkId(ctx, id)) return
     try {
@@ -47,8 +48,13 @@ module.exports = {
           data: article
         }
         if (rmd != 1) {
-          const res = await setBrowse(id)
-          res || await ArticleModel.setBrowse(id, 1)
+          if (!session.browse) {
+            session.browse = 1
+            const res = await setBrowse(id)
+            res || await ArticleModel.setBrowse(id, 1)
+          } else {
+            session.browse += 1
+          }
         } 
       } else {
         logger.info('无此文章', { url, method })    

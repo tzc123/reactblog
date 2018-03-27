@@ -18,6 +18,7 @@ class ArticleStore {
   @observable active = 0
   @observable sticky = false
   @observable comments = []
+  @observable empty = true
 
   @computed get top() {
     return `${(36 + this.active * 26) / 16}rem`
@@ -49,6 +50,10 @@ class ArticleStore {
     this.comments = comments
   }
 
+  @action setEmpty(empty) {
+    this.empty = empty
+  }
+
   loadData(id) {
     return getArticle(id)
       .then(this.setArticle.bind(this))
@@ -63,6 +68,7 @@ class ArticleStore {
     this.loadData = this.loadData.bind(this)
     this.setActive = this.setActive.bind(this)
     this.setSticky = this.setSticky.bind(this)
+    this.setEmpty = this.setEmpty.bind(this)
     this.loadComments = this.loadComments.bind(this)
     this.setArticle(
       initialData

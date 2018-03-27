@@ -7,10 +7,10 @@ import { observer, inject } from 'mobx-react'
 @observer class ArticleFooter extends React.Component {
 
   render() {
-    const { id, article: { comments, sticky } } = this.props
+    const { id, article: { comments, sticky, empty } } = this.props
     return (
       <footer className="article-footer">
-        <CommentsArea id={id} sticky={sticky}/>
+        <CommentsArea id={id} empty={empty} sticky={sticky} />
         {
           comments && comments.length > 0 
           ? <CommentList comments={comments} />
