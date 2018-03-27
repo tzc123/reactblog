@@ -2,11 +2,12 @@ import '../styles/comment.css'
 import { comment } from '../api'
 import { inject } from 'mobx-react'
 import throttle from '../utils/throttle'
-
+let offsetTop
 function handleScroll() {
   const { setSticky } = this.props.article
-  const { offsetTop } = this.refs.sticky
-  setSticky(window.scrollY >= offsetTop)
+  const scrollY = window.scrollY || window.pageYOffset
+  offsetTop || (offsetTop = this.refs.sticky.offsetTop)
+  setSticky(scrollY >= offsetTop)
 }
 
 @inject('article')
@@ -36,7 +37,6 @@ class CommentArea extends React.Component {
 
   handleBlur(e) {
     const { setEmpty } = this.props.article
-    console.log(e.target.innerText)
     setEmpty(!e.target.innerText)
   }
 

@@ -18,6 +18,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.props.home.triggerAnimation()
+    setTimeout(() => scrollTo(0, 0), 100)              
   }
 
   componentWillReceiveProps(props) {

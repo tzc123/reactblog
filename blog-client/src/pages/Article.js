@@ -60,7 +60,8 @@ function initArticle() {
     const { match: { params: { id } }, article: { loadData, loadComments } } = this.props
     loadData(id)
       .then(initArticle.bind(this))
-    loadComments(id)            
+    loadComments(id)
+    setTimeout(() => scrollTo(0, 0), 100)          
   }
 
   componentWillUnmount() {
