@@ -12,7 +12,7 @@ import { observer, inject } from 'mobx-react'
       <footer className="article-footer">
         <CommentsArea id={id} sticky={sticky}/>
         {
-          comments.length > 0 
+          comments && comments.length > 0 
           ? <CommentList comments={comments} />
           : <li className="comment">
               <header>
