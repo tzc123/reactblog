@@ -66,7 +66,8 @@ export function comment(id, text) {
   if (!id || !text ) return
   return post(
     domain + '/article/' + id + '/comment', 
-    { text }
+    { text },
+    { withCredentials: true }
   )
     .then(res => {
       return res.success

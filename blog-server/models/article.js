@@ -157,7 +157,6 @@ async function getBrowse(id) {
 
 async function getBrowses() {
   const res = await ArticleModel.find({}, { browse: 1, _id: 1 })
-  console.log(res)
   return res
 }
 
@@ -194,7 +193,6 @@ async function setComment(_id, comment) {
 
 async function getComments(id) {
   const res = await ArticleModel.findById(id, { comments: 1, _id: 1 })
-  console.log(res)
   return res
 }
 

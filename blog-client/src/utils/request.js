@@ -17,13 +17,13 @@ export function get(url, query) {
   })
 }
 
-export function post(url, data) {
+export function post(url, data, config) {
   if (typeof url != 'string' || (data && data.toString() != '[object Object]')) {
     return console.error(new Error('post([string], [object])'))
   }
 
   return axios
-  .post(url, data)
+  .post(url, data, config)
   .then(res => {
     if (res.status == 200) {
       return res.data

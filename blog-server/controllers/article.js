@@ -230,13 +230,21 @@ module.exports = {
     } else if (text.length > 500) {
       ctx.body = {
         success: false,
-        message: '你的话太多了'
+        message: '评论太长了'
+      }
+    } else if (ctx.session.commentTime && (Date.now() - ctx.session.commentTime) / 1000 < 30 ) {
+      ctx.body = {
+        success: false,
+        message: '歇歇吧,30秒后再评论'
       }
     } else {
       try {
         const { ok, nModified, n } = await ArticleModel.setComment(id, { text })
         if (ok) {
-          logger.info('评论成功', { url, method, id })                    
+          logger.info('评论成功', { url, method, id })  
+          console.log(ctx.session.commentTime) 
+          ctx.session.commentTime = Date.now()  
+          console.log(ctx.session.commentTime)               
           ctx.body = {
             success: true,
             message: '评论成功'
