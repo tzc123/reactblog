@@ -1,21 +1,10 @@
-import { computed } from 'mobx'
-export default class ArticleHeader extends React.Component {
+import { inject } from 'mobx-react'
 
-  @computed get created_at() {
-    return new Date(this.props.created_at)
-      .toLocaleDateString()
-      .replace(/\//g,'-')
-  }
-
-  static defaultProps = {
-    title: '',
-    browse: 0,
-    category: 'null',
-    created_at: '0000-00-00'
-  }
+@inject('article')
+class ArticleHeader extends React.Component {
 
   render() {
-    const { props: { title, browse, category }, created_at } = this
+    const { article: { title, browse, category }, created_at } = this.props.article
     return (
       <header className="article-header">
         <h1>
@@ -33,3 +22,5 @@ export default class ArticleHeader extends React.Component {
     )
   }
 }
+
+export default ArticleHeader

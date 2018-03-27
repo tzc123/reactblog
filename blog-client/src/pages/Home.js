@@ -21,7 +21,7 @@ let initialData = isNode
 
   componentWillReceiveProps(props) {
     const { location: { search } } = props
-    const { category } = queryString(search)
+    const { category } = search ? queryString(search) : {}
     this.props.home.setCategory(category || '')
       .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
@@ -37,10 +37,10 @@ let initialData = isNode
     return articles.length != 0
     ? (
       <main className="home">
-        <Roller currentPage={currentPage} total={total}/>
-        <ArticleList articles={articles} active={active} animated={animated}/>
+        <Roller/>
+        <ArticleList/>
         <aside>
-          <SortNav list={list} setActive={setActive} active={active} />
+          <SortNav/>
           {gameComponent}
         </aside>
       </main>

@@ -1,10 +1,12 @@
 import ArticleItem from './ArticleItem.js'
 import '../styles/articlelist.css'
+import { inject } from 'mobx-react'
 
+@inject('home')
 class ArticleList extends React.Component {
   
   render() {
-    const { articles, active, animated } = this.props
+    const { articles, active, animated } = this.props.home
     let articleItemComponent
     if (active == 0) {
       const date = {}

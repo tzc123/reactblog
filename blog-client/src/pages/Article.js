@@ -45,7 +45,6 @@ function initArticle() {
       img => img.addEventListener('load', this.handleLoad)
     )
   }
-  setTimeout(() => scrollTo(0, 0), 50)  
 }
 
 @inject('article')
@@ -82,10 +81,11 @@ function initArticle() {
 
   handleCatelogClick(index, e) {
     e.preventDefault()
-    this.animate(index, 60)
+    this.animate(index, 100)
   }
 
   animate(index, speed) {
+    this.frameId && cancelAnimationFrame(this.frameId)    
     const top = this.tops[index]
     const activeLine = window.scrollY || window.pageYOffset
     const distance = top - activeLine
@@ -121,7 +121,8 @@ function initArticle() {
           handleScroll 
         }, 
         active, 
-        top 
+        top,
+        sticky
       },
       match: {
         params: {
@@ -135,9 +136,9 @@ function initArticle() {
     ? (
       <main className="article">
         <article>
-          <ArticleHeader {...{title, browse, category, created_at}}/>
+          <ArticleHeader/>
           <ArticleContent content={content}/>
-          <ArticleFooter comments={comments} id={id} />
+          <ArticleFooter id={id} />
         </article>
         <aside>
           <div>

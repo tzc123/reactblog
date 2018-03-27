@@ -1,12 +1,12 @@
 import '../styles/sortnav.css'
 import { Link } from 'react-router-dom'
-import { observable, action } from 'mobx'
-import { observer, inject } from 'mobx-react'
+import { inject } from 'mobx-react'
 
+@inject('home')
 class SortNav extends React.Component {
   
   render() {
-    const { list, setActive, active } = this.props
+    const { list, setActive, active } = this.props.home
     return (
       <nav className="sort-nav">
         <ul>

@@ -1,15 +1,11 @@
 import '../styles/roller.css'
-import { computed } from 'mobx'
+import { inject } from 'mobx-react';
 
+@inject('home')
 export default class Roller extends React.Component {
-  
-  static defaultProps = {
-    total: 1,
-    currentPage: 1
-  }
 
   render() {
-    const { props: { total, currentPage }, handleClick } = this
+    const { props: { home: { total, currentPage } }, handleClick } = this
     const pages = []
     for (let i = 1; i < +total + 1; i++) {
       pages.push(

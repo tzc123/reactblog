@@ -1,5 +1,4 @@
 import '../styles/catelog.css'
-import { inject } from 'mobx-react';
 
 class Catelog extends React.Component {
   
