@@ -1,13 +1,13 @@
 import CommentList from './CommentList'
 import CommentsArea from './CommentArea'
-import { inject } from 'mobx-react'
+import { observer, inject } from 'mobx-react'
+
 
 @inject('article')
-class ArticleFooter extends React.Component {
-  
-  render() {
-    const { id, article: { article: { comments }, sticky } } = this.props
+@observer class ArticleFooter extends React.Component {
 
+  render() {
+    const { id, article: { comments, sticky } } = this.props
     return (
       <footer className="article-footer">
         <CommentsArea id={id} sticky={sticky}/>

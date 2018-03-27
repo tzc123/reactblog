@@ -76,3 +76,13 @@ export function comment(id, text) {
     })
 }
 
+export function getComments(id) {
+  if (!id) return
+  return get(domain + '/article/' + id + '/comments')
+    .then(res => {
+      return res.success
+      ? res.data
+      : null
+    })
+}
+

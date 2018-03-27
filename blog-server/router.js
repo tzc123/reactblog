@@ -7,6 +7,7 @@ const { article, login, image: { parser, upload } } = require('./controllers/ind
 router
   .get('/login', login.index)
   .get('/article', article.list)
+  .get('/article/:id/comments', article.getComments)
   .get('/article/:id', article.index)
   .get('/count', article.count)
   .get('/search', article.search)

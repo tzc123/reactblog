@@ -57,9 +57,10 @@ function initArticle() {
   }
 
   componentDidMount() {
-    const { match: { params: { id } }, article: { loadData } } = this.props
-    loadData(this.props.match.params.id)
+    const { match: { params: { id } }, article: { loadData, loadComments } } = this.props
+    loadData(id)
       .then(initArticle.bind(this))
+    loadComments(id)            
   }
 
   componentWillUnmount() {
@@ -77,6 +78,7 @@ function initArticle() {
     if (id == this.props.match.params.id) return
     loadData(id)
       .then(initArticle.bind(this))
+    loadComments(id)      
   }
 
   handleCatelogClick(index, e) {
@@ -113,13 +115,10 @@ function initArticle() {
         article: { 
           title, 
           content, 
-          browse, 
-          category, 
-          created_at, 
           catelog, 
-          comments,
           handleScroll 
         }, 
+        comments,
         active, 
         top,
         sticky

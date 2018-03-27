@@ -1,7 +1,8 @@
 import '../styles/roller.css'
-import { inject } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
 @inject('home')
+@observer
 export default class Roller extends React.Component {
 
   render() {

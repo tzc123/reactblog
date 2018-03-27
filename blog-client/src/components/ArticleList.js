@@ -1,14 +1,17 @@
 import ArticleItem from './ArticleItem.js'
 import '../styles/articlelist.css'
-import { inject } from 'mobx-react'
+import { inject, observer } from 'mobx-react'
 
 @inject('home')
+@observer
 class ArticleList extends React.Component {
   
   render() {
     const { articles, active, animated } = this.props.home
     let articleItemComponent
-    if (active == 0) {
+    if (articles.length == 0) {
+      articleItemComponent = <h1 className="loading">加载中...</h1>
+    } else if (active == 0) {
       const date = {}
       articleItemComponent = []
       articles.forEach((article, index) => {

@@ -41,9 +41,6 @@ module.exports = {
       : await getArticle(id)
       if (article) {
         article.browse = await getBrowse(id)
-        if (rmd != 1) {
-          article.comments = (await ArticleModel.getComments(id)).comments
-        }
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,
@@ -261,6 +258,28 @@ module.exports = {
       }
     }
 
+  },
+  async getComments(ctx) {
+    const { params: { id }, request: { url, method } } = ctx
+    if (!checkId(ctx, id)) return
+    try {
+      const comments = (await ArticleModel.getComments(id)).comments
+      if (comments) {
+        logger.info('获取评论成功', { url, method })
+        ctx.body = {
+          success: true,
+          data: comments
+        }
+      } else {
+        logger.info('文章不存在', { url, method })
+        ctx.body = {
+          success: false,
+          message: '文章不存在'
+        }
+      }
+    } catch (err) {
+      unknownError(ctx, err)
+    }
   },
   async search(ctx) {
     const { request: { url, method }, query: { keyword } } = ctx

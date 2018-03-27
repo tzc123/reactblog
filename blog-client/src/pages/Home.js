@@ -12,8 +12,9 @@ const isNode = typeof window === 'undefined'
 let initialData = isNode
   ? null
   : window.initialData
+
 @inject('home')
-@observer class Home extends React.Component {
+class Home extends React.Component {
 
   componentDidMount() {
     this.props.home.triggerAnimation()
@@ -27,15 +28,13 @@ let initialData = isNode
   }
 
   render() {
-    const { articles, currentPage, total, active, setActive, list, animated } = this.props.home
     const gameComponent = isNode 
       ? <Game />
       : window.innerWidth > 768
         ? <Game/>
         : ''
         
-    return articles.length != 0
-    ? (
+    return (
       <main className="home">
         <Roller/>
         <ArticleList/>
@@ -45,9 +44,6 @@ let initialData = isNode
         </aside>
       </main>
     )
-    : <main className="home">
-        <h1 className="loading">加载中...</h1>
-      </main>
   }
 }
 

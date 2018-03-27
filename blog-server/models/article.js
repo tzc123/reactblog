@@ -69,6 +69,7 @@ const ArticleSchema = new Schema({
     default: []
   },
   comments: {
+    _id: false,
     type: [
       {
         ...commentType,
@@ -84,7 +85,7 @@ const ArticleSchema = new Schema({
 const ArticleModel = mongoose.model('article', ArticleSchema)
 
 async function paginator(category, size=10, index=1) {
-  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0, catelog: 0 })
+  const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0, catelog: 0, comments: 0 })
                         .sort({ created_at: -1 })
                         .limit(+size)
                         .skip(+index - 1)
@@ -99,7 +100,7 @@ async function findById(id, returnMarkDown = false) {
     id, 
     returnMarkDown
     ? {}
-    : { markdown: 0 }
+    : { markdown: 0, comments: 0 }
   )
   return article
 }
@@ -151,7 +152,7 @@ async function setBrowse(_id, icrement) {
 }
 
 async function getBrowse(id) {
-  const res = await ArticleModel.findById(id, { browse: 1, _id: 1 })
+  const res = await ArticleModel.findById(id, { browse: 1, _id: 0 })
   return res
 }
 
@@ -192,7 +193,7 @@ async function setComment(_id, comment) {
 }
 
 async function getComments(id) {
-  const res = await ArticleModel.findById(id, { comments: 1, _id: 1 })
+  const res = await ArticleModel.findById(id, { comments: 1 })
   return res
 }
 
