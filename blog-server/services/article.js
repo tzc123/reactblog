@@ -3,6 +3,25 @@ const ArticleModel = require('../models/article')
 const md5 = require('md5')
 const config = require('../config')
 const cache = require('../cache')
+const hex = /[0-9A-Fa-f]{6}/
+
+async function getBrowses() {
+  let browses = await cache.hgetall('browse')
+  if (typeof browses != 'object' || browses == null) {
+    try {
+      browses = {}
+      const newBrowses = await ArticleModel.getBrowses()
+      for (browse of newBrowses) {
+        browses[browse.id] = browse.browse
+        await cache.hset('browse', browse.id, browse.browse)
+      }
+    } catch (err) {
+      logger.error('getBrowses', { err: err.stack })
+      return {}
+    }
+  } 
+  return browses
+}
 
 module.exports = {
   async flush() {
@@ -24,6 +43,7 @@ module.exports = {
   },
   async getArticles(category, size, index, sortby) {
     let articles = await cache.hget('articles', category || '') 
+    const browses = await getBrowses()    
     if (!articles) {
       try {
         articles = await ArticleModel.paginator(category)
@@ -37,18 +57,24 @@ module.exports = {
       }
     } else {
       articles = JSON.parse(articles)
-      articles = articles.sort((a, b) => {
-        if (sortby != 'browse') {
-          const timeA = new Date(a.created_at).getTime()
-          const timeB = new Date(b.created_at).getTime()
-          return timeB - timeA
-        } else {
-          const browseA = +a.browse
-          const browseB = +b.browse
-          return browseB - browseA
-        }
-      })
     }
+    articles = articles.map(article => {
+      const browse = browses[article._id] || 0
+      article.browse = browse
+      return article
+    })
+    articles = articles.sort((a, b) => {
+      if (sortby != 'browse') {
+        const timeA = new Date(a.created_at).getTime()
+        const timeB = new Date(b.created_at).getTime()
+        return timeB - timeA
+      } else {
+        const browseA = +a.browse
+        const browseB = +b.browse
+        return browseB - browseA
+      }
+    })
+
     return articles
   },
   async getArticle(id) {
@@ -85,7 +111,7 @@ module.exports = {
     let browse = await cache.hget('browse',id)
     if (isNaN(browse)) {
       try {
-        browse = await ArticleModel.getBrowse(id)       
+        browse = (await ArticleModel.getBrowse(id)).browse       
         await cache.hset('browse', id, browse)
       } catch (err) {
         logger.error('getBrowse', { id, err: err.stack })
@@ -94,23 +120,7 @@ module.exports = {
     }
     return browse
   },
-  async getBrowses() {
-    let browses = await cache.hgetall('browse')
-    if (typeof browses != 'object' || browses == null) {
-      try {
-        browses = {}
-        const newBrowses = await ArticleModel.getBrowses()
-        for (browse of newBrowses) {
-          browses[browse.id] = browse.browse
-          await cache.hset('browse', browse.id, browse.browse)
-        }
-      } catch (err) {
-        logger.error('getBrowses', { err: err.stack })
-        return {}
-      }
-    } 
-    return browses
-  },
+  getBrowses,
   async setBrowse(id) {
     let res = false
     try {
@@ -120,6 +130,18 @@ module.exports = {
       return false
     }
     return res
+  },
+  checkId(ctx, id) {
+    const { request: { url, method } } = ctx
+    if (!hex.test(id)) {
+      logger.error('非法id', { url, method })
+      ctx.body = {
+        success: false,
+        message: '非法id'
+      }
+      return false
+    }
+    return true
   },
   simpleAuth(ctx, secret) {
     const { request: { url, method } } = ctx

@@ -6,6 +6,7 @@ import SubNav from './SubNav'
 @inject('header')
 @observer 
 class Header extends React.Component {
+
   render() {
     const { 
       nav, 
@@ -19,6 +20,7 @@ class Header extends React.Component {
       search, 
       result
     } = this.props.header
+    
     return (
       <header className={activeClass}>
         <div className="container">

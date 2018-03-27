@@ -65,9 +65,7 @@
 }
 
 .article>article>footer {
-  height: 300px;
-  line-height: 300px;
-  text-align: center;
+  margin-top: 30px;
 }
 
 .markdown-body {

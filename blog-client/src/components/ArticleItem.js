@@ -2,6 +2,7 @@ import { computed } from 'mobx';
 import { Link } from "react-router-dom";
 
 export default class ArticleItem extends React.Component {
+
   @computed get created_at() {
     return new Date(this.props.created_at)
       .toLocaleDateString()
@@ -34,6 +35,6 @@ export default class ArticleItem extends React.Component {
         {/* <img className={`pic ${this.state.loading ? 'hidden' : ''}`} src={pic} ref="pic"/> */}
         {/* <img className={`loading ${this.state.loading ? '' : 'hidden'}`} src={loading} /> */}
       </li>
-    );
+    )
   }
 }

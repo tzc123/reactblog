@@ -13,6 +13,7 @@ export default () => {
     <Provider {...stores}>
       <BrowserRouter>
         <div>
+          {/* <Mask/> */}
           <Header/>
           <Switch>
             <Route path="/" exact component={Home}/>

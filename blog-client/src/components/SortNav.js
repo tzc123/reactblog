@@ -4,6 +4,7 @@ import { observable, action } from 'mobx'
 import { observer, inject } from 'mobx-react'
 
 class SortNav extends React.Component {
+  
   render() {
     const { list, setActive, active } = this.props
     return (

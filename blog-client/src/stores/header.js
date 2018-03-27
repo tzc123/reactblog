@@ -41,18 +41,6 @@ class HeaderStore {
   ]
   @observable result = []
   @observable focused = false
-  @computed get activeClass() {
-    return `main-header${this.active ? ' active' : ''}`
-  }
-  @action setArticleCount(articleCount) {
-    this.nav[1].subNav = articleCount
-  }
-  loadData() {
-    getArticleCount()
-    .then(res => {
-      this.setArticleCount(res)
-    })
-  }
   search = debounce((function (target) {
     const keyword = target.value
     search(keyword)
@@ -60,17 +48,36 @@ class HeaderStore {
         res && this.setResult(res)
       })
   }).bind(this), 500, true)
+
+  @computed get activeClass() {
+    return `main-header${this.active ? ' active' : ''}`
+  }
+
+  @action setArticleCount(articleCount) {
+    this.nav[1].subNav = articleCount
+  }
+
+  loadData() {
+    getArticleCount()
+    .then(res => {
+      this.setArticleCount(res)
+    })
+  }
+
   @action setResult(result) {
     this.result = result
   }
+
   @action changeActive() {
     this.active = !this.active
   }
+
   @action cancelActive(e) {
     if (e.target.href) {
       this.active = false
     }
   }
+
   @action setFocused(focused) {
     if (focused) {
       this.focused = focused
@@ -81,9 +88,11 @@ class HeaderStore {
       }), 200);
     }
   }
+
   @action changeSubNavActive(index) {
     this.nav[index].active = !this.nav[index].active
   }
+
   constructor () {
     initialData || this.loadData()
     this.changeActive = this.changeActive.bind(this)

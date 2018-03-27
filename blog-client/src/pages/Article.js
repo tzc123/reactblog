@@ -45,8 +45,9 @@ function initArticle() {
       img => img.addEventListener('load', this.handleLoad)
     )
   }
-  setTimeout(() => scrollTo(0, 0), 0)  
+  setTimeout(() => scrollTo(0, 0), 50)  
 }
+
 @inject('article')
 @observer class Article extends React.Component {
   
@@ -61,6 +62,7 @@ function initArticle() {
     loadData(this.props.match.params.id)
       .then(initArticle.bind(this))
   }
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
     [].map.call(
@@ -70,16 +72,19 @@ function initArticle() {
     this.frameId && cancelAnimationFrame(this.frameId)
     this.props.article.clear()
   }
+
   componentWillReceiveProps(props) {
     const { match: { params: { id } }, article: { loadData } } = props
     if (id == this.props.match.params.id) return
     loadData(id)
       .then(initArticle.bind(this))
   }
+
   handleCatelogClick(index, e) {
     e.preventDefault()
     this.animate(index, 60)
   }
+
   animate(index, speed) {
     const top = this.tops[index]
     const activeLine = window.scrollY || window.pageYOffset
@@ -101,24 +106,38 @@ function initArticle() {
     }
     handle()
   }
+
   render() {
-    const { article: { 
-        title, 
-        content, 
-        browse, 
-        category, 
-        created_at, 
-        catelog, 
-        handleScroll 
-      }, active, top } = this.props.article
+    const { 
+      article: {
+        article: { 
+          title, 
+          content, 
+          browse, 
+          category, 
+          created_at, 
+          catelog, 
+          comments,
+          handleScroll 
+        }, 
+        active, 
+        top 
+      },
+      match: {
+        params: {
+          id
+        }
+      }
+    } = this.props
     const catelogComponent = <Catelog catelog={catelog} top={top} handleClick={this.handleCatelogClick.bind(this)} />
+
     return title 
     ? (
       <main className="article">
         <article>
           <ArticleHeader {...{title, browse, category, created_at}}/>
           <ArticleContent content={content}/>
-          <ArticleFooter />
+          <ArticleFooter comments={comments} id={id} />
         </article>
         <aside>
           <div>

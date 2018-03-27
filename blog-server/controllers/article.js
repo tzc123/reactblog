@@ -2,7 +2,7 @@ const ArticleModel = require('../models/article')
 const config = require('../config')
 const cache = require('../cache')
 
-const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses, simpleAuth } = require('../services/article')
+const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses, simpleAuth, checkId } = require('../services/article')
 
 module.exports = {
   async list(ctx) {
@@ -11,12 +11,6 @@ module.exports = {
       request: { url, method } } = ctx
     try{
       let articles = await getArticles(category, size, index, sortby)
-      const browses = await getBrowses()
-      articles = articles.map(article => {
-        const browse = browses[article._id] || 0
-        article.browse = browse
-        return article
-      })
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })
         ctx.body = {
@@ -40,13 +34,16 @@ module.exports = {
       query: { rmd }, 
       request: { url, method } 
     } = ctx
+    if (!checkId(ctx, id)) return
     try {
       const article = rmd == 1
       ? await ArticleModel.findById(id, true)
       : await getArticle(id)
       if (article) {
-        const browse = await getBrowse(id)
-        article.browse = browse
+        article.browse = await getBrowse(id)
+        if (rmd != 1) {
+          article.comments = (await ArticleModel.getComments(id)).comments
+        }
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,
@@ -112,6 +109,8 @@ module.exports = {
       request: { method, url , body = {}}, 
     } = ctx
     const { secret } = body
+    
+    if (!checkId(ctx, id)) return
     if (!simpleAuth(ctx, secret)) return
     if (id) {
       try {
@@ -152,6 +151,7 @@ module.exports = {
   async update(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
     const { content, description, title, category, markdown, catelog, secret } = body
+    if (!checkId(ctx, id)) return
     if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
@@ -217,6 +217,37 @@ module.exports = {
       unknownError(ctx, err)
     }
   },
+  async comment(ctx) {
+    const { params: { id }, request: { body = {}, url, method } } = ctx
+    const { text } = body
+    if (!checkId(ctx, id)) return
+    if (!text) {
+      logger.info('无内容', { url, method })
+      ctx.body = {
+        success: false,
+        message: '请输入评论'
+      }
+    } else {
+      try {
+        const { ok, nModified, n } = await ArticleModel.setComment(id, { text })
+        if (ok) {
+          ctx.body = {
+            success: true,
+            message: 'success'
+          }
+        } else {
+          logger.error('数据库错误', { url, method, id, res })          
+          ctx.body = {
+            success: false,
+            message: '数据库错误'
+          }
+        }
+      } catch (err) {
+        unknownError(ctx, err)
+      }
+    }
+
+  },
   async search(ctx) {
     const { request: { url, method }, query: { keyword } } = ctx
     if (!keyword) {
@@ -239,6 +270,7 @@ module.exports = {
   },
   async flush(ctx) {
     const { request: { url, method }, query: { secret } } = ctx
+    if (!secret) return
     if (!simpleAuth(ctx, secret)) return
     try {
       await flush(url, method)

@@ -25,22 +25,6 @@ class HomeStore {
       sortby: 'created_at'      
     }
   ]
-  
-  loadData() {
-    return getArticleList({
-      category: this.category,
-      sortby: this.list[this.active].sortby
-    })
-      .then(this.setArticleList.bind(this))
-  }
-
-  triggerAnimation() {
-    this.setAnimated(true)
-    setTimeout(() => {
-      this.setAnimated(false)
-    }, 500);
-    setTimeout(() => scrollTo(0, 0), 0)
-  }
 
   @action setCategory(category) {
     this.category = category
@@ -67,6 +51,23 @@ class HomeStore {
   @action setAnimated(animated) {
     this.animated = animated
   }
+
+  loadData() {
+    return getArticleList({
+      category: this.category,
+      sortby: this.list[this.active].sortby
+    })
+      .then(this.setArticleList.bind(this))
+  }
+
+  triggerAnimation() {
+    this.setAnimated(true)
+    setTimeout(() => {
+      this.setAnimated(false)
+    }, 500);
+    setTimeout(() => scrollTo(0, 0), 0)
+  }
+  
   constructor() {
     this.setArticleList(
       initialData

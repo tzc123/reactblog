@@ -2,6 +2,7 @@
   position: fixed;
   top: 130px;
 }
+
 .game {
   box-sizing: border-box;
   border: 2px solid rgb(187, 173, 160);

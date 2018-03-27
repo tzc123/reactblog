@@ -33,6 +33,7 @@ let initialData = isNode
       : window.innerWidth > 768
         ? <Game/>
         : ''
+        
     return articles.length != 0
     ? (
       <main className="home">

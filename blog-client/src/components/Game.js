@@ -2,6 +2,7 @@ import { observer } from "mobx-react"
 import { observable, action } from "mobx"
 import '../styles/game.css'
 import throttle from '../utils/throttle'
+
 const isNode = typeof window === 'undefined'
 const boxType = {
   2: {
@@ -127,8 +128,12 @@ const boxType = {
     this.boxs = createInitialBoxs()
     this.setScore(this.createBox() + this.createBox())
     this.draw()
-    window.addEventListener('keydown', throttle(this.handleKeyDown.bind(this), 300))
+    window.addEventListener(
+      'keydown', 
+      throttle(this.handleKeyDown.bind(this), 300)
+    )
   }
+
   createInitialBoxs() {
     const initialBoxs = []
     for (let i = 0; i < 16; i++) {
@@ -161,6 +166,7 @@ const boxType = {
     }
     return initialBoxs
   }
+
   createBox() {
     const { boxs } = this
     let emptyBoxs = boxs.map((boxs, index) => {
@@ -179,6 +185,7 @@ const boxType = {
     boxs[index].index = index
     return value
   }
+
   drawLine() {
     const { ctx } = this
     ctx.strokeStyle = 'rgb(187, 173, 160)'
@@ -194,6 +201,7 @@ const boxType = {
       ctx.stroke()
     }
   }
+
   drawBoxs() {
     const { ctx, boxs } = this
     ctx.lineJoin = "round"
@@ -211,21 +219,29 @@ const boxType = {
       ctx.fill()
       ctx.font = type.font
       ctx.fillStyle = type.textColor
-      ctx.fillText(box.value, position[0].x + type.offset.x, position[0].y + type.offset.y)
+      ctx.fillText(
+        box.value, 
+        position[0].x + type.offset.x, 
+        position[0].y + type.offset.y
+      )
     })
   }
+
   draw() {
     this.drawLine()
     this.drawBoxs()
   }
+
   clear() {
     const { ctx } = this
     ctx.clearRect(0, 0, 200, 200)
   }
+
   handleKeyDown(e) {
     const { key } = e
     this.trigger(key)
   }
+
   trigger(key) {
     const { boxs } = this
     const moveTasks = []
@@ -401,6 +417,7 @@ const boxType = {
       handle.call(this)
     }
   }
+
   mergeBoxs() {
     const { ctx, boxs, createInitialBoxs } = this
     const newBoxs = createInitialBoxs()
@@ -415,6 +432,7 @@ const boxType = {
     }
     this.boxs = newBoxs
   }
+
   @action setScore(score) {
     const { current, best } = this
     const newScore = current + score
@@ -424,6 +442,7 @@ const boxType = {
       localStorage.setItem('best', newScore)  
     }
   }
+  
   render() {
     const { current, best } = this
     return (

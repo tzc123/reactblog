@@ -10,11 +10,14 @@ const initialArticle = {
   ategory: '',
   created_at: '0000-00-00',
   catelog: [],
+  comments: []
 }
 
 class ArticleStore {
+  
   @observable article = initialArticle
   @observable active = 0
+  
   @computed get top() {
     return `${(36 + this.active * 26) / 16}rem`
   }

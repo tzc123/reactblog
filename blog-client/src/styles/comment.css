@@ -1,0 +1,111 @@
+.comment-area {
+  display: flex;
+}
+
+.comment-area>p {
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+  flex: 1;
+  background: #f9f9f9;
+  border: 1px solid #999999;
+  border-radius: 5px;
+  outline: none;
+  letter-spacing: 1px;
+  line-height: 14px;
+  font-size: 16px;
+  padding: 10px;
+}
+
+.comment-area>p::before {
+  content: '来啊，bb啊';
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  color: #666;
+}
+
+.comment-area>p:focus {
+  border-color: #222b39;
+  background: #fff;
+}
+
+.comment-area>p:focus::before {
+  content: '';
+}
+
+/* .comment-area>p:focus + .submit {
+  display: block;
+} */
+
+.comment-area>.submit {
+  /* display: none;  */
+  text-align: center;
+  line-height: 36px;
+  display: block;   
+  margin-left: 5px;
+  height: 36px;
+  width: 80px;
+  font-size: 16px;
+  border-radius: 5px;
+  background: #222b39;
+  color: #fff;
+  outline: none;
+  border: none;
+  align-self: flex-end;
+  transition: width .5s;
+}
+
+.comment {
+  border-bottom: 1px solid #f4f4f4; 
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.comment>header {
+  height: 30px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
+.comment>header>span {
+  float: right;
+  color: #6c727c;
+  font-size: 14px;
+}
+
+.comment>.content {
+  height: 30px;
+  line-height: 30px;
+  letter-spacing: 1px;
+}
+
+.comment>footer {
+  height: 22px;
+}
+
+.comment>footer>ul {
+  width: 260px;
+  height: 20px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+
+.tag {
+  height: 16px;
+  line-height: 16px;
+  font-size: 12px;
+  font-weight: 400;
+  padding: 2px 0px 2px 7px;
+  border: 1px solid #999999;
+  border-radius: 20px;
+  transition: all .5s;
+}
+
+.tag:hover {
+  background: #222b39;
+  color: #fff;
+  cursor: pointer;
+}

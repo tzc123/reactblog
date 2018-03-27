@@ -2,6 +2,7 @@ import '../styles/catelog.css'
 import { inject } from 'mobx-react';
 
 class Catelog extends React.Component {
+  
   render() {
     const { catelog , top , handleClick } = this.props
     return (

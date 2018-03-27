@@ -22,8 +22,7 @@ app.use(router.routes())
 app.use(router.allowedMethods())
 
 app.on('error', (err, ctx) => {
-  console.log(err)
-  logger.error('服务器错误', { err: err.stack, ctx })
+  logger.error('服务器错误', { err: err.stack })
 })
 
 app.listen(port, () => {

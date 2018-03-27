@@ -5,7 +5,8 @@ const domain = process.env.DEV == 'local'
 
 export function getArticleList(options) {
   return get(
-    domain + '/article', {
+    domain + '/article', 
+    {
       category: options.category || '',
       size: options.size || 10,
       index: options.index || 1,
@@ -51,9 +52,8 @@ export function getArticleCount() {
 
 export function search(keyword) {
   return get(
-    domain + '/search', {
-      keyword
-    }
+    domain + '/search', 
+    { keyword }
   )
     .then(res => {
       return res.success
@@ -61,3 +61,17 @@ export function search(keyword) {
       : []
     })
 }
+
+export function comment(id, text) {
+  if (!id || !text ) return
+  return post(
+    domain + '/article/' + id + '/comment', 
+    { text }
+  )
+    .then(res => {
+      return res.success
+      ? res.data
+      : null
+    })
+}
+

@@ -2,6 +2,7 @@ import ArticleItem from './ArticleItem.js'
 import '../styles/articlelist.css'
 
 class ArticleList extends React.Component {
+  
   render() {
     const { articles, active, animated } = this.props
     let articleItemComponent

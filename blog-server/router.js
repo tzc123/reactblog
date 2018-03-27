@@ -13,6 +13,7 @@ router
   .get('/flush', article.flush)
   .post('/article', article.create)
   .post('/article/:id/remove', article.remove)
+  .post('/article/:id/comment', article.comment)
   .post('/article/:id', article.update)
   .post('/image', parser, upload)
 
