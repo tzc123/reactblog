@@ -133,7 +133,6 @@ module.exports = {
   },
   checkId(ctx, id) {
     const { request: { url, method } } = ctx
-    console.log(id)
     if (!hex.test(id)) {
       logger.error('非法id', { url, method })
       ctx.body = {

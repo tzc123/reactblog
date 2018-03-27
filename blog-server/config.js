@@ -1,5 +1,5 @@
 const path = require('path')
-
+const origins = ['http://122.152.205.25', 'http://122.152.205.25:2333', 'http://122.152.205.25:4321']
 module.exports = {
   server: {
     port: 4321,
@@ -27,12 +27,12 @@ module.exports = {
     origin: process.env.NODE_ENV == 'production'
             ? function (request) {
                 const { origin } = request.header
-                // if (origin.indexOf('http://122.152.205.25:2333') != -1) {
-                //   return 'http://122.152.205.25:2333'
-                // } else if (origin.indexOf('http://122.152.205.25') != -1) {
-                //   return 'http://122.152.205.25'
-                // }
-                return origin
+                for (let _origin of origins) {
+                  if (_origin == origin) {
+                    return origin
+                  }
+                }
+                return ''
               }
             : 'http://localhost:8080',
     credentials: true,
