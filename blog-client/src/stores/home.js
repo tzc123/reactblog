@@ -64,8 +64,7 @@ class HomeStore {
     this.setAnimated(true)
     setTimeout(() => {
       this.setAnimated(false)
-    }, 500);
-    setTimeout(() => scrollTo(0, 0), 0)
+    }, 500)
   }
   
   constructor() {

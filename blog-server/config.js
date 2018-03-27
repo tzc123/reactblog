@@ -27,12 +27,13 @@ module.exports = {
     origin: process.env.NODE_ENV == 'production'
             ? function (request) {
                 const { origin } = request.header
-                for (let _origin of origins) {
-                  if (_origin == origin) {
-                    return origin
-                  }
-                }
-                return ''
+                // for (let _origin of origins) {
+                //   if (_origin == origin) {
+                //     return origin
+                //   }
+                // }
+                // return ''
+                return origin
               }
             : 'http://localhost:8080',
     credentials: true,

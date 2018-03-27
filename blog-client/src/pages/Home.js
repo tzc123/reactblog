@@ -24,7 +24,6 @@ class Home extends React.Component {
     const { location: { search } } = props
     const { category } = search ? queryString(search) : {}
     this.props.home.setCategory(category || '')
-      .then(() => setTimeout(() => scrollTo(0, 0), 0))
   }
 
   render() {
