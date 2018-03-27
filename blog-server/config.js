@@ -25,7 +25,14 @@ module.exports = {
   secret: 'b946de9eb0fde32fa158f3749de92dc8',
   cors: {
     origin: process.env.NODE_ENV == 'production'
-            ? 'http://122.152.205.25'
+            ? function (request) {
+                const { origin } = request.header
+                if (origin.indexOf('http://122.152.205.25') != -1) {
+                  return 'http://122.152.205.25'
+                } else if (origin.indexOf('http://122.152.205.25:2333') != -1) {
+                  return 'http://122.152.205.25:2333'
+                }
+              }
             : 'http://localhost:8080',
     credentials: true,
     methods: ['GET', 'POST']

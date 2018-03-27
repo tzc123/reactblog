@@ -239,9 +239,7 @@ module.exports = {
         const { ok, nModified, n } = await ArticleModel.setComment(id, { text })
         if (ok) {
           logger.info('评论成功', { url, method, id })  
-          console.log(ctx.session.commentTime) 
-          ctx.session.commentTime = Date.now()  
-          console.log(ctx.session.commentTime)               
+          ctx.session.commentTime = Date.now()             
           ctx.body = {
             success: true,
             message: '评论成功'
