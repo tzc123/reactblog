@@ -2,6 +2,7 @@ import '../styles/comment.css'
 import { comment } from '../api'
 import { inject } from 'mobx-react'
 import throttle from '../utils/throttle'
+
 let offsetTop
 function handleScroll() {
   const { setSticky } = this.props.article
