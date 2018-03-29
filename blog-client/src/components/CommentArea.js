@@ -24,6 +24,7 @@ class CommentArea extends React.Component {
   }
 
   componentWillUnmount() {
+    offsetTop = null
     window.removeEventListener('scroll', this.handleScroll)
   }
 
