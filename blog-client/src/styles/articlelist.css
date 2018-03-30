@@ -5,6 +5,10 @@
   background: #f4f4f4;
 }
 
+.fade{
+  animation: fade .5s forwards;
+}
+
 .animated {
   animation: show_to_top .5s;
 }

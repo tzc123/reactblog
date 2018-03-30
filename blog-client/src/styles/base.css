@@ -55,11 +55,6 @@
 			display: none;
 		}
 
-		.loading {
-			margin: 100px auto;
-			text-align: center;
-		}
-
 		.ellipsis {
 			overflow: hidden;
 			text-overflow: ellipsis;
@@ -110,6 +105,13 @@
 			from {
 				opacity: 0;
 				transform: scale(1,0);
+			}
+		}
+
+		@keyframes fade {
+			to {
+				opacity: 0;
+				transform: translateY(100px)
 			}
 		}
 

@@ -7,7 +7,7 @@ import { inject, observer } from 'mobx-react'
 class SortNav extends React.Component {
   
   render() {
-    const { list, setActive, active } = this.props.home
+    const { list, active, changeActive } = this.props.home
     return (
       <nav className="sort-nav">
         <ul>
@@ -16,7 +16,7 @@ class SortNav extends React.Component {
               (item, index) => (
                 <li className={active == index ? 'active' : ''} 
                   key={index} 
-                  onClick={() => setActive(index)}>
+                  onClick={() => changeActive(index)}>
                   {item.text}
                 </li>
               )

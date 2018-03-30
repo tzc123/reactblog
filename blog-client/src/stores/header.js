@@ -41,6 +41,8 @@ class HeaderStore {
   ]
   @observable result = []
   @observable focused = false
+  @observable progress = 0
+
   search = debounce((function (target) {
     const keyword = target.value
     search(keyword)
@@ -93,12 +95,28 @@ class HeaderStore {
     this.nav[index].active = !this.nav[index].active
   }
 
+  @action setProgress(progress) {
+    this.progress = progress
+  }
+
+  changeProgress(progress) {
+    if (this.progress == process) return
+    this.progress = progress
+    if (progress == 1) {
+      setTimeout(() => {
+        this.setProgress(0)
+      }, 1000);
+    }
+  }
+
   constructor () {
     initialData || this.loadData()
     this.changeActive = this.changeActive.bind(this)
     this.cancelActive = this.cancelActive.bind(this)
     this.setResult = this.setResult.bind(this)
     this.setFocused = this.setFocused.bind(this)
+    this.setProgress = this.setProgress.bind(this)
+    this.changeProgress = this.changeProgress.bind(this)
     this.changeSubNavActive = this.changeSubNavActive.bind(this)
   }
 }

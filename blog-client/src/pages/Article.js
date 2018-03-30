@@ -1,25 +1,26 @@
 import { observer, inject } from "mobx-react"
+import Loading from '../components/Loading'
 import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
 import Catelog from '../components/Catelog'
 import '../styles/article.css'
-import throttle from '../utils/throttle'
+import debounce from '../utils/debounce'
 
 const isNode = typeof window === 'undefined'
 
 const handleScroll = function () {
-  const { tops, active, props: { article: { setActive } }  } = this
+  const { tops, props: { article: { setActive, active } }  } = this
   if (!tops) return
   const activeLine = window.scrollY || window.pageYOffset
   let newActive = active
   let minDistance = Infinity
   tops.forEach((top, index) => {
-    const distance = activeLine - top
-    if (distance > 0 && distance < minDistance) {
-      minDistance = distance
-      newActive = index
-    }
+      const distance = Math.abs(top - activeLine)
+      if (distance < minDistance) {
+        minDistance = Math.min(distance, minDistance) 
+        newActive = index
+      }
   })
   setActive(newActive)
 }
@@ -52,7 +53,7 @@ function initArticle() {
   
   constructor() {
     super()
-    this.handleScroll = throttle(handleScroll.bind(this), 50, true)
+    this.handleScroll = debounce(handleScroll.bind(this), 100)
     this.handleLoad = handleLoad.bind(this)
   }
 
@@ -156,9 +157,7 @@ function initArticle() {
         {/* <img className="top" src={require('../images/arrow.png')}/> */}
       </main>
     ) 
-    : <main className="home">
-        <h1 className="loading">加载中...</h1>
-      </main>
+    : ''
   }
 }
 

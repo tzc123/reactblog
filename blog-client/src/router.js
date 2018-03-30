@@ -1,8 +1,8 @@
-import Home from "./pages/Home.js";
-import Article from "./pages/Article.js";
-import Header from "./components/Header";
+import Home from "./pages/Home.js"
+import Article from "./pages/Article.js"
+import Header from "./components/Header"
 import Mask from "./components/Mask"
-import About from "./pages/About";
+import About from "./pages/About"
 import NotFound from "./pages/NotFound";
 import { Provider } from 'mobx-react'
 import stores from './stores'

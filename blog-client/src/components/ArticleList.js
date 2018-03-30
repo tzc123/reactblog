@@ -5,13 +5,13 @@ import { inject, observer } from 'mobx-react'
 @inject('home')
 @observer
 class ArticleList extends React.Component {
-  
+
   render() {
-    const { articles, active, animated } = this.props.home
+    const { articles, active, animated, fade } = this.props.home
     let articleItemComponent
     if (articles.length == 0) {
-      articleItemComponent = <h1 className="loading">加载中...</h1>
-    } else if (active == 0) {
+      articleItemComponent = ''
+    } else if (active == 0) {    
       const date = {}
       articleItemComponent = []
       articles.forEach((article, index) => {
@@ -34,14 +34,13 @@ class ArticleList extends React.Component {
       })
     } else {
       articleItemComponent = articles.map(
-        (article, index) => (
-          <ArticleItem {...article} index={index} key={index} />
-        ) 
+        (article, index) => {
+          return <ArticleItem {...article} index={index} key={index} />
+        }
       )
     }
-    
     return (
-      <ul className={'article-list' + (animated ? ' animated' : '')}>
+      <ul className={'article-list' + (animated ? ' animated' : '') + (fade ? ' fade' : '')}>
         {articleItemComponent}
       </ul>
     )

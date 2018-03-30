@@ -10,6 +10,7 @@ class HomeStore {
   @observable active = 2
   @observable category = ''
   @observable animated = false
+  @observable fade = false
 
   list = [
     {
@@ -28,6 +29,7 @@ class HomeStore {
 
   @action setCategory(category) {
     this.category = category
+    this.setFade(true)
     return this.loadData()
   }
 
@@ -37,21 +39,35 @@ class HomeStore {
     this.triggerAnimation()
   }
 
-  @action setActive(active) {
+  @action changeActive(active) {
     if (active > 2 || action < 0) return
     const oldActive = this.active
-    this.active = active
     if (oldActive == 1 || active == 1) {
+      this.setFade(true)
       this.loadData()
+        .then(() => {
+          this.setActive(active)
+        })
     } else {
-      this.triggerAnimation()
+      this.setFade(true)
+      setTimeout(() => {
+        this.setActive(active)
+        this.triggerAnimation()
+      }, 100);
     }
+  }
+
+  @action setActive(active) {
+    this.active = active
   }
 
   @action setAnimated(animated) {
     this.animated = animated
   }
 
+  @action setFade(fade) {
+    this.fade = fade
+  }
   loadData() {
     return getArticleList({
       category: this.category,
@@ -61,6 +77,7 @@ class HomeStore {
   }
 
   triggerAnimation() {
+    this.setFade(false)
     this.setAnimated(true)
     setTimeout(() => {
       this.setAnimated(false)
@@ -75,6 +92,7 @@ class HomeStore {
         : []
       : []
     )
+    this.changeActive = this.changeActive.bind(this)
     this.setActive = this.setActive.bind(this)
     this.triggerAnimation = this.triggerAnimation.bind(this)
     this.loadData()

@@ -4,6 +4,7 @@ const domain = process.env.DEV == 'local'
                : 'http://122.152.205.25:4321'
 
 export function getArticleList(options) {
+  require('./stores/header').default.changeProgress(0.1)
   return get(
     domain + '/article', 
     {
@@ -11,7 +12,8 @@ export function getArticleList(options) {
       size: options.size || 10,
       index: options.index || 1,
       sortby: options.sortby || 'created_at'
-    }
+    },
+    e => require('./stores/header').default.changeProgress(e.loaded / e.total)
   )
     .then(res => {
       return res.success
@@ -25,8 +27,12 @@ export function getArticleList(options) {
 }
 
 export function getArticle(id) {
-  return get(domain + '/article/' + id)
-    .then(res => {
+  require('./stores/header').default.changeProgress(0.1)  
+  return get(
+    domain + '/article/' + id, 
+    {}, e => require('./stores/header').default.changeProgress(e.loaded / e.total)
+  )
+    .then(res => {    
       return res.success 
       ? res.data
       : null
@@ -51,11 +57,13 @@ export function getArticleCount() {
 }
 
 export function search(keyword) {
+  require('./stores/header').default.changeProgress(0.1)  
   return get(
     domain + '/search', 
-    { keyword }
+    { keyword },
+    e => require('./stores/header').default.changeProgress(e.loaded / e.total)
   )
-    .then(res => {
+    .then(res => { 
       return res.success
       ? res.data
       : []

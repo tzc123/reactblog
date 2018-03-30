@@ -2,6 +2,7 @@ import { observer, inject } from "mobx-react"
 import '../styles/header.css'
 import { Link } from "react-router-dom";
 import SubNav from './SubNav'
+import Loading from './Loading'
 
 @inject('header')
 @observer 
@@ -18,9 +19,9 @@ class Header extends React.Component {
       setFocused,
       focused,
       search, 
-      result
+      result,
+      progress
     } = this.props.header
-    
     return (
       <header className={activeClass}>
         <div className="container">
@@ -81,6 +82,7 @@ class Header extends React.Component {
             </div>
           </nav>
         </div>
+        <Loading progress={progress}/>
       </header>
     )
   }

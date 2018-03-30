@@ -1,7 +1,7 @@
 import '../styles/comment.css'
 import { comment } from '../api'
 import { inject } from 'mobx-react'
-import throttle from '../utils/throttle'
+import debounce from '../utils/debounce'
 
 let offsetTop
 function handleScroll() {
@@ -16,16 +16,16 @@ class CommentArea extends React.Component {
  
   constructor() {
     super()
-    this.handleScroll = throttle(handleScroll.bind(this), 50, true)
+    this.handleScroll = debounce(handleScroll.bind(this), 100)
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll)
+    // window.addEventListener('scroll', this.handleScroll)
   }
 
   componentWillUnmount() {
-    offsetTop = null
-    window.removeEventListener('scroll', this.handleScroll)
+    // offsetTop = null
+    // window.removeEventListener('scroll', this.handleScroll)
   }
 
   handleSubmit() {

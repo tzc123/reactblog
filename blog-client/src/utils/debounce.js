@@ -1,4 +1,4 @@
-export default function (cb, wait, keep) {
+export default function (cb, wait, keep = false) {
   if (typeof cb != 'function' || typeof wait != 'number' || typeof keep != 'boolean') {
     console.error(new Error('debounce([function], [number], [boolean])'))
     return () => {}
