@@ -110,7 +110,6 @@ class HeaderStore {
   }
 
   constructor () {
-    initialData || this.loadData()
     this.changeActive = this.changeActive.bind(this)
     this.cancelActive = this.cancelActive.bind(this)
     this.setResult = this.setResult.bind(this)
@@ -118,6 +117,7 @@ class HeaderStore {
     this.setProgress = this.setProgress.bind(this)
     this.changeProgress = this.changeProgress.bind(this)
     this.changeSubNavActive = this.changeSubNavActive.bind(this)
+    initialData || this.loadData()
   }
 }
 
