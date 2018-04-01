@@ -41,7 +41,26 @@ module.exports = {
       })
     })
   },
+  zgetall(key) {
+    return new Promise((resolve, reject) => {
+      client.zrange(key, 0, 1, 'WITHSCORES', (err, res) => {
+        err && reject(err)
+        resolve(res)
+      })
+    })
+  },
+  zscore(key, member) {
+    return new Promise((resolve, reject) => {
+      client.zscore(key, member, (err, res) => {
+        err && reject(err)
+        resolve(res)
+      })
+    })
+  },
+  zadd: client.zadd.bind(client),
+  hmset: client.hmset.bind(client),
   exists: client.exists.bind(client),
   flush: client.flushdb.bind(client),
-  hincrby: client.hincrby.bind(client)
+  hincrby: client.hincrby.bind(client),
+  zincrby: client.zincrby.bind(client),
 }

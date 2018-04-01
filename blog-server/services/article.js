@@ -11,10 +11,10 @@ async function getBrowses() {
     try {
       browses = {}
       const newBrowses = await ArticleModel.getBrowses()
-      for (browse of newBrowses) {
+      newBrowses.forEach(browse => {
         browses[browse.id] = browse.browse
-        await cache.hset('browse', browse.id, browse.browse)
-      }
+      })
+      await cache.hmset('browse', browses)
     } catch (err) {
       logger.error('getBrowses', { err: err.stack })
       return {}
