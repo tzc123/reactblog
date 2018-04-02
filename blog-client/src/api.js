@@ -2,9 +2,10 @@ import { get, post } from './utils/request'
 const domain = process.env.DEV == 'local'
                ? 'http://localhost:4321'
                : 'http://122.152.205.25:4321'
+const changeProgress = require('./stores/header').default.changeProgress
 
 export function getArticleList(options) {
-  require('./stores/header').default.changeProgress(0.1)
+  changeProgress(0.1)
   return get(
     domain + '/article', 
     {
@@ -13,7 +14,7 @@ export function getArticleList(options) {
       index: options.index || 1,
       sortby: options.sortby || 'created_at'
     },
-    e => require('./stores/header').default.changeProgress(e.loaded / e.total)
+    e => changeProgress(e.loaded / e.total)
   )
     .then(res => {
       return res.success
@@ -27,10 +28,11 @@ export function getArticleList(options) {
 }
 
 export function getArticle(id) {
-  require('./stores/header').default.changeProgress(0.1)  
+  changeProgress(0.1)  
   return get(
     domain + '/article/' + id, 
-    {}, e => require('./stores/header').default.changeProgress(e.loaded / e.total)
+    {}, { withCredentials: true },
+    e => changeProgress(e.loaded / e.total)
   )
     .then(res => {    
       return res.success 
@@ -57,11 +59,11 @@ export function getArticleCount() {
 }
 
 export function search(keyword) {
-  require('./stores/header').default.changeProgress(0.1)  
+  changeProgress(0.1)  
   return get(
     domain + '/search', 
     { keyword },
-    e => require('./stores/header').default.changeProgress(e.loaded / e.total)
+    e => changeProgress(e.loaded / e.total)
   )
     .then(res => { 
       return res.success

@@ -9,7 +9,7 @@ module.exports = {
     const { 
       query: { category, size, index, sortby }, 
       request: { url, method } } = ctx
-    try{
+    try {
       let articles = await getArticles(category, size, index, sortby)
       if (articles.length == 0) {
         logger.info('无相关文章', { url, method })

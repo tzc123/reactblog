@@ -43,7 +43,7 @@ module.exports = {
   },
   async getArticles(category, size, index, sortby) {
     let articles = await cache.hget('articles', category || '') 
-    const browses = await getBrowses()    
+    const browses = await getBrowses()   
     if (!articles) {
       try {
         articles = await ArticleModel.paginator(category)
@@ -109,7 +109,7 @@ module.exports = {
   },
   async getBrowse(id) {
     let browse = await cache.hget('browse',id)
-    if (isNaN(browse)) {
+    if (!isNaN(browse) || browse == NaN) {
       try {
         browse = (await ArticleModel.getBrowse(id)).browse       
         await cache.hset('browse', id, browse)
