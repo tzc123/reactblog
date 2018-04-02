@@ -76,6 +76,10 @@
   word-break: break-all;
 }
 
+.markdown-body li {
+  list-style: inherit;
+}
+
 .markdown-body .image-wrapper {
   text-align: center;
 }
