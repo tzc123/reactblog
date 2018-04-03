@@ -41,7 +41,7 @@ module.exports = {
       ? await ArticleModel.findById(id, true)
       : await getArticle(id)
       if (article) {
-        article.browse = await getBrowse(id) + 1
+        article.browse = await getBrowse(id)
         logger.info('查找文章成功', { url, method })            
         ctx.body = {
           success: true,

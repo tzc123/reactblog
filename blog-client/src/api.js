@@ -31,8 +31,7 @@ export function getArticle(id) {
   changeProgress(0.1)  
   return get(
     domain + '/article/' + id, 
-    {}, { withCredentials: true },
-    e => changeProgress(e.loaded / e.total)
+    {}, e => changeProgress(e.loaded / e.total), true
   )
     .then(res => {    
       return res.success 
