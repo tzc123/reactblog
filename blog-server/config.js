@@ -33,7 +33,7 @@ module.exports = {
                 //   }
                 // }
                 // return ''
-                return origin
+                return origin || 'http://122.152.205.25:4321'
               }
             : 'http://localhost:8080',
     credentials: true,
