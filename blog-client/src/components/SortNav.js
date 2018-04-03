@@ -1,4 +1,3 @@
-import '../styles/sortnav.css'
 import { Link } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 

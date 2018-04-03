@@ -1,6 +1,5 @@
 import { observer } from "mobx-react"
 import { observable, action } from "mobx"
-import '../styles/game.css'
 import throttle from '../utils/throttle'
 
 const isNode = typeof window === 'undefined'

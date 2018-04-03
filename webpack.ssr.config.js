@@ -33,13 +33,6 @@ const config = {
 							"transform-class-properties"
 						]
 					}
-				}, 
-				{
-					test: /\.css$/,
-					use: ExtractTextPlugin.extract({
-						fallback: "style-loader",
-						use: 'css-loader'
-					})
 				},
 				{
 					test: /\.(jpeg|png|jpg|gif)$/,
@@ -56,7 +49,6 @@ const config = {
 			new webpack.DefinePlugin({
 				"process.env.NODE_ENV": '"production"'
 			}),
-			new ExtractTextPlugin("css/style.css"),
 			new webpack.ProvidePlugin({
 				React: 'react'
 			}),

@@ -1,5 +1,4 @@
 import { observer, inject } from "mobx-react"
-import '../styles/header.css'
 import { Link } from "react-router-dom";
 import SubNav from './SubNav'
 import Loading from './Loading'

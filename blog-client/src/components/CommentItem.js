@@ -1,5 +1,5 @@
 import { computed } from 'mobx'
-import calculateInterval  from '../utils/calculateInterval'
+import calculateInterval from '../utils/calculateInterval'
 
 
 export default class CommentItem extends React.Component {

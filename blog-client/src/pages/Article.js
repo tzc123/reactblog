@@ -4,7 +4,6 @@ import ArticleContent from '../components/ArticleContent'
 import ArticleHeader from '../components/ArticleHeader'
 import ArticleFooter from '../components/ArticleFooter'
 import Catelog from '../components/Catelog'
-import '../styles/article.css'
 import debounce from '../utils/debounce'
 
 const isNode = typeof window === 'undefined'
@@ -73,6 +72,7 @@ function initArticle() {
     )
     this.frameId && cancelAnimationFrame(this.frameId)
     this.props.article.clear()
+    this.props.article.setActive(0)
   }
 
   componentWillReceiveProps(props) {

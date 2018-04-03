@@ -1,5 +1,3 @@
-import '../styles/catelog.css'
-
 class Catelog extends React.Component {
   
   render() {

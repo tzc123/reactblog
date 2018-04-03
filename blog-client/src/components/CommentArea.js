@@ -1,4 +1,3 @@
-import '../styles/comment.css'
 import { comment } from '../api'
 import { inject } from 'mobx-react'
 import debounce from '../utils/debounce'

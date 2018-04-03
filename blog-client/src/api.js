@@ -2,7 +2,8 @@ import { get, post } from './utils/request'
 const domain = process.env.DEV == 'local'
                ? 'http://localhost:4321'
                : 'http://122.152.205.25:4321'
-const changeProgress = require('./stores/header').default.changeProgress
+const isNode = typeof window === 'undefined'
+const changeProgress = isNode ? () => {} : require('./stores/header').default.changeProgress
 
 export function getArticleList(options) {
   changeProgress(0.1)

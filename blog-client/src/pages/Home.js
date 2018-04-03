@@ -5,13 +5,8 @@ import Roller from '../components/Roller'
 import Game from '../components/Game'
 import SortNav from '../components/SortNav'
 import queryString from '../utils/queryString'
-import '../styles/home.css'
 
 const isNode = typeof window === 'undefined'
-
-let initialData = isNode
-  ? null
-  : window.initialData
 
 @inject('home')
 class Home extends React.Component {

@@ -1,5 +1,4 @@
 import ArticleItem from './ArticleItem.js'
-import '../styles/articlelist.css'
 import { inject, observer } from 'mobx-react'
 
 @inject('home')

@@ -1,4 +1,3 @@
-import '../styles/mask.css'
 import debounce from '../utils/debounce'
 
 export default class Mask extends React.Component {

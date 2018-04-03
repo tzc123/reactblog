@@ -1,4 +1,3 @@
-import '../styles/roller.css'
 import { inject, observer } from 'mobx-react';
 
 @inject('home')
