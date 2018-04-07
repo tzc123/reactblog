@@ -72,6 +72,10 @@
   text-align: justify;
 }
 
+.markdown-body a {
+  color: #47d8b8 !important;
+}
+
 .markdown-body p {
   word-break: break-all;
 }

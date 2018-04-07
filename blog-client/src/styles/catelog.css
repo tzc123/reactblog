@@ -39,7 +39,7 @@
 }
 
 .catelog>ul>li:hover {
-  background: rgba(34,43,57,.2);
+  color: #47d8b8 !important;
 }
 
 .catelog>ul>li.t1 {

@@ -122,6 +122,7 @@
 
 .tag:hover {
   background: #222b39;
+  border-color: #222b39;
   color: #fff;
   cursor: pointer;
 }

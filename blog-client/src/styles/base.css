@@ -60,7 +60,7 @@
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
-
+		
 		@keyframes show_pic {
 			from {
 				opacity: 0;
