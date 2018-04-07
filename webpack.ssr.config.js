@@ -3,7 +3,6 @@ const path = require('path')
 const nodeExternals = require('webpack-node-externals');
 const HtmlPlugin = require('html-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const outputPath = path.join(__dirname, 'ssr')
 const appPath = path.join(__dirname, "blog-client/src/serverRender.js")
 const serverDomain = 'http://122.152.205.25:1234/'

@@ -3,12 +3,13 @@ const path = require('path')
 const router = new Router();
 
 const { article, login, image: { parser, upload } } = require('./controllers/index')
+const articleValidator = require('./validators/article')
 
 router
   .get('/login', login.index)
-  .get('/article', article.list)
+  .get('/article', articleValidator.list, article.list)
   .get('/article/:id/comments', article.getComments)
-  .get('/article/:id', article.index)
+  .get('/article/:id', articleValidator.index, article.index)
   .get('/count', article.count)
   .get('/search', article.search)
   .get('/flush', article.flush)

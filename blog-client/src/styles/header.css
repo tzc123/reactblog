@@ -258,6 +258,7 @@
   .icon-list .line {
     height: 2px;
     background: #fff;
+    border-radius: 2px;
   }
 
   .icon-list .line-1,
