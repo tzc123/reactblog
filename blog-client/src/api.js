@@ -88,7 +88,7 @@ export function comment(id, text) {
 
 export function getComments(id) {
   if (!id) return
-  return get(domain + '/article/' + id + '/comments')
+  return get(domain + '/article/' + id + '/comment')
     .then(res => {
       return res.success
       ? res.data

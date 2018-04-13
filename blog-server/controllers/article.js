@@ -1,8 +1,12 @@
 const ArticleModel = require('../models/article')
+const CommentModel = require('../models/comment')
+const BrowseModel = require('../models/browse')
 const config = require('../config')
 const cache = require('../cache')
 
-const { flush, getArticles, getArticle, getCount, getBrowse, unknownError, setBrowse, getBrowses, simpleAuth, checkId } = require('../services/article')
+const { getArticles, getArticle, getCount } = require('../services/article')
+const { getBrowse, setBrowse, getBrowses } = require('../services/browse')
+const { flush, unknownError, simpleAuth, checkId } = require('../services/index')
 
 module.exports = {
   async list(ctx) {
@@ -35,7 +39,6 @@ module.exports = {
       request: { url, method },
       session
     } = ctx
-    if (!checkId(ctx, id)) return
     try {
       const article = rmd == 1
       ? await ArticleModel.findById(id, true)
@@ -51,7 +54,7 @@ module.exports = {
           if (!session.browse) {
             session.browse = 1
             const res = await setBrowse(id)
-            res || await ArticleModel.setBrowse(id, 1)
+            res || await BrowseModel.setBrowse(id, 1)
           } else {
             session.browse += 1
           }
@@ -242,7 +245,7 @@ module.exports = {
       }
     } else {
       try {
-        const { ok, nModified, n } = await ArticleModel.setComment(id, { text })
+        const { ok, nModified, n } = await CommentModel.setComment(id, { text })
         if (ok) {
           logger.info('评论成功', { url, method, id })  
           ctx.session.commentTime = Date.now()             
@@ -267,7 +270,7 @@ module.exports = {
     const { params: { id }, request: { url, method } } = ctx
     if (!checkId(ctx, id)) return
     try {
-      const comments = (await ArticleModel.getComments(id)).comments
+      const comments = (await CommentModel.getComments(id)).comments
       if (comments) {
         logger.info('获取评论成功', { url, method })
         ctx.body = {

@@ -8,7 +8,7 @@ const articleValidator = require('./validators/article')
 router
   .get('/login', login.index)
   .get('/article', articleValidator.list, article.list)
-  .get('/article/:id/comments', article.getComments)
+  .get('/article/:id/comment', article.getComments)
   .get('/article/:id', articleValidator.index, article.index)
   .get('/count', article.count)
   .get('/search', article.search)

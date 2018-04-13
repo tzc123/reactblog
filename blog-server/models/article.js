@@ -1,88 +1,4 @@
-const mongoose = require('mongoose')
-const { Types: { ObjectId }, Schema } = mongoose
-const commentType = {
-  text: {
-    type: String,
-    required: true
-  }, 
-  incisive: {
-    type: Number,
-    default: 0
-  }, 
-  useful: {
-    type: Number,
-    default: 0
-  }, 
-  useless: {
-    type: Number,
-    default: 0
-  }, 
-  nonsense: {
-    type: Number,
-    default: 0
-  }, 
-  created_at: {
-    type: String,
-    default: Date.now
-  }
-}
-const ArticleSchema = new Schema({
-  title: {
-    type: String,
-    required: true,
-    unique: true,
-    maxlength: 128,
-    minlength: 3,
-    trim: true
-  },
-  description: {
-    type: String,
-    maxlength: 512,
-    trim: true
-  },
-  category: {
-    type: String,
-    default: 'Other'
-  },
-  content: {
-    type: String,
-    required: true
-  },
-  created_at: {
-    type: Date,
-    default: Date.now
-  },
-  updated_at: {
-    type: Date
-  },
-  browse: {
-    type: Number,
-    default: 0,
-    min: 0
-  },
-  markdown: {
-    type: String,
-    required: true
-  },
-  catelog: {
-    type: Array,
-    default: []
-  },
-  comments: {
-    _id: false,
-    type: [
-      {
-        ...commentType,
-        subComments: {
-          type: commentType,
-          default: []
-        }
-      }
-    ],
-    default: []
-  }
-})
-const ArticleModel = mongoose.model('article', ArticleSchema)
+const ArticleModel = require('./base/article')
 
 async function paginator(category, size=10, index=1) {
   const articles = await ArticleModel.find(category ? { category } : {}, { content: 0, __v: 0, markdown: 0, catelog: 0, comments: 0 })
@@ -146,21 +62,6 @@ async function update(_id, article) {
   return res
 }
 
-async function setBrowse(_id, icrement) {
-  const res = await ArticleModel.updateOne({ _id }, { $set: { browse: icrement } })
-  return res
-}
-
-async function getBrowse(id) {
-  const res = await ArticleModel.findById(id, { browse: 1, _id: 0 })
-  return res
-}
-
-async function getBrowses() {
-  const res = await ArticleModel.find({}, { browse: 1, _id: 1 })
-  return res
-}
-
 async function count() {
   const res = await ArticleModel.aggregate(
     [
@@ -184,19 +85,6 @@ async function search(keyword) {
   return res
 }
 
-async function setComment(_id, comment) {
-  const res = await ArticleModel.updateOne(
-    { _id }, 
-    { $push: { comments: comment } } 
-  )
-  return res
-}
-
-async function getComments(id) {
-  const res = await ArticleModel.findById(id, { comments: 1 })
-  return res
-}
-
 module.exports = {
   findOne,
   create,
@@ -205,11 +93,6 @@ module.exports = {
   remove,
   paginator,
   update,
-  setBrowse,
   count,
-  getBrowse,
-  getBrowses,
-  search,
-  setComment,
-  getComments
+  search
 }
