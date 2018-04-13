@@ -51,13 +51,15 @@ module.exports = {
           data: article
         }
         if (rmd != 1) {
-          if (!session.browse) {
-            session.browse = 1
-            const res = await setBrowse(id)
-            res || await BrowseModel.setBrowse(id, 1)
-          } else {
-            session.browse += 1
-          }
+          // if (!session.browse) {
+          //   session.browse = 1
+          //   const res = await setBrowse(id)
+          //   res || await BrowseModel.setBrowse(id, 1)
+          // } else {
+          //   session.browse += 1
+          // }
+          const res = await setBrowse(id)
+          res || await BrowseModel.setBrowse(id, 1)
         } 
       } else {
         logger.info('无此文章', { url, method })    
