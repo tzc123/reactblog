@@ -10,6 +10,7 @@ module.exports = {
       name: 'app',
       script: 'blog-server/app.js',
       watch: true,
+      instances: 4,      
       "env": {
         "NODE_ENV": "production"
       },
@@ -26,6 +27,7 @@ module.exports = {
     {
       name: 'ssr',
       script: 'ssr-server/app.js',
+      instances: 4,
       watch: true,
       "env": {
         "NODE_ENV": "production"
