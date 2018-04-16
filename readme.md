@@ -1,4 +1,4 @@
-### personal blog
+## personal blog
 
 ### location
 
@@ -7,7 +7,7 @@
 ### todos
 
 * comment
-  * liks
+  * likes
   * reply
 * alert
   * success
