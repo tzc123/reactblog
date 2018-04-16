@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default (props) => {
-  if (!props) return ''
-  const { type, subNav, active } = props
+export default ({type, subNav, active}) => {
 
   return (
     <ul className={`sub-nav ${active ? 'active' : ''}`}>

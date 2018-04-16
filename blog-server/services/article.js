@@ -4,8 +4,8 @@ const cache = require('../cache')
 const { getBrowses } = require('./browse')
 
 module.exports = {
-  async getArticles(category, size, index, sortby) {
-    let articles = await cache.hget('articles', category || '') 
+  async getArticles(category = '', size, index, sortby) {
+    let articles = await cache.hget('articles', category) 
     const browses = await getBrowses()   
     if (!articles) {
       try {

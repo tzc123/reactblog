@@ -9,10 +9,9 @@ function handleScroll() {
   offsetTop || (offsetTop = this.refs.sticky.offsetTop)
   setSticky(scrollY >= offsetTop)
 }
-
 @inject('article')
 class CommentArea extends React.Component {
- 
+
   constructor() {
     super()
     this.handleScroll = debounce(handleScroll.bind(this), 100)

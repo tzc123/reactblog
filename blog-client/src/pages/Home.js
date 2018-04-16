@@ -16,10 +16,10 @@ class Home extends React.Component {
     setTimeout(() => scrollTo(0, 0), 100)              
   }
 
-  componentWillReceiveProps(props) {
-    const { location: { search } } = props
-    const { category } = search ? queryString(search) : {}
-    this.props.home.setCategory(category || '')
+  componentWillReceiveProps({location: { search }}) {
+    console.log(search)
+    const { category = '' } = search ? queryString(search) : {}
+    this.props.home.setCategory(category)
   }
 
   render() {

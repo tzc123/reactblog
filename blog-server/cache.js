@@ -23,8 +23,6 @@ module.exports = {
       })
     })
   },
-  set: client.set.bind(client),
-  hset: client.hset.bind(client),
   hget(hashkey, key) {
     return new Promise((resolve, reject) => {
       client.hget(hashkey, key, (err, res) => {
@@ -57,6 +55,8 @@ module.exports = {
       })
     })
   },
+  set: client.set.bind(client),
+  hset: client.hset.bind(client),
   zadd: client.zadd.bind(client),
   hmset: client.hmset.bind(client),
   exists: client.exists.bind(client),

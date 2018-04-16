@@ -5,27 +5,20 @@ const domain = process.env.DEV == 'local'
 const isNode = typeof window === 'undefined'
 const changeProgress = isNode ? () => {} : require('./stores/header').default.changeProgress
 
-export function getArticleList(options) {
+export function getArticleList({category = '', size = 10, index = 1, sortby = 'created_at'}) {
   changeProgress(0.1)
   return get(
     domain + '/article', 
-    {
-      category: options.category || '',
-      size: options.size || 10,
-      index: options.index || 1,
-      sortby: options.sortby || 'created_at'
-    },
+    { category, size, index, sortby },
     e => changeProgress(e.loaded / e.total)
-  )
-    .then(res => {
-      return res.success
-      ? res.data
-      : []
-    })
-    .catch(err => {
-      console.log(err)
-      return []
-    })
+  ).then(res => {
+    return res.success
+    ? res.data
+    : []
+  }).catch(err => {
+    console.log(err)
+    return []
+  })
 }
 
 export function getArticle(id) {
@@ -33,29 +26,26 @@ export function getArticle(id) {
   return get(
     domain + '/article/' + id, 
     {}, e => changeProgress(e.loaded / e.total), true
-  )
-    .then(res => {    
-      return res.success 
-      ? res.data
-      : null
-    })
-    .catch(err => {
-      console.log(err)
-      return null
-    })
+  ).then(res => {    
+    return res.success 
+    ? res.data
+    : null
+  }).catch(err => {
+    console.log(err)
+    return null
+  })
 }
 
 export function getArticleCount() {
   return get(domain + '/count')
-    .then(res => {
-      return res.success
-      ? res.data
-      : []
-    })
-    .catch(err => {
-      console.log(err)
-      return []
-    })
+  .then(res => {
+    return res.success
+    ? res.data
+    : []
+  }).catch(err => {
+    console.log(err)
+    return []
+  })
 }
 
 export function search(keyword) {
@@ -64,12 +54,11 @@ export function search(keyword) {
     domain + '/search', 
     { keyword },
     e => changeProgress(e.loaded / e.total)
-  )
-    .then(res => { 
-      return res.success
-      ? res.data
-      : []
-    })
+  ).then(res => { 
+    return res.success
+    ? res.data
+    : []
+  })
 }
 
 export function comment(id, text) {
@@ -78,21 +67,20 @@ export function comment(id, text) {
     domain + '/article/' + id + '/comment', 
     { text },
     { withCredentials: true }
-  )
-    .then(res => {
-      return res.success
-      ? res.data
-      : null
-    })
+  ).then(res => {
+    return res.success
+    ? res.data
+    : null
+  })
 }
 
 export function getComments(id) {
   if (!id) return
   return get(domain + '/article/' + id + '/comment')
-    .then(res => {
-      return res.success
-      ? res.data
-      : null
-    })
+  .then(res => {
+    return res.success
+    ? res.data
+    : null
+  })
 }
 

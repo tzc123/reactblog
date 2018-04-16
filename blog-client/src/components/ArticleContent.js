@@ -1,5 +1,5 @@
-export default (props) => (
+export default ({content = ''}) => (
   <div className="article-content markdown-body" 
-    dangerouslySetInnerHTML={{__html: props.content || ''}}>
+    dangerouslySetInnerHTML={{__html: content}}>
   </div>
 )

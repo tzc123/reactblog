@@ -74,7 +74,7 @@ module.exports = {
   },
   async create(ctx) {
     const { request: { body = {}, url, method } } = ctx
-    const { content, description, title, catelog, category, markdown , secret} = body
+    const { content, description = '', title, catelog, category, markdown , secret} = body
     if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
       try {
@@ -84,7 +84,7 @@ module.exports = {
           markdown,
           title,
           catelog,
-          description: description || ''
+          description: description
         })
         if (!newArticle) {
           logger.info('同名', { url, method, title })
@@ -158,7 +158,7 @@ module.exports = {
   },
   async update(ctx) {
     const { params: { id }, request: { body = {}, url, method } } = ctx
-    const { content, description, title, category, markdown, catelog, secret } = body
+    const { content, description = '', title, category, markdown, catelog, secret } = body
     if (!checkId(ctx, id)) return
     if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
@@ -169,7 +169,7 @@ module.exports = {
           markdown,
           catelog,
           title,
-          description: description || ''
+          description: description
         })
         if (ok == 1) {
           if (n >= 1) {

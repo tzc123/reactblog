@@ -75,8 +75,7 @@ function initArticle() {
     this.props.article.setActive(0)
   }
 
-  componentWillReceiveProps(props) {
-    const { match: { params: { id } }, article: { loadData } } = props
+  componentWillReceiveProps({ match: { params: { id } }, article: { loadData } }) {
     if (id == this.props.match.params.id) return
     loadData(id)
       .then(initArticle.bind(this))

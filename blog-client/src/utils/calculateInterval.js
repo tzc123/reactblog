@@ -9,7 +9,7 @@ export default function (date) {
   const years = now.getFullYear() - date.getFullYear()
   if (years > 0) return years + '年前'
   const months = now.getMonth() - date.getMonth()
-  if (months > 0) return months + '月前'
+  if (months > 0) return months + '个月前'
   const days = now.getDate() - date.getDate()
   if (days > 0) return days + '天前'
   const houers = now.getHours() - date.getHours()
