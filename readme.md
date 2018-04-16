@@ -1,6 +1,18 @@
-### 个人博客
+### personal blog
 
-### 网址
+### location
 
-主页：http://www.tzc123.cn
+122.152.205.25
+
+### todos
+
+* comment
+  * liks
+  * reply
+* alert
+  * success
+  * fail
+  * warning
+* paginator
+* optimize page style 
   
