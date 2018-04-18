@@ -93,7 +93,7 @@ class HomeStore {
     this.changeActive = this.changeActive.bind(this)
     this.setActive = this.setActive.bind(this)
     this.triggerAnimation = this.triggerAnimation.bind(this)
-    initialData || this.loadData()
+    initialData && initialData.home || this.loadData()
   }
 }
 
