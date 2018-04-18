@@ -36,6 +36,7 @@ class HomeStore {
   @action setArticleList(articles) {
     this.articles = articles
     this.total = articles.length
+    console.log(articles)
     this.triggerAnimation()
   }
 
@@ -72,8 +73,9 @@ class HomeStore {
     return getArticleList({
       category: this.category,
       sortby: this.list[this.active].sortby
-    })
-      .then(this.setArticleList.bind(this))
+    }).then(
+      this.setArticleList.bind(this)
+    )
   }
 
   triggerAnimation() {
