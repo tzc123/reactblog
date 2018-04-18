@@ -103,7 +103,7 @@
 
 .comment>footer>ul {
   flex: 1;
-  max-width: 300px;
+  max-width: 250px;
   height: 22px;
   display: flex;
   justify-content: space-between;
@@ -115,7 +115,7 @@
   line-height: 17px;
   font-size: 12px;
   font-weight: 400;
-  padding: 2px 0px 2px 7px;
+  padding: 2px 8px;
   border: 1px solid #999999;
   border-radius: 20px;
   transition: all .5s;

@@ -23,16 +23,16 @@ export default class CommentItem extends React.Component {
         <footer>
           <ul>
             <li className="tag">
-              精辟（{incisive}）
+              精辟 {incisive}
             </li>
             <li className="tag">
-              有用（{useful}）
+              有用 {useful}
             </li>
             <li className="tag">
-              没用（{useless}）
+              没用 {useless}
             </li>
             <li className="tag">
-              扯淡（{nonsense}）
+              扯淡 {nonsense}
             </li>            
           </ul>
         </footer>
