@@ -85,15 +85,12 @@ class HomeStore {
   }
   
   constructor() {
-    this.setArticleList(
-      initialData && initialData.home
-      ? initialData.home.articles
-      : []
-    )
     this.changeActive = this.changeActive.bind(this)
     this.setActive = this.setActive.bind(this)
     this.triggerAnimation = this.triggerAnimation.bind(this)
-    initialData && initialData.home || this.loadData()
+    initialData && initialData.home 
+    ? this.setArticleList(initialData.home.articles)
+    : this.loadData()
   }
 }
 
