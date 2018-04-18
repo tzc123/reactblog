@@ -95,7 +95,7 @@ export function search(keyword) {
 
 export function comment(id, text) {
   const token = preventRepeate('comment')    
-  if (!id || !text ) return
+  if (!id || !text ) return Promise.reject('不能提交空评论')
   return post(
     domain + '/article/' + id + '/comment', 
     { text }, { 

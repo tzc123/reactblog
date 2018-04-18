@@ -28,11 +28,12 @@ class CommentArea extends React.Component {
 
   handleSubmit() {
     const { props: { id, article: { loadComments } }, refs: { input } } = this
-    comment(
-      id,
-      input.innerText
-    )
-      .then(loadComments.bind(null, id))
+    comment(id, input.innerText).then(
+      loadComments.bind(null, id)
+    ).catch(err => {
+      console.error(err)
+    })
+
   }
 
   handleBlur(e) {

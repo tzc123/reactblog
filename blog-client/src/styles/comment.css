@@ -21,16 +21,20 @@
   border-radius: 5px;
   outline: none;
   letter-spacing: 1px;
-  line-height: 34px;
+  line-height: 18px;
   font-size: 16px;
-  padding: 0 10px;
+  padding: 6px 10px;
+}
+
+.comment-area>p:active {
+  background-color: #ffffff;
 }
 
 .comment-area>p.empty::before {
   content: '来啊，bb啊';
   position: absolute;
   left: 10px;
-  top: 1px;
+  top: 8px;
   color: #666;
 }
 
