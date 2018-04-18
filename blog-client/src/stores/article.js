@@ -71,10 +71,8 @@ class ArticleStore {
     this.setEmpty = this.setEmpty.bind(this)
     this.loadComments = this.loadComments.bind(this)
     this.setArticle(
-      initialData
-      ? initialData.article
-        ? initialData.article.article
-        : initialArticle
+      initialData && initialData.article
+      ? initialData.article.article
       : initialArticle
     )
   }

@@ -86,10 +86,8 @@ class HomeStore {
   
   constructor() {
     this.setArticleList(
-      initialData
-      ? initialData.home
-        ? initialData.home.articles
-        : []
+      initialData && initialData.home
+      ? initialData.home.articles
       : []
     )
     this.changeActive = this.changeActive.bind(this)
