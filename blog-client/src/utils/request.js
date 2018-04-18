@@ -1,7 +1,7 @@
 require('es6-promise').polyfill()
 import axios from 'axios';
 
-export function get(url, query = {}, cb, withCredentials) {
+export function get(url, query = {}, options = {}) {
   if (typeof url != 'string' || (query && query.toString() != '[object Object]')) {
     return console.error(new Error('get([string], ?[object])'))
   }
@@ -9,8 +9,7 @@ export function get(url, query = {}, cb, withCredentials) {
   return axios
   .get(url, { 
     params: query,
-    onDownloadProgress: cb,
-    withCredentials
+    ...options
   })
   .then(res => {
     if (res.status == 200) {
@@ -36,3 +35,5 @@ export function post(url, data, options) {
     }
   })
 }
+
+export const createSource = axios.CancelToken.source

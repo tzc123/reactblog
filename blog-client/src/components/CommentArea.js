@@ -45,8 +45,15 @@ class CommentArea extends React.Component {
 
     return (
       <section className={'comment-area' + (sticky ? ' sticky' : '')} ref="sticky">
-        <p className={empty ? 'empty' : ''} contentEditable="true" ref="input" onBlur={handleBlur.bind(this)}></p>
-        <div className="submit" onClick={handleSubmit.bind(this)}>crazy bb</div>
+        <p className={empty ? 'empty' : ''} 
+          contentEditable="true" 
+          ref="input" 
+          onBlur={handleBlur.bind(this)}>
+        </p>
+        <div className="submit" 
+          onClick={handleSubmit.bind(this)}>
+          crazy bb
+        </div>
       </section>
     )
   }

@@ -21,16 +21,16 @@
   border-radius: 5px;
   outline: none;
   letter-spacing: 1px;
-  line-height: 14px;
+  line-height: 34px;
   font-size: 16px;
-  padding: 10px;
+  padding: 0 10px;
 }
 
 .comment-area>p.empty::before {
   content: '来啊，bb啊';
   position: absolute;
   left: 10px;
-  top: 10px;
+  top: 1px;
   color: #666;
 }
 
@@ -82,10 +82,11 @@
   float: right;
   color: #6c727c;
   font-size: 14px;
+  font-weight: 400;
 }
 
 .comment>.content {
-  margin: 15px 0 15px 15px;
+  margin: 15px 0;
   padding: 10px 15px;
   word-break: break-all;
   border-radius: 5px;
@@ -111,7 +112,7 @@
 
 .tag {
   height: 16px;
-  line-height: 16px;
+  line-height: 17px;
   font-size: 12px;
   font-weight: 400;
   padding: 2px 0px 2px 7px;

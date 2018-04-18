@@ -17,7 +17,6 @@ class Home extends React.Component {
   }
 
   componentWillReceiveProps({location: { search }}) {
-    console.log(search)
     const { category = '' } = search ? queryString(search) : {}
     this.props.home.setCategory(category)
   }
