@@ -17,7 +17,7 @@ module.exports = async function () {
       }
     ],
     active: 2,
-    animated: false,
+    animated: true,
     category: '',
     fade: false
 

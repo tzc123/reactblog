@@ -36,7 +36,6 @@ class HomeStore {
   @action setArticleList(articles) {
     this.articles = articles
     this.total = articles.length
-    console.log(articles)
     this.triggerAnimation()
   }
 
