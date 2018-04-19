@@ -22,11 +22,7 @@ class Home extends React.Component {
   }
 
   render() {
-    const gameComponent = isNode 
-      ? <Game />
-      : window.innerWidth > 768
-        ? <Game/>
-        : ''
+    const gameComponent = isNode || window.innerWidth > 768 ? <Game /> : ''
         
     return (
       <main className="home">

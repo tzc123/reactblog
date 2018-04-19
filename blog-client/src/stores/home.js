@@ -9,7 +9,7 @@ class HomeStore {
   @observable articles = []
   @observable active = 2
   @observable category = ''
-  @observable animated = false
+  @observable animated = true
   @observable fade = false
 
   list = [
