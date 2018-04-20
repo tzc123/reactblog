@@ -11,7 +11,7 @@ module.exports = {
     }
     return []
   },
-  async getArticles() {
+  async getArticleList() {
     const res = await axios.get(domain + '/article?size=10&index=1')
     if (res.status == 200) {
       if (res.data.success) {

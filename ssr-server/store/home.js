@@ -1,4 +1,4 @@
-const { getArticles } =  require('../api');
+const { getArticleList } = require('../api');
 
 module.exports = async function () {
   const store = {
@@ -23,7 +23,7 @@ module.exports = async function () {
 
   }
 
-  const articles = await getArticles()
+  const articles = await getArticleList()
   store.total = articles.length
   store.articles = articles
 

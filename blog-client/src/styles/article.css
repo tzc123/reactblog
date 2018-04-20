@@ -113,5 +113,6 @@
   }
   .article>article {
     margin-right: 0;
+    padding: 30px 15px 15px;
   }
 }
