@@ -94,7 +94,7 @@
 }
 
 .comment>.content {
-  margin: 15px 0;
+  margin-top: 15px;
   padding: 10px 15px;
   word-break: break-all;
   border-radius: 5px;

@@ -20,7 +20,7 @@ export default class CommentItem extends React.Component {
         <div className="content">
           {text}
         </div>
-        <footer>
+        {/* <footer>
           <ul>
             <li className="tag">
               精辟 {incisive}
@@ -35,7 +35,7 @@ export default class CommentItem extends React.Component {
               扯淡 {nonsense}
             </li>            
           </ul>
-        </footer>
+        </footer> */}
       </li>
     )
   }

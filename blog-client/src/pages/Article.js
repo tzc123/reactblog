@@ -101,10 +101,7 @@ function initArticle() {
         return
       }
       this.frameId = requestAnimationFrame(handle)
-      scrollBy(0, 
-        distance < 0
-        ? -speed
-        : speed)
+      scrollBy(0, distance < 0 ? -speed : speed)
       i++
     }
     handle()
@@ -113,22 +110,12 @@ function initArticle() {
   render() {
     const { 
       article: {
-        article: { 
-          title, 
-          content, 
-          catelog, 
-          handleScroll 
-        }, 
+        article: { title, content, catelog, handleScroll }, 
         comments,
         active, 
         top,
         sticky
-      },
-      match: {
-        params: {
-          id
-        }
-      }
+      }, match: { params: { id } }
     } = this.props
     const catelogComponent = <Catelog catelog={catelog} top={top} handleClick={this.handleCatelogClick.bind(this)} />
 
@@ -143,13 +130,9 @@ function initArticle() {
         <aside>
           <div>
             {
-              isNode
+              isNode || (window.innerWidth > 768 && catelog.length > 0)
               ? catelogComponent
-              : window.innerWidth > 768 
-                ? catelog.length > 0 
-                  ? catelogComponent
-                  : ''
-                : ''
+              : ''
             }
           </div>
         </aside>

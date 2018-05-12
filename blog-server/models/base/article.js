@@ -5,22 +5,6 @@ const commentType = {
     type: String,
     required: true
   }, 
-  incisive: {
-    type: Number,
-    default: 0
-  }, 
-  useful: {
-    type: Number,
-    default: 0
-  }, 
-  useless: {
-    type: Number,
-    default: 0
-  }, 
-  nonsense: {
-    type: Number,
-    default: 0
-  }, 
   created_at: {
     type: String,
     default: Date.now
