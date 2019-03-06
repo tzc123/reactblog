@@ -1,26 +1,31 @@
 module.exports = {
   messages: {
-    type: function (key, value, type) {
+    type(key, value, type) {
       return `${key}: ${value} is not a ${type}`
     },
-    required: function (key, value) {
+    required(key, value) {
       return `${key}: this key is required`
     },
-    minLength: function (key, value, minLength) {
+    minLength(key, value, minLength) {
       return `${key}: the length of ${value} is shorter than ${minLength}`
     },
-    maxLength: function (key, value, maxLength) {
+    maxLength(key, value, maxLength) {
       return `${key}: the length of ${value} is longer than ${maxLength}`
     },
-    fixed: function (key, value, fixed) {
+    fixed(key, value, fixed) {
       return `${key}: length fixed ${fixed}`
     },
-    min: function (key, value, min) {
+    min(key, value, min) {
       return `${key}: ${value} is lesser than ${min}`
     },
-    max: function (key, value, max) {
+    max(key, value, max) {
       return `${key}:  ${value} is more than ${max}`
     },
+  },
+  handles: {
+    default(ctx, message, setDefault) {
+      rules.required && setDefault()
+    }
   },
   handler: function (ctx, message) {}
 }

@@ -39,6 +39,69 @@ module.exports = {
       }
     }
   }),
+  update: fdValidator({
+    params: {
+      id: {
+        rules: {
+          isId: true,
+          required: true
+        }
+      },
+      title: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      },
+      content: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      },
+      markdown: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      }
+    }
+  }),
+  create: fdValidator({
+    params: {
+      id: {
+        rules: {
+          isId: true,
+          required: true
+        }
+      },
+      title: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      },
+      content: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      },
+      catelog: {
+        rules: {
+          type: 'array',
+          required: true,
+          default: []
+        }
+      },
+      markdown: {
+        rules: {
+          type: 'string',
+          required: true
+        }
+      }
+    }
+  }),
   index: fdValidator({
     params: {
       id: {

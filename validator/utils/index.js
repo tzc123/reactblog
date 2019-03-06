@@ -1,7 +1,3 @@
-function exist(value) {
-  return value || value === 0
-}
-
 module.exports = {
   exist(value) {
     return value || value === 0

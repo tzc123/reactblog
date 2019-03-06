@@ -4,7 +4,7 @@ const BrowseModel = require('../models/browse')
 const config = require('../config')
 const cache = require('../cache')
 
-const { getArticles, getArticle, getCount } = require('../services/article')
+const { getArticles, getArticle, createArticle, getCount, removeArticle, getArticleCache, saveArticleCache } = require('../services/article')
 const { getBrowse, setBrowse, getBrowses } = require('../services/browse')
 const { flush, unknownError, simpleAuth, checkId } = require('../services/index')
 
@@ -77,32 +77,7 @@ module.exports = {
     const { content, description = '', title, catelog, category, markdown , secret} = body
     if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
-      try {
-        const newArticle = await ArticleModel.create({
-          category,
-          content,
-          markdown,
-          title,
-          catelog,
-          description: description
-        })
-        if (!newArticle) {
-          logger.info('同名', { url, method, title })
-          ctx.body = {
-            success: false,
-            message: '已有同名文章'
-          }
-        } else {
-          flush(url, method)
-          logger.info('已添加', { id: newArticle._id.toString(), url, method })          
-          ctx.body = {
-            success: true,
-            message: '添加成功'
-          }
-        }
-      } catch (err) {
-        unknownError(ctx, err)
-      }
+      createArticle(ctx, params)
     } else {
       logger.info('参数错误', {  url, method })
       ctx.body = {
@@ -121,33 +96,7 @@ module.exports = {
     if (!checkId(ctx, id)) return
     if (!simpleAuth(ctx, secret)) return
     if (id) {
-      try {
-        const res = await ArticleModel.remove(id)
-        if (res.ok == 1) {
-          if (res.n >= 1) {
-            flush(url, method)
-            logger.info('已删除', {  url, method, id })
-            ctx.body = {
-              success: true,
-              message: '删除成功'
-            }
-          } else {
-            logger.info('无此文章', {  url, method, id })
-            ctx.body = {
-              success: false,
-              message: '该文章不存在'
-            }
-          }
-        } else {
-          logger.error('数据库错误', {  url, method, res, id })
-          ctx.body = {
-            success: false,
-            message: '数据库错误'
-          }
-        }
-      } catch (err) {
-        unknownError(ctx, err)
-      }
+      removeArticle(ctx, id)
     } else {
       logger.info('参数错误', { url, method, id })
       ctx.body = {
@@ -162,48 +111,14 @@ module.exports = {
     if (!checkId(ctx, id)) return
     if (!simpleAuth(ctx, secret)) return
     if (content && title && category && markdown && catelog && Array.isArray(catelog)) {
-      try {
-        const { ok, nModified, n } = await ArticleModel.update(id, {
-          category,
-          content,
-          markdown,
-          catelog,
-          title,
-          description: description
-        })
-        if (ok == 1) {
-          if (n >= 1) {
-            if (nModified == 0) {
-              logger.info('未改动', { url, method, id })
-              ctx.body = {
-                success: false,
-                message: '没有需要更新的地方'
-              }
-            } else {
-              flush(url, method)
-              logger.info('已更新', { url, method, id })
-              ctx.body = {
-                success: true,
-                message: '更新成功'
-              }
-            }
-          } else {
-            logger.info('文章不存在', { url, method, id })
-            ctx.body = {
-              success: false,
-              message: '未找到该文章'
-            }
-          }
-        } else {
-          logger.error('数据库错误', { url, method, id, res })
-          ctx.body = {
-            success: false,
-            message: '数据库错误'
-          }
-        }
-      } catch (err) {
-        unknownError(ctx, err)
-      }  
+      updateArticle(ctx, id, {
+        category,
+        content,
+        markdown,
+        catelog,
+        title,
+        description: description
+      })
     } else {
       logger.info('参数错误', { url, method, id  })
       ctx.body = {
@@ -289,6 +204,9 @@ module.exports = {
     } catch (err) {
       unknownError(ctx, err)
     }
+  },
+  async saveArticleCache(ctx) {
+    
   },
   async search(ctx) {
     const { request: { url, method }, query: { keyword } } = ctx

@@ -2,7 +2,7 @@ const defaults = require('./defaults')
 const validators = require('./validators')
 const { analyze, merge } = require('./utils')
 
-function handleValidate(key, value, option, ctx) {
+function handleValidate(key, value, option, ctx, target) {
   const { rules = {}, handlers = {} } = option
   if (
     typeof option != 'object' 
@@ -17,14 +17,20 @@ function handleValidate(key, value, option, ctx) {
   validatorsKeys.shift()
   return validatorsKeys.every(validatorkey => {
     if (rules[validatorkey] || rules[validatorkey] == 0) {
-      const res = validators[validatorkey](value, rules[validatorkey])
+      const isValid = validators[validatorkey](value, rules[validatorkey])
       if (!messages[validatorkey]) {
-        console.log(`custom rule ${validatorkey} require a message generate function`)
+        console.warn(`custom rule ${validatorkey} require a message generate function`)
         messages[validatorkey] = () => {}
       }
       const message = (messages[validatorkey])(key, value, rules[validatorkey])
-      res || (handlers[validatorkey] || defaults.handler)(ctx, message)
-      return res
+      let setDefault
+      if (validatorkey === 'default' && rules.required) {
+        setDefault = () => {
+          target[key] = rules.default
+        }
+      }
+      isValid || (handlers[validatorkey] || defaults.handles[validatorkey] || defaults.handler)(ctx, message, setDefault)
+      return isValid
     } else {
       return true
     }
@@ -52,7 +58,7 @@ function fdValidator (options) {
             return
           }
         }
-        handleValidate(key, params[key], option[key], ctx)
+        handleValidate(key, params[key], option[key], ctx, params)
       })
     })
   }
