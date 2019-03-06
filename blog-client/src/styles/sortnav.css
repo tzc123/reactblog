@@ -2,14 +2,18 @@
   position: fixed;
   top: 85px;
   width: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sort-nav>ul {
   display: flex;
-  width: 240px;
+  width: 160px;
   height: 30px;
   background: #ffffff;
   border-radius: 6px;
+  margin-left: 15px;
 }
 
 .sort-nav>ul>li {

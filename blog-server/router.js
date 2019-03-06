@@ -1,5 +1,4 @@
 const Router = require("koa-router");
-const path = require('path')
 const router = new Router();
 
 const { article, login, image: { parser, upload } } = require('./controllers/index')

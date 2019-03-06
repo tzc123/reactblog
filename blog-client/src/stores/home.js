@@ -7,7 +7,7 @@ class HomeStore {
   @observable currentPage = 1
   @observable total = 0
   @observable articles = []
-  @observable active = 2
+  @observable active = 0
   @observable category = ''
   @observable animated = true
   @observable fade = false
@@ -20,10 +20,6 @@ class HomeStore {
     {
       text: 'browse',
       sortby: 'browse'      
-    },
-    {
-      text: 'default',
-      sortby: 'created_at'      
     }
   ]
 
@@ -40,21 +36,11 @@ class HomeStore {
   }
 
   @action changeActive(active) {
-    if (active > 2 || action < 0) return
-    const oldActive = this.active
-    if (oldActive == 1 || active == 1) {
-      this.setFade(true)
-      this.loadData()
-        .then(() => {
-          this.setActive(active)
-        })
-    } else {
-      this.setFade(true)
-      setTimeout(() => {
-        this.setActive(active)
-        this.triggerAnimation()
-      }, 100);
-    }
+    if (active == this.active) return
+    this.setFade(true)
+    this.setArticleList([])
+    this.setActive(active)
+    this.loadData()
   }
 
   @action setActive(active) {

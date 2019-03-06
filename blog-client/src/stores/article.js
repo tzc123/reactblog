@@ -55,12 +55,12 @@ class ArticleStore {
   }
 
   loadData(id) {
-    return getArticle(id)
+    return getArticle({ id })
       .then(this.setArticle.bind(this))
   }
 
   loadComments(id) {
-    return getComments(id)
+    return getComments({ id })
       .then(this.setComments.bind(this)) 
   }
 

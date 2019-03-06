@@ -9,6 +9,7 @@ class SortNav extends React.Component {
     const { list, active, changeActive } = this.props.home
     return (
       <nav className="sort-nav">
+        order by:
         <ul>
           {
             list.map(

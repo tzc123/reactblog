@@ -1,5 +1,7 @@
 import ReactDOM from 'react-dom'
 import RouterComponent from './router.js'
+import * as a from "react-router-dom";
+console.log(a)
 const isNode = typeof window === 'undefined'
 if (!isNode) {
 	require('./styles/base.css')

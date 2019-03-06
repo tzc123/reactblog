@@ -22,10 +22,5 @@ module.exports = {
       return `${key}:  ${value} is more than ${max}`
     },
   },
-  handler: function (ctx, message) {
-    ctx.body = {
-      success: false,
-      message
-    }
-  }
+  handler: function (ctx, message) {}
 }

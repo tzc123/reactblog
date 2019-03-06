@@ -2,6 +2,8 @@ import {  observable, action, computed } from 'mobx'
 import { getArticleCount, search } from '../api'
 import debounce from '../utils/debounce'
 
+export let changeProcess
+
 const { initialData } = window
 
 class HeaderStore {
@@ -45,7 +47,7 @@ class HeaderStore {
 
   search = debounce((function (target) {
     const keyword = target.value
-    search(keyword)
+    search({ keyword })
       .then(res => {
         res && this.setResult(res)
       })
@@ -115,7 +117,7 @@ class HeaderStore {
     this.setResult = this.setResult.bind(this)
     this.setFocused = this.setFocused.bind(this)
     this.setProgress = this.setProgress.bind(this)
-    this.changeProgress = this.changeProgress.bind(this)
+    this.changeProgress = changeProcess = this.changeProgress.bind(this)
     this.changeSubNavActive = this.changeSubNavActive.bind(this)
     initialData || this.loadData()
   }

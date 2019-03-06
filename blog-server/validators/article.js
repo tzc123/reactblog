@@ -1,4 +1,6 @@
+// 自己写的校验中间件
 const fdValidator = require('../../validator')
+// 是否是合法的id
 const hex = /[0-9a-f]{24}/
 
 fdValidator.messages.required = function(key, value) {

@@ -62,7 +62,7 @@ module.exports = {
         count = await ArticleModel.count()
         await cache.set('articleCount', JSON.stringify(count))
       } catch (err) {
-        logger.err('getCount', { err: err.stack })
+        logger.error('getCount', { err: err.stack })
         return []
       }
     } else {

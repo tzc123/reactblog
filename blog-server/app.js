@@ -11,7 +11,7 @@ require('./logger')
 const app = new Koa();
 app.keys = ['keeyyysss']
 
-app.use(koaCors(cors));
+app.use(koaCors(cors))
 
 app.use(koaSession(session, app))
 

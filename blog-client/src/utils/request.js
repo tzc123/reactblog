@@ -1,39 +1,68 @@
+const _changeProgress = (rate) => require('../stores/header').default.changeProgress(rate)
 require('es6-promise').polyfill()
-import axios from 'axios';
+import axios from 'axios'
 
-export function get(url, query = {}, options = {}) {
-  if (typeof url != 'string' || (query && query.toString() != '[object Object]')) {
-    return console.error(new Error('get([string], ?[object])'))
+const isNode = typeof window === 'undefined'
+const changeProgress = isNode 
+? () => {}
+: _changeProgress
+
+const http = axios.create({
+  onDownloadProgress: e => changeProgress(e.loaded / e.total)
+})
+
+const directives = {}
+function preventRepeate(url) {
+  if (directives[url]) {
+    directives[url]('repeated operation: cancel last operation')
   }
-
-  return axios
-  .get(url, { 
-    params: query,
-    ...options
-  })
-  .then(res => {
-    if (res.status == 200) {
-      return res.data
-    } else {
-      throw res.statusText
-    }
-  })
+  const source = axios.CancelToken.source()
+  directives[url] = source.cancel
+  return source.token
 }
 
-export function post(url, data, options) {
-  if (typeof url != 'string' || (data && data.toString() != '[object Object]')) {
-    return console.error(new Error('post([string], [object])'))
-  }
+http.defaults.withCredentials = true
+http.defaults.baseURL = process.env.DEV == 'local'
+? 'http://localhost:4321'
+: 'http://122.152.205.25:4321'
 
-  return axios
-  .post(url, data, options)
-  .then(res => {
-    if (res.status == 200) {
-      return res.data
+http.interceptors.request.use(req => {
+  console.log(req)
+  const token = preventRepeate(req.url)
+  changeProgress(0.1)
+  return req
+})
+
+http.interceptors.response.use(res => {
+  if (res.status === 200) {
+    if (res.data.success) {
+      return Promise.resolve(res.data.data)
     } else {
-      throw res.statusText
+      const msg = res.data.msg || '未知错误'
+      return Promise.reject(msg)
     }
-  })
-}
+  } else {
+    const msg = config.api.errMessage[res.status]
+    Message.error(msg)
+    return Promise.reject(msg)
+  }
+}, err => {
+  let msg = ''
+  if (!err.response) {
+    console.log(err)
+    msg = '网络连接异常'
+    return Promise.reject(msg)
+  }
+  if (
+    err.response.data
+    && err.response.data.errormsg
+  ) {
+    msg = err.response.data.errormsg
+  } else {
+    msg = config.api.errMessage[err.response.status]
+  }
+  return Promise.reject(msg)
+})
 
-export const createSource = axios.CancelToken.source
+export default http
+
