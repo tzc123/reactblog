@@ -26,7 +26,7 @@ module.exports = {
       logger.info('上传成功', { url, method, filename: file.file.name })
       ctx.body = {
         success: true,
-        message: file.file.name
+        data: file.file.name
       }
     } else {
       logger.info('格式错误', { url, method })
