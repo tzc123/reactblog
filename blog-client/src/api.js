@@ -19,7 +19,7 @@ export function getArticleCount() {
 export function search({ keyword }) {
   return http.get(
     '/search', 
-    { params{ keyword } }
+    { params: { keyword } }
   )
 }
 
