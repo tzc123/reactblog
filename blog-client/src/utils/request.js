@@ -27,7 +27,6 @@ http.defaults.baseURL = process.env.DEV == 'local'
 : 'http://122.152.205.25:4321'
 
 http.interceptors.request.use(req => {
-  console.log(req)
   const token = preventRepeate(req.url)
   changeProgress(0.1)
   return req
