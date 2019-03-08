@@ -53,7 +53,7 @@ class CommentArea extends React.Component {
         </p>
         <div className="submit" 
           onClick={handleSubmit.bind(this)}>
-          crazy bb
+          评论
         </div>
       </section>
     )

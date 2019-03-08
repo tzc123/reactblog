@@ -55,7 +55,7 @@ class Header extends React.Component {
               <input name="search" 
                 onInput={search}
                 onFocus={() => setFocused(true)}
-                placeholder="你倒是搜啊..."/>
+                placeholder="搜索"/>
               <i></i>
               <ul className={`result${focused ? '' : ' hidden'}`}>
                 {
